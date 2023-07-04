@@ -55,6 +55,9 @@ function handleCallback() {
       // Response from the token endpoint
       const accessToken = data.access_token;
 
+      // Log the access token for debugging
+      console.log('Access Token:', accessToken);
+
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
       getUserLibraryArtists(accessToken);
@@ -99,26 +102,26 @@ function getUserLibraryArtists(accessToken) {
       // Response contains the user's library tracks
       const libraryTracks = data.items;
 
-      // Extract unique artist names from the library tracks
-      const libraryArtists = [...new Set(libraryTracks.map(track => track.track.artists.map(artist => artist.name)).flat())];
+      // Extract unique artists from the library tracks
+      const libraryArtists = [...new Set(libraryTracks.flatMap(track => track.track.artists.map(artist => artist.name)))];
 
       // Log the library artists
       console.log('Library Artists:', libraryArtists);
     })
     .catch(error => {
-    console.error('Error:', error);
+      console.error('Error:', error);
     });
-    }
-    
-    // Generate a random string of a given length
-    function generateRandomString(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
+}
+
+// Generate a random string of a given length
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-    }
-    
-    // Call the handleCallback function when the page is loaded
-    window.addEventListener('DOMContentLoaded', handleCallback);
+  }
+  return result;
+}
+
+// Call the handleCallback function when the page is loaded
+window.addEventListener('DOMContentLoaded', handleCallback);
