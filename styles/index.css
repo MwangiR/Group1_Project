@@ -1,9 +1,9 @@
 :root {
-  --moutBattenPink: #a6808c;
+  --mountainPink: #a6808c;
   --paleDogwood: #ccb7ae;
-  --spaceCadet: #202c59;
   --mindaro: #dbff76;
-  --caputMortuum: #581f18;
+  --spaceCadet: #202c59;
+  --caputMortum: #581f18;
 }
 
 body {
@@ -74,4 +74,9 @@ section {
 
 .artistName {
   flex: 1 0 200px;
+}
+
+#authBtn {
+  background-color: var(--mindaro);
+  color: var(--spaceCadet);
 }
