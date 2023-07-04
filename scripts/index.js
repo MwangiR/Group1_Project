@@ -1,6 +1,8 @@
 const clientId = '07574a44bbef47ad9c5b4949cf020c29';
 const redirectUri = 'https://alexanderduncan1.github.io/Group1_Project/';
+const clientSecret = '3a121714103f4ebbbe8a1d88a0e5fa8c';
 
+// Function to handle user authentication and authorization
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem('spotify_auth_state', state);
@@ -11,6 +13,7 @@ function authenticate() {
   window.location.href = authorizeUrl;
 }
 
+// Function to handle callback after user authorization
 function handleCallback() {
   // Extract the query parameters from the callback URL
   const query = window.location.search.substring(1);
@@ -37,7 +40,7 @@ function handleCallback() {
     code: code,
     redirect_uri: redirectUri,
     client_id: clientId,
-    client_secret: '3a121714103f4ebbbe8a1d88a0e5fa8c'
+    client_secret: clientSecret
   };
 
   fetch(tokenUrl, {
@@ -51,26 +54,71 @@ function handleCallback() {
     .then(data => {
       // Response from the token endpoint
       const accessToken = data.access_token;
-      const expiresIn = data.expires_in;
 
-      // Use the access token for further actions
-      console.log(accessToken);
-      // Replace this comment with your desired code
+      // Use the access token to fetch user's playlists and library
+      getUserPlaylists(accessToken);
+      getUserLibraryArtists(accessToken);
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
 
-// Generate a random string of a given length
-function generateRandomString(length) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
+// Function to fetch user's playlists
+function getUserPlaylists(accessToken) {
+  fetch('https://api.spotify.com/v1/me/playlists', {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Response contains the user's playlists
+      const playlists = data.items;
+
+      // Iterate over each playlist
+      for (const playlist of playlists) {
+        const playlistName = playlist.name;
+        console.log('Playlist:', playlistName);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
-// Call the handleCallback function when the page is loaded
-window.addEventListener('DOMContentLoaded', handleCallback);
+// Function to fetch user's library artists
+function getUserLibraryArtists(accessToken) {
+  fetch('https://api.spotify.com/v1/me/tracks', {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Response contains the user's library tracks
+      const libraryTracks = data.items;
+
+      // Extract unique artist names from the library tracks
+      const libraryArtists = [...new Set(libraryTracks.map(track => track.track.artists.map(artist => artist.name)).flat())];
+
+      // Log the library artists
+      console.log('Library Artists:', libraryArtists);
+    })
+    .catch(error => {
+    console.error('Error:', error);
+    });
+    }
+    
+    // Generate a random string of a given length
+    function generateRandomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+    }
+    
+    // Call the handleCallback function when the page is loaded
+    window.addEventListener('DOMContentLoaded', handleCallback);
