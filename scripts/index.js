@@ -7,7 +7,7 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem('spotify_auth_state', state);
 
-  const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}`;
+  const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}&scope=user-library-read`;
 
   // Redirect to Spotify's authorization endpoint
   window.location.href = authorizeUrl;
