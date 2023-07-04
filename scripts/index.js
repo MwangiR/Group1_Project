@@ -25,7 +25,7 @@ function handleCallback() {
   // Verify the state and secure
   const storedState = localStorage.getItem("spotify_auth_state");
   if (!state || state !== storedState) {
-    //console.error("Invalid state parameter.");
+    console.error("Invalid state parameter.");
     return;
   }
 
