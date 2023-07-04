@@ -5,31 +5,32 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem('spotify_auth_state', state);
 
-   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}`;
+  const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}`;
 
   // Redirect to Spotify's authorization endpoint
   window.location.href = authorizeUrl;
 }
+
 function handleCallback() {
   // Extract the query parameters from the callback URL
   const query = window.location.search.substring(1);
   const params = new URLSearchParams(query);
 
-  // gets authorization code and state
+  // Get authorization code and state
   const code = params.get('code');
   const state = params.get('state');
 
-  // Verify the state ? and secures 
+  // Verify the state and secure
   const storedState = localStorage.getItem('spotify_auth_state');
   if (!state || state !== storedState) {
     console.error('Invalid state parameter.');
     return;
   }
 
-  // Clear the stored state ? not sure why, copy pasted from spotify dev api
+  // Clear the stored state
   localStorage.removeItem('spotify_auth_state');
 
-  // POST request to swamp the authorization for an access token
+  // POST request to swap the authorization code for an access token
   const tokenUrl = 'https://accounts.spotify.com/api/token';
   const data = {
     grant_type: 'authorization_code',
@@ -48,11 +49,12 @@ function handleCallback() {
   })
     .then(response => response.json())
     .then(data => {
-      // response from the token endpoint
+      // Response from the token endpoint
       const accessToken = data.access_token;
       const expiresIn = data.expires_in;
 
-      // Perform actions with the access token (e.g., call Spotify Web API)
+      // Use the access token for further actions
+      console.log(accessToken);
       // Replace this comment with your desired code
     })
     .catch(error => {
