@@ -69,7 +69,7 @@ function handleCallback() {
     });
 }
 
-// Function to fetch user's playlists
+// Function to fetch user's playlists and extract artists from each playlist
 function getUserPlaylists(accessToken) {
   fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
@@ -80,17 +80,50 @@ function getUserPlaylists(accessToken) {
     .then(data => {
       // Response contains the user's playlists
       const playlists = data.items;
+      const playlistArtists = [];
 
       // Iterate over each playlist
       for (const playlist of playlists) {
         const playlistName = playlist.name;
         console.log('Playlist:', playlistName);
+
+        // Get the playlist's tracks
+        const playlistId = playlist.id;
+        getPlaylistTracks(accessToken, playlistId)
+          .then(tracks => {
+            // Extract artists from each track in the playlist
+            const artists = tracks.flatMap(track => track.track.artists.map(artist => artist.name));
+            console.log('Artists in Playlist:', artists);
+
+            // Add artists to the playlistArtists array
+            playlistArtists.push(...artists);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
       }
+
+      console.log('All Playlist Artists:', playlistArtists);
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
+
+// Function to fetch a playlist's tracks
+function getPlaylistTracks(accessToken, playlistId) {
+  return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Response contains the playlist's tracks
+      return data.items;
+    });
+}
+
 
 // Function to fetch user's library artists
 function getUserLibraryArtists(accessToken) {
