@@ -1,3 +1,11 @@
+:root {
+  --moutBattenPink: #a6808c;
+  --paleDogwood: #ccb7ae;
+  --spaceCadet: #202c59;
+  --mindaro: #dbff76;
+  --caputMortuum: #581f18;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -34,21 +42,36 @@ section {
 }
 
 #firstSection {
-  width: 1200px;
-  height: 600px;
+  flex: 1 0 auto;
 }
 
 #secondSection {
   display: flex;
-  width: 1200px;
+  flex: 1 0 auto;
 }
 
 #secondSection article {
   border: 5px solid darkblue;
   margin: 5px;
+  flex: 1 0 50%;
 }
 
 #secondSection aside {
   border: 5px solid darkgreen;
   margin: 5px;
+  flex: 1 0 40%;
+}
+
+#authBtn {
+  background-color: var(--mindaro);
+  color: var(--spaceCadet);
+}
+
+.artistGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.artistName {
+  flex: 1 0 200px;
 }
