@@ -216,6 +216,20 @@ fetch(modifiedUrl)
 //-------------------------------------------------------------------
 //jquery section
 $(function () {
+  function showNotify(text, color, element) {
+    const notifyContainer = $("<div>")
+      .attr({
+        class: `${color} callout`,
+        style: "width:300px; position:absolute; right:0; top:10%; left:5%;",
+      })
+      .append($("<h5>").text(`${text}`));
+
+    $(`${element}`).append(notifyContainer);
+
+    setTimeout(function () {
+      notifyContainer.remove();
+    }, 3000);
+  }
   function modalDiv() {
     const modalDiv = $("<div>")
       .addClass("reveal")
@@ -243,7 +257,8 @@ $(function () {
 
   clickableBtn.on("click", function (e) {
     e.preventDefault();
-    modalDiv();
+    //modalDiv();
+    showNotify("this is a warning", "success", "body");
     console.log("clicked");
   });
   $(document).foundation();

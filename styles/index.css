@@ -80,3 +80,9 @@ section {
   background-color: var(--mindaro);
   color: var(--spaceCadet);
 }
+
+@media (max-width: 600px) {
+  #secondSection {
+    flex-direction: column;
+  }
+}
