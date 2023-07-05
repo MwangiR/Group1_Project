@@ -89,10 +89,10 @@ function getUserPlaylists(accessToken) {
 
         //-----------------------
         //show playlist in DOM
-        const playlistEl = document.querySelector(".playlistTab");
-        const playlistNameEl = document.createElement("h3");
-        playlistNameEl.textContent = playlistName;
-        playlistEl.appendChild(playlistNameEl);
+        // const playlistEl = document.querySelector(".playlistTab");
+        // const playlistNameEl = document.createElement("h3");
+        // playlistNameEl.textContent = playlistName;
+        // playlistEl.appendChild(playlistNameEl);
 
         console.log("Playlist:", playlistName);
 
@@ -154,15 +154,15 @@ function getUserLibraryArtists(accessToken) {
         ),
       ];
 
-      const artistDiv = document.createElement("div");
-      const artistList = document.createElement("ul");
-      libraryArtists.forEach((artist) => {
-        const artistEl = document.createElement("li");
-        artistEl.textContent = artist;
-        artistList.appendChild(artistEl);
-      });
-      artistDiv.appendChild(artistList);
-      document.querySelector(".playlistTab").appendChild(artistDiv);
+      // const artistDiv = document.createElement("div");
+      // const artistList = document.createElement("ul");
+      // libraryArtists.forEach((artist) => {
+      //   const artistEl = document.createElement("li");
+      //   artistEl.textContent = artist;
+      //   artistList.appendChild(artistEl);
+      // });
+      // artistDiv.appendChild(artistList);
+      // document.querySelector(".playlistTab").appendChild(artistDiv);
 
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
@@ -215,24 +215,21 @@ const modifiedUrl =
   `${radius}` +
   "&unit=km" +
   "&apikey=";
-
-//Sam- I put comment for testing purposes
-// +
-// `${apikey}`;
++`${apikey}`;
 //const requestUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + `${apikey}`;
 
-// fetch(modifiedUrl)
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-//     // Parse the response.
-//     // Do other things.
-//   })
-//   .catch((err) => {
-//     // This time, we do not end up here!
-//   });
+fetch(modifiedUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    // Parse the response.
+    // Do other things.
+  })
+  .catch((err) => {
+    // This time, we do not end up here!
+  });
 
 //-------------------------------------------------------------------
 //jquery section
