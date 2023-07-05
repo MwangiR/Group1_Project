@@ -160,3 +160,81 @@ function generateRandomString(length) {
 // Call the handleCallback function when the page is loaded
 window.addEventListener('DOMContentLoaded', handleCallback);
 
+// ----------------------------------------------------------------------------
+// Discovery API Section
+
+// geolocation
+let userLocation = "";
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+=======
+function showPosition(position) {
+  userLocation = (position.coords.latitude + position.coords.longitude);
+  console.log(position.coords.latitude, position.coords.longitude);
+}
+// can add error correction in here later
+
+
+// fetch request 
+let radius = 50;
+
+const apiKey = "eseLXtPfRbVGKGyJSqbCSi9iaudaWTws";
+const modifiedUrl = "https://app.ticketmaster.com/discovery/v2/events.json?latlong=" + `${userLocation}` + "&radius=" + `${radius}` + "&unit=km" + "&apikey=" + `${apikey}`;
+//const requestUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + `${apikey}`;
+
+fetch(modifiedUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    // Parse the response.
+    // Do other things.
+  })
+  .catch(err => {
+    // This time, we do not end up here!
+  });
+
+
+
+//-------------------------------------------------------------------
+//jquery section
+$(function () {
+  function modalDiv() {
+    const modalDiv = $("<div>")
+      .addClass("reveal")
+      .attr({
+        id: "Modal",
+        "data-reveal": "",
+      })
+      .append(
+        $("<h2>").text("This is a modal"),
+        $("<button>")
+          .addClass("close-button")
+          .attr({
+            "data-close": "",
+            "aria-label": "Close modal",
+            type: "button",
+          })
+          .append($("<span>").attr("aria-hidden", "true").html("&times")),
+      );
+
+    $("body").append(modalDiv);
+    $(document).foundation();
+  }
+
+  const clickableBtn = $(".showModal");
+
+  clickableBtn.on("click", function (e) {
+    e.preventDefault();
+    modalDiv();
+    console.log("clicked");
+  });
+  $(document).foundation();
+});

@@ -1,0 +1,82 @@
+:root {
+  --mountainPink: #a6808c;
+  --paleDogwood: #ccb7ae;
+  --mindaro: #dbff76;
+  --spaceCadet: #202c59;
+  --caputMortum: #581f18;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+header {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  position: relative;
+  text-align: justify;
+  border: 5px solid black;
+  margin: 1% 0;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#divSection {
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#firstSection {
+  flex: 1 0 auto;
+}
+
+#secondSection {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+#secondSection article {
+  border: 5px solid darkblue;
+  margin: 5px;
+  flex: 1 0 50%;
+}
+
+#secondSection aside {
+  border: 5px solid darkgreen;
+  margin: 5px;
+  flex: 1 0 40%;
+}
+
+#authBtn {
+  background-color: var(--mindaro);
+  color: var(--spaceCadet);
+}
+
+.artistGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.artistName {
+  flex: 1 0 200px;
+}
+
+#authBtn {
+  background-color: var(--mindaro);
+  color: var(--spaceCadet);
+}
