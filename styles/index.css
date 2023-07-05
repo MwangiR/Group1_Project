@@ -41,6 +41,17 @@ section {
   flex-wrap: wrap;
 }
 
+.authTab {
+  display: flex;
+}
+.authTab h3 {
+  flex: 1 0 30%;
+}
+
+.authTab div {
+  flex: 1 0 60%;
+}
+
 #firstSection {
   flex: 1 0 auto;
 }

@@ -86,6 +86,14 @@ function getUserPlaylists(accessToken) {
       // Iterate over each playlist
       for (const playlist of playlists) {
         const playlistName = playlist.name;
+
+        //-----------------------
+        //show playlist in DOM
+        const playlistEl = document.querySelector(".playlistTab");
+        const playlistNameEl = document.createElement("h3");
+        playlistNameEl.textContent = playlistName;
+        playlistEl.appendChild(playlistNameEl);
+
         console.log("Playlist:", playlistName);
 
         // Get the playlist's tracks
@@ -146,6 +154,16 @@ function getUserLibraryArtists(accessToken) {
         ),
       ];
 
+      const artistDiv = document.createElement("div");
+      const artistList = document.createElement("ul");
+      libraryArtists.forEach((artist) => {
+        const artistEl = document.createElement("li");
+        artistEl.textContent = artist;
+        artistList.appendChild(artistEl);
+      });
+      artistDiv.appendChild(artistList);
+      document.querySelector(".playlistTab").appendChild(artistDiv);
+
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
     })
@@ -196,8 +214,9 @@ const modifiedUrl =
   "&radius=" +
   `${radius}` +
   "&unit=km" +
-  "&apikey=" +
-  `${apikey}`;
+  "&apikey=";
+// +
+//`${apikey}`;
 //const requestUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + `${apikey}`;
 
 fetch(modifiedUrl)
