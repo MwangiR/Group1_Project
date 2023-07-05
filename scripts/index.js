@@ -7,7 +7,9 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem('spotify_auth_state', state);
 
-  const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}`;
+  const scope = 'playlist-read-private playlist-read-collaborative user-library-read'; // Add the required scopes here
+
+  const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${state}&scope=${encodeURIComponent(scope)}`;
 
   // Redirect to Spotify's authorization endpoint
   window.location.href = authorizeUrl;
@@ -26,8 +28,7 @@ function handleCallback() {
   // Verify the state and secure
   const storedState = localStorage.getItem('spotify_auth_state');
   if (!state || state !== storedState) {
-    console.error('Invalid state parameter.');
-    return;
+      return;
   }
 
   // Clear the stored state
@@ -55,6 +56,9 @@ function handleCallback() {
       // Response from the token endpoint
       const accessToken = data.access_token;
 
+      // Log the access token for debugging
+      console.log('Access Token:', accessToken);
+
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
       getUserLibraryArtists(accessToken);
@@ -64,7 +68,7 @@ function handleCallback() {
     });
 }
 
-// Function to fetch user's playlists
+// Function to fetch user's playlists and extract artists from each playlist
 function getUserPlaylists(accessToken) {
   fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
@@ -75,17 +79,50 @@ function getUserPlaylists(accessToken) {
     .then(data => {
       // Response contains the user's playlists
       const playlists = data.items;
+      const playlistArtists = [];
 
       // Iterate over each playlist
       for (const playlist of playlists) {
         const playlistName = playlist.name;
         console.log('Playlist:', playlistName);
+
+        // Get the playlist's tracks
+        const playlistId = playlist.id;
+        getPlaylistTracks(accessToken, playlistId)
+          .then(tracks => {
+            // Extract artists from each track in the playlist
+            const artists = tracks.flatMap(track => track.track.artists.map(artist => artist.name));
+            console.log('Artists in Playlist:', artists);
+
+            // Add artists to the playlistArtists array
+            playlistArtists.push(...artists);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
       }
+
+      console.log('All Playlist Artists:', playlistArtists);
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
+
+// Function to fetch a playlist's tracks
+function getPlaylistTracks(accessToken, playlistId) {
+  return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Response contains the playlist's tracks
+      return data.items;
+    });
+}
+
 
 // Function to fetch user's library artists
 function getUserLibraryArtists(accessToken) {
@@ -99,30 +136,29 @@ function getUserLibraryArtists(accessToken) {
       // Response contains the user's library tracks
       const libraryTracks = data.items;
 
-      // Extract unique artist names from the library tracks
-      const libraryArtists = [...new Set(libraryTracks.map(track => track.track.artists.map(artist => artist.name)).flat())];
+      // Extract unique artists from the library tracks
+      const libraryArtists = [...new Set(libraryTracks.flatMap(track => track.track.artists.map(artist => artist.name)))];
 
       // Log the library artists
       console.log('Library Artists:', libraryArtists);
     })
     .catch(error => {
-    console.error('Error:', error);
+      console.error('Error:', error);
     });
-    }
-    
-    // Generate a random string of a given length
-    function generateRandomString(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-    }
-    
-    // Call the handleCallback function when the page is loaded
-    window.addEventListener('DOMContentLoaded', handleCallback);
+}
 
+// Generate a random string of a given length
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+// Call the handleCallback function when the page is loaded
+window.addEventListener('DOMContentLoaded', handleCallback);
 
 // ----------------------------------------------------------------------------
 // Discovery API Section
@@ -137,6 +173,7 @@ function getLocation() {
   }
 }
 
+=======
 function showPosition(position) {
   userLocation = (position.coords.latitude + position.coords.longitude);
   console.log(position.coords.latitude, position.coords.longitude);
@@ -201,5 +238,3 @@ $(function () {
   });
   $(document).foundation();
 });
-
-//--------------------------------------------------------------------
