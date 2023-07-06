@@ -246,7 +246,7 @@ $(function () {
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
 // bring in spotify playlists
-let alexArray = data.libraryArtists;
+let alexArray = localStorage.getItem("take-me");
 let artistArray = alexArray.split(", ").join("+");
 
 // get geolocation
@@ -265,7 +265,7 @@ function showPosition(position) {
   // discoveryApi fetch
   var url =
     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
-    artistArray +
+    alexArray +
     "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50";
