@@ -257,6 +257,7 @@ $(function () {
 
 // bring in spotify playlists
 let alexArray = useTheseArtists;
+console.log(alexArray);
 //let artistArray = alexArray.join(" ");
 
 // get geolocation
