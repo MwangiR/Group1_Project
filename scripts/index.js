@@ -114,7 +114,7 @@ function getUserPlaylists(accessToken) {
             // console.log("-------------------------------");
             // if (!Array.isArray(artists)) throw new Error("Expected an Array");
             // playlistArtist.push(...artists);
-            console.log("This is data", data);
+            console.log("This is data", data.href);
           });
       }
 
