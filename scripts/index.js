@@ -1,5 +1,5 @@
 const clientId = "07574a44bbef47ad9c5b4949cf020c29";
-const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
+const redirectUri = "https://mwangir.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
 let useTheseArtists = undefined;
@@ -9,7 +9,7 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
 
-  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here                            
+  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here
 
   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri,
