@@ -156,6 +156,21 @@ function getUserLibraryArtists(accessToken) {
         ),
       ];
 
+      //-----------------------------
+      //display to dom
+      const playlistEL = document.querySelector(".playlistTab");
+      const ulContainerEl = document.createElement("ul");
+
+      libraryArtists.forEach((artist) => {
+        const artistLiEL = document.createElement("li");
+        artistLiEL.textContent = artist;
+        ulContainerEl.appendChild(artistLiEL);
+      });
+
+      playlistEL.appendChild(ulContainerEl);
+
+      //----------------------------
+
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
 
