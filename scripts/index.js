@@ -276,9 +276,6 @@ $(function () {
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
 // bring in spotify playlists
-let alexArray = useTheseArtists;
-console.log(alexArray);
-//let artistArray = alexArray.join(" ");
 
 // get geolocation
 function getLocation() {
@@ -293,13 +290,17 @@ function getLocation() {
 function showPosition(position) {
   var latlon = position.coords.latitude + "," + position.coords.longitude;
 
+  let alexArray = useTheseArtists;
+  console.log(alexArray);
+  //let artistArray = alexArray.join(" ");
+
   // discoveryApi fetch
   var url =
     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
     alexArray +
     "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
-    latlon;
-  //+ "&radius=50";
+    latlon +
+    "&radius=50";
 
   fetch(url)
     .then((response) => response.json())
