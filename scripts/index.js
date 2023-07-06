@@ -83,6 +83,8 @@ function getUserPlaylists(accessToken) {
     .then((data) => {
       // Response contains the user's playlists
       const playlists = data.items;
+
+      console.log(playlist);
       const allArtists = [];
 
       // Iterate over each playlist
