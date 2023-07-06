@@ -165,8 +165,6 @@ function getUserLibraryArtists(accessToken) {
 
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
-
-      useTheseArtists = uniqueArtists;
     })
     .catch((error) => {
       console.error("Error:", error);
