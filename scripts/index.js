@@ -172,15 +172,12 @@ $(function () {
   $(document).foundation();
 });
 
-
-
 // ----------------------------------------------------------------------------
 // Discovery API Section
 
 // //google maps api
 // const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
-
 
 // bring in spotify playlists
 let alexArray = "rock";
@@ -200,18 +197,23 @@ function showPosition(position) {
   var latlon = position.coords.latitude + "," + position.coords.longitude;
 
   // discoveryApi fetch
-  var url = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistArray + "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" + latlon + "&radius=50";
+  var url =
+    "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
+    artistArray +
+    "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+    latlon +
+    "&radius=50";
 
   fetch(url)
-    .then(response => response.json())
-    .then(json => {
+    .then((response) => response.json())
+    .then((json) => {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
       showEvents(json);
       initMap(position, json);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 }
@@ -238,17 +240,34 @@ function showError(error) {
 // display the events and their details
 function showEvents(json) {
   for (var i = 0; i < json.page.size; i++) {
-    $("#events").append("<p>" + json._embedded.events[i].name, "<a href = " + `${json._embedded.events[i].url}` + ">Buy Tickets" + "</p>");
+    const eventsEl = document.querySelector("#events");
+    const eventContainer = document.createElement("div");
+
+    const eventsNameEL = document.createElement("p");
+    eventsNameEL.textContent = json._embedded.events[i].name;
+
+    const eventsUrlEL = document.createElement("a");
+    eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
+    eventsUrlEL.setAttribute("class", "button expanded");
+    eventsUrlEL.textContent = "Buy Tickets";
+
+    eventContainer.appendChild(eventsNameEL);
+    eventContainer.appendChild(eventsUrlEL);
+    eventsEl.appendChild(eventContainer);
+
+    // $("#events").append(
+    //   "<p>" + json._embedded.events[i].name,
+    //   "<a href = " + `${json._embedded.events[i].url}` + ">Buy Tickets" + "</p>",
+    // );
   } // image  "<img src =" + json._embedded.events[i].images[0].url + ">",
 }
 
-
 // initialize map
 function initMap(position, json) {
-  var mapDiv = document.getElementById('map');
+  var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
     center: { lat: position.coords.latitude, lng: position.coords.longitude },
-    zoom: 11
+    zoom: 11,
   });
   for (var i = 0; i < json.page.size; i++) {
     addMarker(map, json._embedded.events[i]);
@@ -258,10 +277,13 @@ function initMap(position, json) {
 // add markers to map
 function addMarker(map, event) {
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
-    map: map
+    position: new google.maps.LatLng(
+      event._embedded.venues[0].location.latitude,
+      event._embedded.venues[0].location.longitude,
+    ),
+    map: map,
   });
-  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+  marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
   console.log(marker);
 }
 
