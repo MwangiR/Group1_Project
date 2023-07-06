@@ -1,6 +1,6 @@
-const clientId = "07574a44bbef47ad9c5b4949cf020c29";
+const clientId = "456f6a4204b744b0ad0bbc9b05bec3b3";
 const redirectUri = "https://mwangir.github.io/Group1_Project/";
-const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
+const clientSecret = "518ad5850c434ad3aca350a5e92fbf46";
 
 let useTheseArtists = undefined;
 
