@@ -104,7 +104,7 @@ function getUserPlaylists(accessToken) {
           },
         })
           .then((res) => res.json())
-          .then(({ data }) => {
+          .then((data) => {
             // Extract artists from each track in the playlist
             // console.log("this is items", items);
             // const artists = items.flatMap((track) =>
@@ -114,6 +114,7 @@ function getUserPlaylists(accessToken) {
             // console.log("-------------------------------");
             // if (!Array.isArray(artists)) throw new Error("Expected an Array");
             // playlistArtist.push(...artists);
+            console.log("This is data", data);
 
             const items = data.items;
             const trackNames = [];
