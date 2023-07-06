@@ -9,7 +9,7 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
 
-  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here
+  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here                            
 
   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri,
@@ -84,7 +84,6 @@ function getUserPlaylists(accessToken) {
       // Response contains the user's playlists
       const playlists = data.items;
       const allArtists = [];
-      console.log(playlists);
 
       // Iterate over each playlist
       const fetchPromises = playlists.map((playlist) => {
