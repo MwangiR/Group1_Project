@@ -145,10 +145,25 @@ function getUserLibraryArtists(accessToken) {
       const libraryTracks = data.items;
 
       // Extract unique artists from the library tracks
-      const libraryArtists = [...new Set(libraryTracks.flatMap(track => track.track.artists.map(artist => artist.name)))];
+      const libraryArtists = [
+        ...new Set(
+          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name)),
+        ),
+      ];
 
+      // const artistDiv = document.createElement("div");
+      // const artistList = document.createElement("ul");
+      // libraryArtists.forEach((artist) => {
+      //   const artistEl = document.createElement("li");
+      //   artistEl.textContent = artist;
+      //   artistList.appendChild(artistEl);
+      // });
+      // artistDiv.appendChild(artistList);
+      // document.querySelector(".playlistTab").appendChild(artistDiv);
       // Log the library artists
-      console.log('Library Artists:', libraryArtists);
+      console.log("Library Artists:", libraryArtists);
+      localStorage.setItem("take-me", libraryArtists);
+
     })
     .catch(error => {
       console.error('Error:', error);
@@ -228,8 +243,8 @@ $(function () {
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
 // bring in spotify playlists
-let alexArray = "rock";
-let artistArray = alexArray.split(" ").join("+");
+let alexArray = data.libraryArtists;
+let artistArray = alexArray.split(", ").join("+");
 
 // get geolocation
 function getLocation() {
