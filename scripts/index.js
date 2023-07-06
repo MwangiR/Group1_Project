@@ -110,6 +110,7 @@ function getUserPlaylists(accessToken) {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
           console.log("All Playlist Artists:", uniqueArtists);
+          applyToDom(uniqueArtists);
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
@@ -158,7 +159,7 @@ function getUserLibraryArtists(accessToken) {
 
       //-----------------------------
       //display to dom
-      applyToDom(libraryArtists);
+      //applyToDom(libraryArtists);
       //----------------------------
 
       // Log the library artists
