@@ -88,7 +88,7 @@ function getUserPlaylists(accessToken) {
 
       for (const playlist of playlists) {
         const playlistName = playlist.name;
-        console.log(playlistName);
+        console.log("This are playlist nammes", playlistName);
       }
 
       // Iterate over each playlist
