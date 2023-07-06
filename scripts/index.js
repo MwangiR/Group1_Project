@@ -2,6 +2,8 @@ const clientId = "07574a44bbef47ad9c5b4949cf020c29";
 const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
+let useTheseArtists = undefined;
+
 // Function to handle user authentication and authorization
 function authenticate() {
   const state = generateRandomString(16);
@@ -156,6 +158,8 @@ function getUserLibraryArtists(accessToken) {
 
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
+
+      useTheseArtists = libraryArtists;
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -252,7 +256,7 @@ $(function () {
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
 // bring in spotify playlists
-let alexArray = localStorage.getItem("take-me");
+let alexArray = useTheseArtists;
 //let artistArray = alexArray.join(" ");
 
 // get geolocation
