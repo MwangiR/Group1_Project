@@ -121,20 +121,6 @@ function getUserPlaylists(accessToken) {
     });
 }
 
-// Function to fetch a playlist's tracks
-function getPlaylistTracks(accessToken, playlistId) {
-  return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // Response contains the playlist's tracks
-      return data.items;
-    });
-}
-
 // Function to fetch user's library artists
 function getUserLibraryArtists(accessToken) {
   fetch("https://api.spotify.com/v1/me/tracks", {
