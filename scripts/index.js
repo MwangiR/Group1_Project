@@ -296,9 +296,9 @@ function showPosition(position) {
 
   // discoveryApi fetch
   var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
     artistsArray +
-    "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+    "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50";
 
