@@ -247,7 +247,7 @@ $(function () {
 
 // bring in spotify playlists
 let alexArray = localStorage.getItem("take-me");
-let artistArray = alexArray.split(", ").join("+");
+//let artistArray = alexArray.join(" ");
 
 // get geolocation
 function getLocation() {
@@ -356,6 +356,7 @@ function addMarker(map, event) {
 // generate map and event results
 const generateContent = document.querySelector("#updateContent");
 generateContent.addEventListener("click", function (event) {
+  console.log(event);
   event.preventDefault();
   getLocation();
 });
