@@ -87,6 +87,11 @@ function getUserPlaylists(accessToken) {
 
       console.log("This is playlist Name", data.items);
 
+      const playlistName = documnet.createElement("h3");
+      playlistName.textContent = data.items.name;
+
+      document.getElementById("playlistTab").prependChild(playlistName);
+
       // Iterate over each playlist
       const fetchPromises = playlists.map((playlist) => {
         const playlistId = playlist.id;
