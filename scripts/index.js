@@ -111,6 +111,7 @@ function getUserPlaylists(accessToken) {
           const uniqueArtists = [...new Set(allArtists)];
           console.log("All Playlist Artists:", uniqueArtists);
           applyToDom(uniqueArtists);
+          useTheseArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
