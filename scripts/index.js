@@ -88,7 +88,7 @@ function getUserPlaylists(accessToken) {
       console.log("This is playlist Name", data);
 
       const playlistName = documnet.createElement("h3");
-      playlistName.textContent = data.items.name;
+      playlistName.textContent = data.item[0].name;
 
       document.getElementById("playlistTab").appendChild(playlistName);
 
