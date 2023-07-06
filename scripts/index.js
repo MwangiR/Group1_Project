@@ -291,13 +291,13 @@ function showPosition(position) {
 
   let alexArray = useTheseArtists;
   console.log(alexArray);
-  let artistArray = alexArray.join(" ");
-  console.log(artistArray);
+  let artistsArray = alexArray.join(" ");
+  console.log(artistsArray);
 
   // discoveryApi fetch
   var url =
     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
-    artistArray +
+    artistsArray +
     "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50";
