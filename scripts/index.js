@@ -28,7 +28,7 @@ function handleCallback() {
   // Verify the state and secure
   const storedState = localStorage.getItem('spotify_auth_state');
   if (!state || state !== storedState) {
-      return;
+    return;
   }
 
   // Clear the stored state
@@ -245,7 +245,7 @@ $(function () {
 
 // bring in spotify playlists
 let alexArray = localStorage.getItem("take-me");
-let artistArray = alexArray.split(", ").join("+");
+//let artistArray = alexArray.join(" ");
 
 // get geolocation
 function getLocation() {
@@ -354,6 +354,7 @@ function addMarker(map, event) {
 // generate map and event results
 const generateContent = document.querySelector("#updateContent");
 generateContent.addEventListener("click", function (event) {
+  console.log(event);
   event.preventDefault();
   getLocation();
 });
