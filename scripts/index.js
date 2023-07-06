@@ -86,6 +86,11 @@ function getUserPlaylists(accessToken) {
       const playlists = data.items;
       const allArtists = [];
 
+      for (const playlist of playlists) {
+        const playlistName = playlist.name;
+        console.log(playlistName);
+      }
+
       // Iterate over each playlist
       const fetchPromises = playlists.map((playlist) => {
         const playlistId = playlist.id;
