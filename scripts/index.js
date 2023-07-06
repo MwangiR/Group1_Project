@@ -9,7 +9,7 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
 
-  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here
+  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here                            
 
   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri,
@@ -165,7 +165,7 @@ function getUserLibraryArtists(accessToken) {
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
 
-      useTheseArtists = libraryArtists;
+      useTheseArtists = uniqueArtists;
     })
     .catch((error) => {
       console.error("Error:", error);
