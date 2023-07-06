@@ -158,17 +158,7 @@ function getUserLibraryArtists(accessToken) {
 
       //-----------------------------
       //display to dom
-      const playlistEL = document.querySelector(".playlistTab");
-      const ulContainerEl = document.createElement("ul");
-
-      libraryArtists.forEach((artist) => {
-        const artistLiEL = document.createElement("li");
-        artistLiEL.textContent = artist;
-        ulContainerEl.appendChild(artistLiEL);
-      });
-
-      playlistEL.appendChild(ulContainerEl);
-
+      applyToDom(libraryArtists);
       //----------------------------
 
       // Log the library artists
@@ -213,6 +203,20 @@ function generateArtistList(artists) {
 window.addEventListener("DOMContentLoaded", handleCallback);
 
 //-------------------------------------------------------------------
+//apply to dom function
+
+function applyToDom(playlistObj) {
+  const playlistEL = document.querySelector(".playlistTab");
+  const ulContainerEl = document.createElement("ul");
+
+  playlistObj.forEach((artist) => {
+    const artistLiEL = document.createElement("li");
+    artistLiEL.textContent = artist;
+    ulContainerEl.appendChild(artistLiEL);
+  });
+
+  playlistEL.appendChild(ulContainerEl);
+}
 //jquery section
 $(function () {
   function showNotify(text, color, element) {
