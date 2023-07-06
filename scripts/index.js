@@ -90,9 +90,30 @@ function getUserPlaylists(accessToken) {
         const playlistName = playlist.name;
         console.log("This are playlist nammes", playlistName);
 
-        const playlistNameEL = document.createElement("h2");
-        playlistNameEL.textContent = playlistName;
-        document.querySelector(".playlistName").append(playlistNameEL);
+        // const playlistNameEL = document.createElement("h2");
+        // playlistNameEL.textContent = playlistName;
+        // document.querySelector(".playlistName").append(playlistNameEL);
+
+        // Extract artists from each playlist
+        const playlistId = playlist.id;
+        const playlistArtist = [];
+
+        fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+          .then((res) => res.json())
+          .then(({ items }) => {
+            // Extract artists from each track in the playlist
+            const artists = items.flatMap((track) =>
+              track.track.artists.map((artist) => artist.name),
+            );
+            console.log("Artists in Playlist:", artists);
+            console.log("-------------------------------");
+            if (!Array.isArray(artists)) throw new Error("Expected an Array");
+            playlistArtist.push(...artists);
+          });
       }
 
       // Iterate over each playlist
