@@ -115,16 +115,6 @@ function getUserPlaylists(accessToken) {
             // if (!Array.isArray(artists)) throw new Error("Expected an Array");
             // playlistArtist.push(...artists);
             console.log("This is data", data);
-
-            const items = data.items;
-            const trackNames = [];
-
-            for (const item of items) {
-              const trackName = item.track.name;
-              trackNames.push(trackName);
-            }
-
-            console.log("Track Names", trackNames);
           });
       }
 
