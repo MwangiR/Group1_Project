@@ -116,10 +116,15 @@ function getUserPlaylists(accessToken) {
             // playlistArtist.push(...artists);
             console.log("This is data", data);
             const items = data.items;
+            const artistNames = [];
             console.log("This is items", items);
             for (const item of items) {
-              const trackName = item.track.name;
-              console.log(trackName);
+              const artists = item.track.artists;
+              for (const artist of artists) {
+                const artistName = artist.name;
+                artistNames.push(artistName);
+              }
+              console.log("This is artistNames----------------", artistNames);
             }
           });
       }
