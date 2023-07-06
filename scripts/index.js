@@ -28,7 +28,7 @@ function handleCallback() {
   // Verify the state and secure
   const storedState = localStorage.getItem('spotify_auth_state');
   if (!state || state !== storedState) {
-      return;
+    return;
   }
 
   // Clear the stored state
@@ -69,7 +69,7 @@ function handleCallback() {
 }
 
 // Function to fetch user's playlists and extract artists from each playlist
-function getUserLibraryArtists(accessToken) {
+function getUserPlaylists(accessToken) {
   fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -117,7 +117,6 @@ function getUserLibraryArtists(accessToken) {
     });
 }
 
-
 // Function to fetch a playlist's tracks
 function getPlaylistTracks(accessToken, playlistId) {
   return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
@@ -132,7 +131,6 @@ function getPlaylistTracks(accessToken, playlistId) {
     });
 }
 
-
 // Function to fetch user's library artists
 function getUserLibraryArtists(accessToken) {
   fetch('https://api.spotify.com/v1/me/tracks', {
@@ -146,25 +144,10 @@ function getUserLibraryArtists(accessToken) {
       const libraryTracks = data.items;
 
       // Extract unique artists from the library tracks
-      const libraryArtists = [
-        ...new Set(
-          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name)),
-        ),
-      ];
+      const libraryArtists = [...new Set(libraryTracks.flatMap(track => track.track.artists.map(artist => artist.name)))];
 
-      // const artistDiv = document.createElement("div");
-      // const artistList = document.createElement("ul");
-      // libraryArtists.forEach((artist) => {
-      //   const artistEl = document.createElement("li");
-      //   artistEl.textContent = artist;
-      //   artistList.appendChild(artistEl);
-      // });
-      // artistDiv.appendChild(artistList);
-      // document.querySelector(".playlistTab").appendChild(artistDiv);
       // Log the library artists
-      console.log("Library Artists:", libraryArtists);
-      localStorage.setItem("take-me", libraryArtists);
-
+      console.log('Library Artists:', libraryArtists);
     })
     .catch(error => {
       console.error('Error:', error);
@@ -181,8 +164,27 @@ function generateRandomString(length) {
   return result;
 }
 
+// Function to generate the artist list or perform any other operation with the uniqueArtists array
+function generateArtistList(artists) {
+  // Here, you can create the list using the artists array and perform any desired operation
+  // For example, you can append the artists to an HTML element on your page or create a formatted string
+
+  // Example: Creating an unordered list of artists
+  const artistList = document.createElement('ul');
+  artists.forEach(artist => {
+    const artistItem = document.createElement('li');
+    artistItem.textContent = artist;
+    artistList.appendChild(artistItem);
+  });
+
+  // Append the artist list to a specific element on your page
+  const container = document.querySelector('.artist-list-container');
+  container.appendChild(artistList);
+}
+
 // Call the handleCallback function when the page is loaded
 window.addEventListener('DOMContentLoaded', handleCallback);
+
 
 
 //-------------------------------------------------------------------
