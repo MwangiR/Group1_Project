@@ -3,6 +3,7 @@ const redirectUri = "https://mwangir.github.io/Group1_Project/";
 const clientSecret = "518ad5850c434ad3aca350a5e92fbf46";
 
 let useTheseArtists = undefined;
+//change
 
 // Function to handle user authentication and authorization
 function authenticate() {
