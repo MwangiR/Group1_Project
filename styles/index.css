@@ -44,6 +44,7 @@ section {
 .authTab {
   display: flex;
 }
+
 .authTab h3 {
   flex: 1 0 30%;
 }
@@ -96,4 +97,9 @@ section {
   #secondSection {
     flex-direction: column;
   }
+}
+
+#map {
+  width: 390px;
+  height: 390px;
 }

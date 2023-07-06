@@ -57,37 +57,26 @@
         <div>
             <a href="#" class="button expanded showModal" data-open="Modal">Sample Modal</a>
         </div>
+        <button id="updateContent" class="button">Search for Tickets</button>
 
         <section id="secondSection">
             <article>
-                <h2>Artist</h2>
-                <div class="artistGroup">
-                    <div class="artistName">Sample name</div>
-                    <div class="button-group align-center" id="artistBtnGroup">
-                        <a class="button">One</a>
-                        <a class="button">Two</a>
-                        <a class="button">Three</a>
-                    </div>
+                <h2>Events</h2>
+
+                <div class="button-group align-center" id="artistBtnGroup">
+                    <a class="button">One</a>
+                    <a class="button">Two</a>
+                    <a class="button">Three</a>
                 </div>
+                <div id="events"></div>
+
 
             </article>
             <aside>
-                <h2>Third Section</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim fugit tempora, iure laboriosam
-                    perspiciatis totam reiciendis qui, voluptas mollitia, sit maxime voluptatem quidem aperiam quae quod
-                    aliquam. Reiciendis, facilis non.
-                    Dolore nisi, aliquam, veniam aperiam omnis nostrum nihil maxime esse itaque animi enim rerum eius
-                    at? Unde quod obcaecati cumque cupiditate quibusdam neque assumenda, odio nulla dignissimos!
-                    Deleniti, eius eum.
-                    Suscipit pariatur iure similique rerum corrupti explicabo, fugit illo doloremque impedit facilis
-                    itaque praesentium recusandae dolores delectus modi nemo quibusdam tempore minima doloribus nostrum
-                    amet? Earum excepturi quos cum tenetur.
-                    Esse quod facilis iure id repellendus libero eos architecto quos nostrum officia, odit obcaecati
-                    praesentium nobis quibusdam a ducimus illum harum, unde voluptate! Neque, dolorem vitae. Eligendi
-                    iste ullam suscipit.
-                    Impedit, ullam nulla dolore eligendi itaque neque voluptatibus, voluptatem maiores, soluta esse
-                    numquam minima vitae odio consequuntur iure. Totam, veniam pariatur. Asperiores est ipsum facilis
-                    eos aliquid eligendi perferendis pariatur!</p>
+                <h2>Map</h2>
+                <p id="location"></p>
+                <div id="map"></div>
+
             </aside>
         </section>
     </div>
@@ -101,6 +90,9 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js"
         crossorigin="anonymous"></script>
     <script src="./scripts/index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg&callback=initMap"
+        async defer></script>
+    <!-- // maybe move up -->
 </body>
 
 </html>
