@@ -185,52 +185,6 @@ function generateRandomString(length) {
 // Call the handleCallback function when the page is loaded
 window.addEventListener("DOMContentLoaded", handleCallback);
 
-// ----------------------------------------------------------------------------
-// Discovery API Section
-
-// geolocation
-let userLocation = "";
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-}
-
-function showPosition(position) {
-  userLocation = position.coords.latitude + position.coords.longitude;
-  console.log(position.coords.latitude, position.coords.longitude);
-}
-// can add error correction in here later
-
-// fetch request
-let radius = 50;
-
-const apiKey = "eseLXtPfRbVGKGyJSqbCSi9iaudaWTws";
-const modifiedUrl =
-  "https://app.ticketmaster.com/discovery/v2/events.json?latlong=" +
-  `${userLocation}` +
-  "&radius=" +
-  `${radius}` +
-  "&unit=km" +
-  "&apikey=";
-+`${apikey}`;
-//const requestUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + `${apikey}`;
-
-fetch(modifiedUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    // Parse the response.
-    // Do other things.
-  })
-  .catch((err) => {
-    // This time, we do not end up here!
-  });
-
 //-------------------------------------------------------------------
 //jquery section
 $(function () {
@@ -280,4 +234,104 @@ $(function () {
     console.log("clicked");
   });
   $(document).foundation();
+});
+
+
+
+// ----------------------------------------------------------------------------
+// Discovery API Section
+
+// //google maps api
+// const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
+// const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
+
+
+// bring in spotify playlists
+let alexArray = "rock";
+let artistArray = alexArray.split(" ").join("+");
+
+// get geolocation
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    var x = document.getElementById("location");
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  // discoveryApi fetch
+  var url = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artistArray + "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" + latlon + "&radius=50";
+
+  fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+      var e = document.getElementById("events");
+      e.innerHTML = json.page.totalElements + " events found.";
+      showEvents(json);
+      initMap(position, json);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
+// show errors
+function showError(error) {
+  var x = document.getElementById("location");
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation.";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable.";
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out.";
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred.";
+      break;
+  }
+}
+
+// display the events and their details
+function showEvents(json) {
+  for (var i = 0; i < json.page.size; i++) {
+    $("#events").append("<p>" + json._embedded.events[i].name, "<a href = " + `${json._embedded.events[i].url}` + ">Buy Tickets" + "</p>");
+  } // image  "<img src =" + json._embedded.events[i].images[0].url + ">",
+}
+
+
+// initialize map
+function initMap(position, json) {
+  var mapDiv = document.getElementById('map');
+  var map = new google.maps.Map(mapDiv, {
+    center: { lat: position.coords.latitude, lng: position.coords.longitude },
+    zoom: 11
+  });
+  for (var i = 0; i < json.page.size; i++) {
+    addMarker(map, json._embedded.events[i]);
+  }
+}
+
+// add markers to map
+function addMarker(map, event) {
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+    map: map
+  });
+  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+  console.log(marker);
+}
+
+// generate map and event results
+const generateContent = document.querySelector("#updateContent");
+generateContent.addEventListener("click", function (event) {
+  event.preventDefault();
+  getLocation();
 });
