@@ -299,7 +299,7 @@ function showError(error) {
   }
 }
 
-// display the events
+// display the events and their details
 function showEvents(json) {
   for (var i = 0; i < json.page.size; i++) {
     $("#events").append("<p>" + json._embedded.events[i].name, "<a href = " + `${json._embedded.events[i].url}` + ">Buy Tickets" + "</p>");
