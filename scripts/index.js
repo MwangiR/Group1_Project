@@ -85,7 +85,7 @@ function getUserPlaylists(accessToken) {
       const playlists = data.items;
       const allArtists = [];
 
-      console.log("This is playlist Name", data);
+      console.log("This is playlist Name", data.item[0]);
 
       const playlistName = documnet.createElement("h3");
       playlistName.textContent = data.item[0].name;
