@@ -99,9 +99,9 @@ function getUserLibraryArtists(accessToken) {
       // });
       // artistDiv.appendChild(artistList);
       // document.querySelector(".playlistTab").appendChild(artistDiv);
-
       // Log the library artists
       console.log("Library Artists:", libraryArtists);
+      localStorage.setItem("take-me", libraryArtists);
     })
     .catch((error) => {
       console.error("Error:", error);
