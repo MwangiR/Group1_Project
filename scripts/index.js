@@ -292,6 +292,7 @@ function showPosition(position) {
   let alexArray = useTheseArtists;
   console.log(alexArray);
   let artistArray = alexArray.join(" ");
+  console.log(artistArray);
 
   // discoveryApi fetch
   var url =
