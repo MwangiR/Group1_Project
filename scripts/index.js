@@ -69,7 +69,7 @@ function handleCallback() {
 }
 
 // Function to fetch user's playlists and extract artists from each playlist
-function getUserPlaylists(accessToken) {
+function getUserLibraryArtists(accessToken) {
   fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -116,6 +116,7 @@ function getUserPlaylists(accessToken) {
       console.error('Error:', error);
     });
 }
+
 
 // Function to fetch a playlist's tracks
 function getPlaylistTracks(accessToken, playlistId) {
