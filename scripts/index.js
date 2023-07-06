@@ -180,8 +180,8 @@ $(function () {
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
 // bring in spotify playlists
-let alexArray = "rock";
-let artistArray = alexArray.split(" ").join("+");
+let alexArray = data.libraryArtists;
+let artistArray = alexArray.split(", ").join("+");
 
 // get geolocation
 function getLocation() {
