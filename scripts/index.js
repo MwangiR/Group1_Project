@@ -104,16 +104,26 @@ function getUserPlaylists(accessToken) {
           },
         })
           .then((res) => res.json())
-          .then(({ items }) => {
+          .then(({ data }) => {
             // Extract artists from each track in the playlist
-            console.log("this is items", items);
-            const artists = items.flatMap((track) =>
-              track.track.artists.map((artist) => artist.name),
-            );
-            console.log("Artists in Playlist:", artists);
-            console.log("-------------------------------");
-            if (!Array.isArray(artists)) throw new Error("Expected an Array");
-            playlistArtist.push(...artists);
+            // console.log("this is items", items);
+            // const artists = items.flatMap((track) =>
+            //   track.track.artists.map((artist) => artist.name),
+            // );
+            // console.log("Artists in Playlist:", artists);
+            // console.log("-------------------------------");
+            // if (!Array.isArray(artists)) throw new Error("Expected an Array");
+            // playlistArtist.push(...artists);
+
+            const items = data.items;
+            const trackNames = [];
+
+            for (const item of items) {
+              const trackName = item.track.name;
+              trackNames.push(trackName);
+            }
+
+            console.log("Track Names", trackNames);
           });
       }
 
