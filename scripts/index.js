@@ -277,8 +277,8 @@ function showPosition(position) {
     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" +
     alexArray +
     "&sort=date,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
-    latlon +
-    "&radius=50";
+    latlon;
+  //+ "&radius=50";
 
   fetch(url)
     .then((response) => response.json())
