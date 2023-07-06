@@ -85,38 +85,26 @@ function getUserPlaylists(accessToken) {
       const playlists = data.items;
       const allArtists = [];
 
-      console.log("This is playlist Name", data.item);
+      console.log("This is playlist Name", data.item[0].name);
 
+      // Iterate over each playlist
       const fetchPromises = playlists.map((playlist) => {
         const playlistId = playlist.id;
         return getPlaylistTracks(accessToken, playlistId)
           .then((tracks) => {
             // Extract artists from each track in the playlist
-            console.log(tracks);
+            const artists = tracks.flatMap((track) =>
+              track.track.artists.map((artist) => artist.name),
+            );
+            console.log("Artists in Playlist:", artists);
+
+            // Add artists to the allArtists array
+            allArtists.push(...artists);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       });
-
-      // Iterate over each playlist
-      // const fetchPromises = playlists.map((playlist) => {
-      //   const playlistId = playlist.id;
-      //   return getPlaylistTracks(accessToken, playlistId)
-      //     .then((tracks) => {
-      //       // Extract artists from each track in the playlist
-      //       const artists = tracks.flatMap((track) =>
-      //         track.track.artists.map((artist) => artist.name),
-      //       );
-      //       console.log("Artists in Playlist:", artists);
-
-      //       // Add artists to the allArtists array
-      //       allArtists.push(...artists);
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error:", error);
-      //     });
-      // });
 
       // Wait for all the fetch promises to resolve
       Promise.all(fetchPromises)
