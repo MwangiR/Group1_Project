@@ -106,6 +106,7 @@ function getUserPlaylists(accessToken) {
           .then((res) => res.json())
           .then(({ items }) => {
             // Extract artists from each track in the playlist
+            console.log("this is items", items);
             const artists = items.flatMap((track) =>
               track.track.artists.map((artist) => artist.name),
             );
