@@ -327,6 +327,8 @@ function showPosition(position) {
     .catch((err) => {
       console.log(err);
     });
+  console.log(useTheseArtists);
+  console.log(crossCheckedArray);
 }
 
 // function to compare the 2 unique arrays
@@ -350,8 +352,8 @@ function findCommonElement(uniqueArrayResults, useTheseArtists) {
       }
     }
   }
-  console.log(useTheseArtists);
-  console.log(crossCheckedArray);
+  //console.log(useTheseArtists);
+  //console.log(crossCheckedArray);
   // Return if no common element exist
   //return false;
 }
