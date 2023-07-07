@@ -111,7 +111,7 @@ function getUserPlaylists(accessToken) {
           const uniqueArtists = [...new Set(allArtists)];
           console.log("All Playlist Artists:", uniqueArtists);
           applyToDom(uniqueArtists);
-          useTheseArtists = uniqueArtists;
+          uniqueSpotifyArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
@@ -267,14 +267,48 @@ $(function () {
   $(document).foundation();
 });
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
 
-// //google maps api
+// google maps api
 // const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
 // const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
 
-// bring in spotify playlists
+
+// empty array for initial fetch request data
+let uniqueSpotifyArtists = undefined;
+let initialDataArrayResults = [];
+let uniqueArrayResults = [];
+let crossCheckedArray = [];
+
+
+// function to compare the 2 unique arrays
+function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
+
+  // Loop for array 1
+  for (let i = 0; i < uniqueArrayResults.length; i++) {
+    // Loop for array 2
+    for (let j = 0; j < uniqueSpotifyArtists.length; j++) {
+      // Compare the element of each and every element from both of the arrays
+      if (uniqueArrayResults[i] === uniqueSpotifyArtists[j]) {
+        crossCheckedArray.push(uniqueArrayResults[i]);
+      }
+    }
+  }
+  console.log(uniqueSpotifyArtists);
+  console.log(crossCheckedArray);
+}
+
+
+
+
+// generate map and event results
+const generateContent = document.querySelector("#updateContent");
+generateContent.addEventListener("click", function (event) {
+  console.log(event);
+  event.preventDefault();
+  getLocation();
+});
 
 // get geolocation
 function getLocation() {
@@ -287,23 +321,36 @@ function getLocation() {
 }
 
 
-// empty array for initial fetch request data
-let initialDataArrayResults = [];
-let uniqueArrayResults = [];
-let crossCheckedArray = [];
-let useTheseArtists = undefined;
-
-
-
+// get latitude and longitude
+let latlon = "";
 function showPosition(position) {
-  var latlon = position.coords.latitude + "," + position.coords.longitude;
+  latlon = position.coords.latitude + "," + position.coords.longitude;
+  initialArtists();
+};
 
-  // let alexArray = useTheseArtists;
-  // console.log(alexArray);
-  // let artistsArray = alexArray.join(" ");
-  // console.log(artistsArray);
+// show errors
+function showError(error) {
+  var x = document.getElementById("location");
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation.";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable.";
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out.";
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred.";
+      break;
+  }
+}
 
-  // need an initial fetch to get all tickets for music gigs within a radius of th user location
+
+// initial fetch to get all tickets for music gigs within a radius of the user location
+function initialArtists() {   //may need something inside ()???
+
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
@@ -322,42 +369,14 @@ function showPosition(position) {
       console.log(initialDataArrayResults);
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
       console.log(uniqueArrayResults);
-      findCommonElement(uniqueArrayResults, useTheseArtists);
+      findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
     })
     .catch((err) => {
       console.log(err);
     });
-  console.log(useTheseArtists);
+  console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
 }
-
-// function to compare the 2 unique arrays
-
-function findCommonElement(uniqueArrayResults, useTheseArtists) {
-
-  // Loop for array 1
-  for (let i = 0; i < uniqueArrayResults.length; i++) {
-
-    // Loop for array 2
-    for (let j = 0; j < useTheseArtists.length; j++) {
-
-      // Compare the element of each and
-      // every element from both of the
-      // arrays
-      if (uniqueArrayResults[i] === useTheseArtists[j]) {
-        crossCheckedArray.push(uniqueArrayResults[i]);
-
-        // Return if common element found
-        //return true;
-      }
-    }
-  }
-  console.log(useTheseArtists);
-  console.log(crossCheckedArray);
-  // Return if no common element exist
-  //return false;
-}
-
 
 
 
@@ -388,27 +407,7 @@ function findCommonElement(uniqueArrayResults, useTheseArtists) {
 //     });
 // }
 
-// show errors
-function showError(error) {
-  var x = document.getElementById("location");
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation.";
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable.";
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out.";
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred.";
-      break;
-  }
-}
 
-
-// new code block to compare Spotify Array with Ticketek Array
 
 
 
@@ -429,13 +428,11 @@ function showEvents(json) {
     eventContainer.appendChild(eventsNameEL);
     eventContainer.appendChild(eventsUrlEL);
     eventsEl.appendChild(eventContainer);
-
-    // $("#events").append(
-    //   "<p>" + json._embedded.events[i].name,
-    //   "<a href = " + `${json._embedded.events[i].url}` + ">Buy Tickets" + "</p>",
-    // );
-  } // image  "<img src =" + json._embedded.events[i].images[0].url + ">",
+  }
 }
+
+
+
 
 // initialize map
 function initMap(position, json) {
@@ -462,10 +459,4 @@ function addMarker(map, event) {
   console.log(marker);
 }
 
-// generate map and event results
-const generateContent = document.querySelector("#updateContent");
-generateContent.addEventListener("click", function (event) {
-  console.log(event);
-  event.preventDefault();
-  getLocation();
-});
+
