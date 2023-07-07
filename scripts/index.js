@@ -2,7 +2,7 @@ const clientId = "07574a44bbef47ad9c5b4949cf020c29";
 const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
-let useTheseArtists = undefined;
+
 
 // Function to handle user authentication and authorization
 function authenticate() {
@@ -286,35 +286,105 @@ function getLocation() {
   }
 }
 
+
+// empty array for initial fetch request data
+let initialDataArrayResults = [];
+let uniqueArrayResults = [];
+let crossCheckedArray = [];
+let useTheseArtists = undefined;
+
+
+
 function showPosition(position) {
   var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-  let alexArray = useTheseArtists;
-  console.log(alexArray);
-  let artistsArray = alexArray.join(" ");
-  console.log(artistsArray);
+  // let alexArray = useTheseArtists;
+  // console.log(alexArray);
+  // let artistsArray = alexArray.join(" ");
+  // console.log(artistsArray);
 
-  // discoveryApi fetch
-  var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
-    artistsArray +
-    "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+  // need an initial fetch to get all tickets for music gigs within a radius of th user location
+  var getAllUrl =
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50";
 
-  fetch(url)
+  fetch(getAllUrl)
     .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      var e = document.getElementById("events");
-      e.innerHTML = json.page.totalElements + " events found.";
-      showEvents(json);
-      initMap(position, json);
+    .then((initialData) => {
+      console.log(initialData);
+
+      for (const event of initialData._embedded.events) {
+        if (event._embedded.hasOwnProperty("attractions")) {
+          initialDataArrayResults.push(event._embedded.attractions[0].name);
+        } else { console.log(event) };
+      }
+      console.log(initialDataArrayResults);
+      uniqueArrayResults = [...new Set(initialDataArrayResults)];
+      console.log(uniqueArrayResults);
+      findCommonElement(uniqueArrayResults, useTheseArtists);
     })
     .catch((err) => {
       console.log(err);
     });
 }
+
+// function to compare the 2 unique arrays
+
+function findCommonElement(uniqueArrayResults, useTheseArtists) {
+
+  // Loop for array1
+  for (let i = 0; i < uniqueArrayResults.length; i++) {
+
+    // Loop for useTheseArtists
+    for (let j = 0; j < useTheseArtists.length; j++) {
+
+      // Compare the element of each and
+      // every element from both of the
+      // arrays
+      if (uniqueArrayResults[i] === useTheseArtists[j]) {
+        crossCheckedArray.push(uniqueArrayResults[i]);
+
+        // Return if common element found
+        //return true;
+      }
+    }
+  }
+  console.log(useTheseArtists);
+  console.log(crossCheckedArray);
+  // Return if no common element exist
+  //return false;
+}
+
+
+
+
+
+
+
+
+// discoveryApi fetch
+//   var url =
+//     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
+//     artistsArray +
+//     "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+//     latlon +
+//     "&radius=50";
+
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then((json) => {
+//       console.log(json);
+//       var e = document.getElementById("events");
+//       e.innerHTML = json.page.totalElements + " events found.";
+
+//       showEvents(json);
+//       initMap(position, json);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
 
 // show errors
 function showError(error) {
@@ -335,6 +405,11 @@ function showError(error) {
   }
 }
 
+
+// new code block to compare Spotify Array with Ticketek Array
+
+
+
 // display the events and their details
 function showEvents(json) {
   for (var i = 0; i < json.page.size; i++) {
@@ -342,7 +417,7 @@ function showEvents(json) {
     const eventContainer = document.createElement("div");
 
     const eventsNameEL = document.createElement("p");
-    eventsNameEL.textContent = json._embedded.events[i].name;
+    eventsNameEL.textContent = json._embedded.events[i]._embedded.attractions[0].name;
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
