@@ -307,7 +307,7 @@ function showPosition(position) {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=50";
+    "&radius=50&size=1000"; //added size constraint, maybe add more constraints
 
   fetch(getAllUrl)
     .then((response) => response.json())
@@ -327,16 +327,18 @@ function showPosition(position) {
     .catch((err) => {
       console.log(err);
     });
+  console.log(useTheseArtists);
+  console.log(crossCheckedArray);
 }
 
 // function to compare the 2 unique arrays
 
 function findCommonElement(uniqueArrayResults, useTheseArtists) {
 
-  // Loop for array1
+  // Loop for array 1
   for (let i = 0; i < uniqueArrayResults.length; i++) {
 
-    // Loop for useTheseArtists
+    // Loop for array 2
     for (let j = 0; j < useTheseArtists.length; j++) {
 
       // Compare the element of each and
@@ -350,8 +352,8 @@ function findCommonElement(uniqueArrayResults, useTheseArtists) {
       }
     }
   }
-  console.log(useTheseArtists);
-  console.log(crossCheckedArray);
+  //console.log(useTheseArtists);
+  //console.log(crossCheckedArray);
   // Return if no common element exist
   //return false;
 }
