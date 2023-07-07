@@ -307,7 +307,7 @@ function showPosition(position) {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=50&size=1000"; //added size constraint, maybe add more constraints
+    "&radius=50&size=500"; //added size constraint, maybe add more constraints
 
   fetch(getAllUrl)
     .then((response) => response.json())
@@ -352,8 +352,8 @@ function findCommonElement(uniqueArrayResults, useTheseArtists) {
       }
     }
   }
-  //console.log(useTheseArtists);
-  //console.log(crossCheckedArray);
+  console.log(useTheseArtists);
+  console.log(crossCheckedArray);
   // Return if no common element exist
   //return false;
 }
