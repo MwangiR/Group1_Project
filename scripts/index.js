@@ -307,7 +307,7 @@ function showPosition(position) {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=50&size=500"; //added size constraint, maybe add more constraints
+    "&radius=50&size=200"; //added size constraint, maybe add more constraints
 
   fetch(getAllUrl)
     .then((response) => response.json())
