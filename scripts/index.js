@@ -326,6 +326,7 @@ let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   initialArtists();
+  getTickets();
 };
 
 // show errors
@@ -349,7 +350,7 @@ function showError(error) {
 
 
 // initial fetch to get all tickets for music gigs within a radius of the user location
-function initialArtists() {   //may need something inside ()???
+function initialArtists() {
 
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
@@ -359,16 +360,16 @@ function initialArtists() {   //may need something inside ()???
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      console.log(initialData);
+      //console.log(initialData);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
         } else { console.log(event) };
       }
-      console.log(initialDataArrayResults);
+      //console.log(initialDataArrayResults);
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
-      console.log(uniqueArrayResults);
+      //console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
     })
     .catch((err) => {
@@ -379,33 +380,29 @@ function initialArtists() {   //may need something inside ()???
 }
 
 
+// discoveryApi fetch for tickets
+function getTickets() {
+  var url =
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
+    crossCheckedArray +
+    "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+    latlon +
+    "&radius=50";
 
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      var e = document.getElementById("events");
+      e.innerHTML = json.page.totalElements + " events found.";
 
-
-
-
-// discoveryApi fetch
-//   var url =
-//     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
-//     artistsArray +
-//     "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
-//     latlon +
-//     "&radius=50";
-
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then((json) => {
-//       console.log(json);
-//       var e = document.getElementById("events");
-//       e.innerHTML = json.page.totalElements + " events found.";
-
-//       showEvents(json);
-//       initMap(position, json);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
+      showEvents(json);
+      initMap(position, json);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 
 
