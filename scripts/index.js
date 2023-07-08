@@ -311,6 +311,7 @@ generateContent.addEventListener("click", function (event) {
   console.log(event);
   event.preventDefault();
   getLocation();
+  initialArtists(); //moved from showPosition() might not work, might need to wait
 });
 
 // get geolocation
@@ -328,7 +329,7 @@ function getLocation() {
 let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
-  initialArtists();
+  //initialArtists();
 
 };
 
@@ -384,6 +385,15 @@ function initialArtists() {
 }
 
 
+// generate tickets
+const generateContent = document.querySelector("#updateContent");
+generateContent.addEventListener("click", function (event) {
+  console.log(event);
+  event.preventDefault();
+  getLocation();
+  getTickets();
+});
+
 // discoveryApi fetch for tickets
 function getTickets() {
   console.log(crossCheckedArray);
@@ -391,7 +401,7 @@ function getTickets() {
   let UseMe = crossCheckedArrayString.toString();
   console.log(UseMe);
   var url =
-    //"https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Jack Ladder Surprise Chef" +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Jack Ladder Surprise Chef" +
     //UseMe +
     "&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
