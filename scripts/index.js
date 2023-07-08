@@ -386,8 +386,8 @@ function initialArtists() {
 
 
 // generate tickets
-const generateContent = document.querySelector("#updateContent");
-generateContent.addEventListener("click", function (event) {
+const generateTickets = document.querySelector("#updateContent");
+generateTickets.addEventListener("click", function (event) {
   console.log(event);
   event.preventDefault();
   getLocation();
