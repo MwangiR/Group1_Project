@@ -94,7 +94,7 @@ function getUserPlaylists(accessToken) {
             const artists = tracks.flatMap((track) =>
               track.track.artists.map((artist) => artist.name),
             );
-            console.log("Artists in Playlist:", artists);
+            //console.log("Artists in Playlist:", artists);
 
             // Add artists to the allArtists array
             allArtists.push(...artists);
@@ -164,7 +164,7 @@ function getUserLibraryArtists(accessToken) {
       //----------------------------
 
       // Log the library artists
-      console.log("Library Artists:", libraryArtists);
+      //console.log("Library Artists:", libraryArtists);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -295,8 +295,8 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
       }
     }
   }
-  console.log(uniqueSpotifyArtists);
-  console.log(crossCheckedArray);
+  //console.log(uniqueSpotifyArtists);
+  //console.log(crossCheckedArray);
   //generateArtistList(crossCheckedArray);
   //getTickets();
 
@@ -308,7 +308,7 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
 // generate cross checked list results
 const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
-  console.log(event);
+  //console.log(event);
   event.preventDefault();
   getLocation();
   initialArtists(); //moved from showPosition() might not work, might need to wait
@@ -388,7 +388,7 @@ function initialArtists() {
 // generate tickets
 const generateTickets = document.querySelector("#updateContent");
 generateTickets.addEventListener("click", function (event) {
-  console.log(event);
+  //console.log(event);
   event.preventDefault();
   getLocation();
   getTickets();
@@ -415,7 +415,7 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      initMap(position, json);
+      //initMap(position, json);
     })
     .catch((err) => {
       console.log(err);
