@@ -382,6 +382,7 @@ function initialArtists() {
 
 // discoveryApi fetch for tickets
 function getTickets() {
+  console.log(crossCheckedArray);
   var url =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
     crossCheckedArray +
