@@ -212,6 +212,12 @@ function applyToDom(playlistObj) {
   playlistObj.forEach((artist) => {
     const artistLiEL = document.createElement("li");
     artistLiEL.textContent = artist;
+    //add search for ticket button here
+    const ticketEL = document.createElement("button");
+    ticketEL.classList('button-id');
+    ticketEL.textContent = "Search for Tickets";
+
+    artistLiEL.appendChild(ticketEL);
     ulContainerEl.appendChild(artistLiEL);
   });
 
