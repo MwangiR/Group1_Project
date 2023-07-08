@@ -383,6 +383,15 @@ function initialArtists() {
       //console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
       applyToDom(crossCheckedArray);
+      // generate tickets
+      const generateTickets = document.querySelectorAll(".this-button");
+      generateTickets.addEventListener("click", function (event) {
+        console.log(event);
+
+        event.preventDefault();
+        getLocation();
+        getTickets();
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -392,15 +401,7 @@ function initialArtists() {
 }
 
 
-// generate tickets
-const generateTickets = document.querySelector("updateContent");
-generateTickets.addEventListener("click", function (event) {
-  console.log(event);
 
-  event.preventDefault();
-  getLocation();
-  getTickets();
-});
 
 // discoveryApi fetch for tickets
 function getTickets() {
