@@ -214,7 +214,8 @@ function applyToDom(playlistObj) {
     artistLiEL.textContent = artist;
     //add search for ticket button here
     const ticketEL = document.createElement("button");
-    ticketEL.classList.add('button-id');
+    ticketEL.classList.add('button');
+    ticketEL.classList.add('this-button');
     ticketEL.textContent = "Search for Tickets";
 
     artistLiEL.appendChild(ticketEL);
