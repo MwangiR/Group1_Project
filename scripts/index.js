@@ -297,6 +297,8 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
   }
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
+  getTickets();
+
 }
 
 
@@ -326,7 +328,7 @@ let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   initialArtists();
-  getTickets();
+  
 };
 
 // show errors
