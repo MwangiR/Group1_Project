@@ -298,15 +298,15 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
   //generateArtistList(crossCheckedArray);
-  getTickets();
+  //getTickets();
 
 }
 
 
 
 
-// generate map and event results
-const generateContent = document.querySelector("#updateContent");
+// generate cross checked list results
+const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
   console.log(event);
   event.preventDefault();
@@ -368,7 +368,7 @@ function initialArtists() {
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
-        } else { console.log(event) };
+        } // else { console.log(event) };
       }
       //console.log(initialDataArrayResults);
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
