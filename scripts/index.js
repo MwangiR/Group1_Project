@@ -383,21 +383,21 @@ function initialArtists() {
       //console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
       applyToDom(crossCheckedArray);
+      // generate tickets
+      const generateTickets = document.querySelectorAll(".this-button");
+      generateTickets.addEventListener("click", function (event) {
+        console.log(event);
+
+        event.preventDefault();
+        getLocation();
+        getTickets();
+      });
     })
     .catch((err) => {
       console.log(err);
     });
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
-  // generate tickets
-  const generateTickets = document.querySelector(".this-button");
-  generateTickets.addEventListener("click", function (event) {
-    console.log(event);
-
-    event.preventDefault();
-    getLocation();
-    getTickets();
-  });
 }
 
 
