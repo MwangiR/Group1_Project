@@ -383,11 +383,11 @@ function initialArtists() {
 // discoveryApi fetch for tickets
 function getTickets() {
   var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
-    crossCheckedArray +
-    "&sort=relevance,desc&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Surprise Chef" +
+    //crossCheckedArray +
+    "&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=50";
+    "&radius=50&size=200";
 
   fetch(url)
     .then((response) => response.json())
