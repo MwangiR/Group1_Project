@@ -401,7 +401,7 @@ function getTickets() {
   let UseMe = crossCheckedArrayString.toString();
   console.log(UseMe);
   var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Jack Ladder Surprise Chef" +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Surprise Chef" +
     //UseMe +
     "&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
