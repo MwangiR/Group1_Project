@@ -114,7 +114,7 @@ function getUserPlaylists(accessToken) {
           uniqueSpotifyArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
-          generateArtistList(uniqueArtists);
+          //generateArtistList(uniqueArtists);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -297,7 +297,8 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
   }
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
-  getTickets();
+  generateArtistList(crossCheckedArray);
+  //getTickets();
 
 }
 
