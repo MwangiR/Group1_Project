@@ -110,11 +110,11 @@ function getUserPlaylists(accessToken) {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
           console.log("All Playlist Artists:", uniqueArtists);
-          applyToDom(uniqueArtists);
+          //applyToDom(uniqueArtists);
           uniqueSpotifyArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
-          //generateArtistList(uniqueArtists);
+          generateArtistList(uniqueArtists);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -297,8 +297,8 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
   }
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
-  generateArtistList(crossCheckedArray);
-  //getTickets();
+  //generateArtistList(crossCheckedArray);
+  getTickets();
 
 }
 
@@ -380,6 +380,7 @@ function initialArtists() {
     });
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
+  applyToDom(crossCheckedArray);
 }
 
 
