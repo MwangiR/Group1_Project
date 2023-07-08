@@ -328,7 +328,7 @@ let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   initialArtists();
-  
+
 };
 
 // show errors
@@ -389,8 +389,8 @@ function getTickets() {
   let UseMe = crossCheckedArrayString.toString();
   console.log(UseMe);
   var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
-    UseMe +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Jack Ladder Surprise Chef" +
+    //UseMe +
     "&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50&size=200";
