@@ -389,19 +389,18 @@ function initialArtists() {
     });
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
-  // generate tickets
-  const generateTickets = document.querySelector(".this-button");
-  generateTickets.addEventListener("click", function (event) {
-    console.log(event);
-
-    event.preventDefault();
-    getLocation();
-    getTickets();
-  });
 }
 
 
+// generate tickets
+const generateTickets = document.querySelector("updateContent");
+generateTickets.addEventListener("click", function (event) {
+  console.log(event);
 
+  event.preventDefault();
+  getLocation();
+  getTickets();
+});
 
 // discoveryApi fetch for tickets
 function getTickets() {
