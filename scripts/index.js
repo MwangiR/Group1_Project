@@ -374,13 +374,13 @@ function initialArtists() {
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
       //console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
+      applyToDom(crossCheckedArray);
     })
     .catch((err) => {
       console.log(err);
     });
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
-  applyToDom(crossCheckedArray);
 }
 
 
