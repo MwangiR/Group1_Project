@@ -393,9 +393,10 @@ function initialArtists() {
 
 
 // generate tickets
-const generateTickets = document.querySelector("#updateContent");
+const generateTickets = document.querySelector(".this-button");
 generateTickets.addEventListener("click", function (event) {
-  //console.log(event);
+  console.log(event);
+
   event.preventDefault();
   getLocation();
   getTickets();
