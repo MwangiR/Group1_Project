@@ -158,7 +158,8 @@ function getUserPlaylists(accessToken) {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
           console.log("All Playlist Artists:", uniqueArtists);
-          applyToDom(uniqueArtists);
+          //applyToDom(uniqueArtists);
+          accordionContent("Playlist", uniqueArtists);
           useTheseArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
@@ -257,10 +258,9 @@ function applyToDom(playlistObj) {
   const ulContainerEl = document.createElement("ul");
 
   playlistObj.forEach((artist) => {
-    // const artistLiEL = document.createElement("li");
-    // artistLiEL.textContent = artist;
-    // ulContainerEl.appendChild(artistLiEL);
-    accordionContent("Playlist", artist);
+    const artistLiEL = document.createElement("li");
+    artistLiEL.textContent = artist;
+    ulContainerEl.appendChild(artistLiEL);
   });
 
   playlistEL.appendChild(ulContainerEl);
