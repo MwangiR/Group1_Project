@@ -226,7 +226,7 @@ function applyToDom(playlistObj) {
       specificArtist = thisArtist;
       event.preventDefault();
       getLocation();
-      getTickets();
+      //getTickets();
 
     })
 
@@ -329,8 +329,8 @@ const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
   //console.log(event);
   event.preventDefault();
-  getLocation();
-  //initialArtists(); //moved from showPosition() might not work, might need to wait
+  //getLocation();
+  initialArtists(); //moved from showPosition() might not work, might need to wait
 });
 
 // get geolocation
@@ -350,7 +350,8 @@ function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
-  initialArtists();
+  //initialArtists();
+  getTickets();
 
 };
 
@@ -373,7 +374,7 @@ function showError(error) {
   }
 }
 
-
+//   LLOOOOOOOOOPP{P{P to get everything}}
 // initial fetch to get all tickets for music gigs within a radius of the user location
 function initialArtists() {
 
@@ -444,7 +445,7 @@ function getTickets() {
 
       showEvents(json);
       //test initMap(position, json)
-      getLocation();
+      //getLocation();
       initMap(position, json);
     })
     .catch((err) => {
