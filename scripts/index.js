@@ -207,7 +207,9 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 
 function applyToDom(playlistObj) {
   const playlistEL = document.querySelector(".playlistTab");
+  playlistEL.innerHTML = "";
   const ulContainerEl = document.createElement("ul");
+
 
   playlistObj.forEach((artist) => {
     const artistLiEL = document.createElement("li");
