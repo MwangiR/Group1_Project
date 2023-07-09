@@ -370,54 +370,10 @@ function showModal() {
   document.querySelector("body").append(modalContainer);
 }
 
-//jquery section
-$(function () {
-  function showNotify(text, color, element) {
-    const notifyContainer = $("<div>")
-      .attr({
-        class: `${color} callout`,
-        style: "width:300px; position:absolute; right:0; top:10%; left:5%;",
-      })
-      .append($("<h5>").text(`${text}`));
-
-    $(`${element}`).append(notifyContainer);
-
-    setTimeout(function () {
-      notifyContainer.remove();
-    }, 3000);
-  }
-  function modalDiv() {
-    const modalDiv = $("<div>")
-      .addClass("reveal")
-      .attr({
-        id: "Modal",
-        "data-reveal": "",
-      })
-      .append(
-        $("<h2>").text("This is a modal"),
-        $("<button>")
-          .addClass("close-button")
-          .attr({
-            "data-close": "",
-            "aria-label": "Close modal",
-            type: "button",
-          })
-          .append($("<span>").attr("aria-hidden", "true").html("&times")),
-      );
-
-    $("body").append(modalDiv);
-    $(document).foundation();
-  }
-
-  const clickableBtn = $(".showModal");
-
-  clickableBtn.on("click", function (e) {
-    e.preventDefault();
-    modalDiv();
-    //showNotify("this is a warning", "success", "body");
-    console.log("clicked");
-  });
-  $(document).foundation();
+document.querySelector(".showModal").addEventListener("click", (e) => {
+  e.preventDefault();
+  showModal();
+  console.log("clicked");
 });
 
 // ----------------------------------------------------------------------------
