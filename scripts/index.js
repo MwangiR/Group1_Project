@@ -346,6 +346,8 @@ function getLocation() {
 let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
+  // mapLat = position.coords.latitude;
+  // mapLon = position.coords.longitude;
   //initialArtists();
 
 };
@@ -434,7 +436,8 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      initMap(position, json);
+      //test initMap(position, json)
+      initMap();
     })
     .catch((err) => {
       console.log(err);
@@ -476,6 +479,8 @@ function showEvents(json) {
 }
 
 
+// let mapLat = "";
+// let mapLon = "";
 
 
 // initialize map
@@ -483,7 +488,7 @@ function initMap(position, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
     center: { lat: position.coords.latitude, lng: position.coords.longitude },
-    zoom: 11,
+    zoom: 10,
   });
   for (var i = 0; i < json.page.size; i++) {
     addMarker(map, json._embedded.events[i]);
