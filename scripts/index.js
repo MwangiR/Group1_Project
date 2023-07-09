@@ -325,10 +325,6 @@ function showNotify1(text, color, element) {
   const notifyContainer = document.createElement("div");
   notifyContainer.className = `${color} callout`;
   notifyContainer.innerHTML = `<h5>${text}</h5>`;
-  notifyContainer.setAttribute(
-    "style",
-    "width:300px; position:absolute; right:0; top:10%; left:5%;",
-  );
   $(`${element}`).append(notifyContainer);
 
   setTimeout(function () {
