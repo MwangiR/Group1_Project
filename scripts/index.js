@@ -346,8 +346,8 @@ function getLocation() {
 let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
-  // mapLat = position.coords.latitude;
-  // mapLon = position.coords.longitude;
+  mapLat = position.coords.latitude;
+  mapLon = position.coords.longitude;
   //initialArtists();
 
 };
@@ -394,6 +394,10 @@ function initialArtists() {
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
       console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
+
+      //remove duplicates from cross-check array
+      crossCheckedArray = [...new Set(crossCheckedArray)];
+
       applyToDom(crossCheckedArray);
       // // generate tickets
       // const generateTickets = document.querySelectorAll(".this-button");
@@ -479,15 +483,15 @@ function showEvents(json) {
 }
 
 
-// let mapLat = "";
-// let mapLon = "";
+let mapLat = "";
+let mapLon = "";
 
 
 // initialize map
 function initMap(position, json) {
   var mapDiv = document.getElementById('map');
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: position.coords.latitude, lng: position.coords.longitude },
+    center: { lat: mapLat, lng: mapLon },
     zoom: 10
   });
   for (var i = 0; i < json.page.size; i++) {
