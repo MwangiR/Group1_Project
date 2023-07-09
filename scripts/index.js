@@ -220,6 +220,7 @@ function applyToDom(playlistObj) {
     ticketEL.addEventListener("click", function (event) {
       // generate tickets      
       console.log(event);
+      let specificArtist = event.target.parent().textContent;
       event.preventDefault();
       getLocation();
       getTickets();
@@ -414,12 +415,12 @@ function initialArtists() {
 // discoveryApi fetch for tickets
 function getTickets() {
   console.log(crossCheckedArray);
-  let crossCheckedArrayString = crossCheckedArray.join(" ");
-  let UseMe = crossCheckedArrayString.toString();
-  console.log(UseMe);
+  //let crossCheckedArrayString = crossCheckedArray.join(" ");
+  //let UseMe = crossCheckedArrayString.toString();
+  console.log(specificArtist);
   var url =
-    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=Surprise Chef" +
-    //UseMe +
+    "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
+    specificArtist +
     "&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
     "&radius=50&size=200";
