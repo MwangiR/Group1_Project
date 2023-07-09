@@ -392,7 +392,7 @@ function initialArtists() {
       }
       //console.log(initialDataArrayResults);
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
-      //console.log(uniqueArrayResults);
+      console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
       applyToDom(crossCheckedArray);
       // // generate tickets
@@ -485,11 +485,9 @@ let mapLon = "";
 
 // initialize map
 function initMap(json) {
-  console.log(mapLat);
-  console.log(mapLon);
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: { mapLat, mapLon },
+    center: { lat: mapLat, lng: mapLon },
     zoom: 10,
   });
   for (var i = 0; i < json.page.size; i++) {
