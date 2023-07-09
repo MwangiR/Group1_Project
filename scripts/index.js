@@ -226,7 +226,7 @@ function applyToDom(playlistObj) {
       specificArtist = thisArtist;
       event.preventDefault();
       getLocation();
-      //getTickets();
+      getTickets();
 
     })
 
@@ -351,7 +351,7 @@ function showPosition(position) {
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
   //initialArtists();
-  getTickets();
+  //getTickets();
 
 };
 
