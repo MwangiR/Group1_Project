@@ -266,7 +266,7 @@ function applyToDom(playlistObj) {
   playlistEL.appendChild(ulContainerEl);
 }
 
-function accordionContent(title, text) {
+function accordionContent(title, items) {
   const accordionContainerEL = document.createElement("div");
   accordionContainerEL.setAttribute("class", "row");
   playlistEL.appendChild(accordionContainerEL);
@@ -298,9 +298,11 @@ function accordionContent(title, text) {
   accordionContentEl.setAttribute("data-tab-content", "");
   accordionItemEL.appendChild(accordionContentEl);
 
-  const accordionTextEl = document.createElement("p");
-  accordionTextEl.textContent = text;
-  accordionContentEl.appendChild(accordionTextEl);
+  for (const item of items) {
+    const accordionTextEl = document.createElement("p");
+    accordionTextEl.textContent = item;
+    accordionContentEl.appendChild(accordionTextEl);
+  }
 
   accordionItemEL.addEventListener("click", function () {
     this.classList.toggle("is-active");
