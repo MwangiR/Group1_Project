@@ -346,8 +346,8 @@ function getLocation() {
 let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
-  // mapLat = position.coords.latitude;
-  // mapLon = position.coords.longitude;
+  mapLat = position.coords.latitude;
+  mapLon = position.coords.longitude;
   //initialArtists();
 
 };
@@ -479,15 +479,17 @@ function showEvents(json) {
 }
 
 
-// let mapLat = "";
-// let mapLon = "";
+let mapLat = "";
+let mapLon = "";
 
 
 // initialize map
-function initMap(position, json) {
+function initMap(json) {
+  console.log(mapLat);
+  console.log(mapLon);
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: position.coords.latitude, lng: position.coords.longitude },
+    center: { mapLat, mapLon },
     zoom: 10,
   });
   for (var i = 0; i < json.page.size; i++) {
