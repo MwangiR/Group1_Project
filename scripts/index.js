@@ -452,7 +452,16 @@ function showEvents(json) {
     const eventContainer = document.createElement("div");
 
     const eventsNameEL = document.createElement("p");
-    eventsNameEL.textContent = json._embedded.events[i]._embedded.attractions[0].name;
+
+
+    //testing this
+    for (const newEvent of json._embedded.events) {
+      if (newEvent._embedded.hasOwnProperty("attractions")) {
+        eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
+      } else { console.log(newEvent) };
+    }
+
+    //eventsNameEL.textContent = json._embedded.events[i]._embedded.attractions[0].name;--------------------------------------------
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
