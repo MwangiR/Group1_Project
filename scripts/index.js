@@ -160,6 +160,7 @@ function getUserPlaylists(accessToken) {
           console.log("All Playlist Artists:", uniqueArtists);
           //applyToDom(uniqueArtists);
           accordionContent("Playlist", uniqueArtists);
+          showNotify1("Playlist retrieved", "Success", "#authSection");
           useTheseArtists = uniqueArtists;
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
