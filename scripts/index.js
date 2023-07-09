@@ -252,18 +252,69 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 
 //-------------------------------------------------------------------
 //apply to dom function
-
+const playlistEL = document.querySelector(".playlistTab");
 function applyToDom(playlistObj) {
-  const playlistEL = document.querySelector(".playlistTab");
   const ulContainerEl = document.createElement("ul");
 
   playlistObj.forEach((artist) => {
-    const artistLiEL = document.createElement("li");
-    artistLiEL.textContent = artist;
-    ulContainerEl.appendChild(artistLiEL);
+    // const artistLiEL = document.createElement("li");
+    // artistLiEL.textContent = artist;
+    // ulContainerEl.appendChild(artistLiEL);
+    accordionContent("Playlist", artist);
   });
 
   playlistEL.appendChild(ulContainerEl);
+}
+
+function accordionContent(title, text) {
+  const accordionContainerEL = document.createElement("div");
+  accordionContainerEL.setAttribute("class", "row");
+  playlistEL.appendChild(accordionContainerEL);
+
+  const accordionColumnEL = document.createElement("div");
+  accordionColumnEL.setAttribute("class", "column");
+  accordionContainerEL.appendChild(accordionColumnEL);
+
+  const accordionUlEl = document.createElement("ul");
+  accordionUlEl.setAttribute("class", "accordion");
+  accordionUlEl.setAttribute("data-accordion", "");
+  accordionUlEl.setAttribute("data-multi-expand", "true");
+  accordionUlEl.setAttribute("data-allow-all-closed", "true");
+  accordionColumnEL.appendChild(accordionUlEl);
+
+  const accordionItemEL = document.createElement("li");
+  accordionItemEL.setAttribute("class", "accordion-item");
+  accordionItemEL.setAttribute("data-accordion-item", "");
+  accordionUlEl.appendChild(accordionItemEL);
+
+  const accordionTitleEl = document.createElement("a");
+  accordionTitleEl.setAttribute("class", "accordion-title");
+  accordionTitleEl.setAttribute("aria-expanded", "true");
+  accordionTitleEl.textContent = title;
+  accordionItemEL.appendChild(accordionTitleEl);
+
+  const accordionContentEl = document.createElement("div");
+  accordionContentEl.setAttribute("class", "accordion-content");
+  accordionContentEl.setAttribute("data-tab-content", "");
+  accordionItemEL.appendChild(accordionContentEl);
+
+  const accordionTextEl = document.createElement("p");
+  accordionTextEl.textContent = text;
+  accordionContentEl.appendChild(accordionTextEl);
+
+  accordionItemEL.addEventListener("click", function () {
+    this.classList.toggle("is-active");
+    if (this.classList.contains("is-active")) {
+      accordionContentEl.style.display = "block";
+      accordionContentEl.style.transition = "display 1s ";
+      accordionTitleEl.setAttribute("aria-expanded", "true");
+      accordionContentEl.setAttribute("aria-hidden", "false");
+    } else {
+      accordionContentEl.style.display = "none";
+      accordionTitleEl.setAttribute("aria-expanded", "false");
+      accordionContentEl.setAttribute("aria-hidden", "true");
+    }
+  });
 }
 
 function showNotify1(text, color, element) {
@@ -282,8 +333,9 @@ function showNotify1(text, color, element) {
 }
 
 document.querySelector(".testModal").addEventListener("click", () => {
-  showModal();
+  //showModal();
   //showNotify1("This is a test", "info", ".testModal");
+  accordionContent("Test", "This is a test accordion");
 });
 function showModal() {
   const modalContainer = document.createElement("div");
