@@ -434,7 +434,7 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      //initMap(position, json);
+      initMap(position, json);
     })
     .catch((err) => {
       console.log(err);
