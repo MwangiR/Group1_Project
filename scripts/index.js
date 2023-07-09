@@ -346,8 +346,8 @@ function getLocation() {
 let latlon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
-  mapLat = position.coords.latitude;
-  mapLon = position.coords.longitude;
+  // mapLat = position.coords.latitude;
+  // mapLon = position.coords.longitude;
   //initialArtists();
 
 };
@@ -437,7 +437,7 @@ function getTickets() {
 
       showEvents(json);
       //test initMap(position, json)
-      initMap();
+      initMap(position, json);
     })
     .catch((err) => {
       console.log(err);
@@ -479,33 +479,28 @@ function showEvents(json) {
 }
 
 
-let mapLat = "";
-let mapLon = "";
+// let mapLat = "";
+// let mapLon = "";
 
 
 // initialize map
-function initMap(json) {
-  var mapDiv = document.getElementById("map");
+function initMap(position, json) {
+  var mapDiv = document.getElementById('map');
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: mapLat, lng: mapLon },
-    zoom: 11,
+    center: { lat: position.coords.latitude, lng: position.coords.longitude },
+    zoom: 10
   });
-  //json.page.totalElements or 199
-  for (var i = 0; i < 199; i++) {
+  for (var i = 0; i < json.page.size; i++) {
     addMarker(map, json._embedded.events[i]);
   }
 }
 
-// add markers to map
 function addMarker(map, event) {
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(
-      event._embedded.venues[0].location.latitude,
-      event._embedded.venues[0].location.longitude,
-    ),
-    map: map,
+    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+    map: map
   });
-  marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
   console.log(marker);
 }
 
