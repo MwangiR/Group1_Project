@@ -410,6 +410,7 @@ function initialArtists() {
       //   getLocation();
       //   getTickets();
       // });
+
     })
     .catch((err) => {
       console.log(err);
@@ -443,6 +444,7 @@ function getTickets() {
 
       showEvents(json);
       //test initMap(position, json)
+      getLocation();
       initMap(position, json);
     })
     .catch((err) => {
@@ -487,6 +489,8 @@ function showEvents(json) {
 
 let mapLat = "";
 let mapLon = "";
+
+
 
 
 // initialize map
