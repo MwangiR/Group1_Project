@@ -4,6 +4,7 @@ const clientSecret = "518ad5850c434ad3aca350a5e92fbf46";
 
 let useTheseArtists = undefined;
 //change
+showNotify1("this ia a test", "success", "body");
 
 // Function to handle user authentication and authorization
 function authenticate() {
@@ -123,8 +124,11 @@ function getUserPlaylists(accessToken) {
               for (const artist of artists) {
                 const artistName = artist.name;
                 artistNames.push(artistName);
+
+                //const artistNames = items.flatMap(item => item.track.artists.map(artist => artist.name));
               }
               console.log("This is artistNames----------------", artistNames);
+              console.log("Artist Names:", artistNames.join(", ")); //output into a single line of code
             }
           });
       }
@@ -261,6 +265,59 @@ function applyToDom(playlistObj) {
 
   playlistEL.appendChild(ulContainerEl);
 }
+
+function showNotify1(text, color, element) {
+  const notifyContainer = document.createElement("div");
+  notifyContainer.className = `${color} callout`;
+  notifyContainer.innerHTML = `<h5>${text}</h5>`;
+  notifyContainer.setAttribute(
+    "style",
+    "width:300px; position:absolute; right:0; top:10%; left:5%;",
+  );
+  $(`${element}`).append(notifyContainer);
+
+  setTimeout(function () {
+    notifyContainer.remove();
+  }, 3000);
+}
+
+document.querySelector(".testModal").addEventListener("click", () => {
+  showModal();
+  //showNotify1("This is a test", "info", ".testModal");
+});
+function showModal() {
+  const modalContainer = document.createElement("div");
+  modalContainer.classList.add("reveal");
+  modalContainer.setAttribute("id", "Modal");
+  modalContainer.setAttribute("data-reveal", "");
+  modalContainer.setAttribute(
+    "style",
+    "display:grid; place-items:center; position:absolute; top:30%; left:30%;",
+  );
+
+  const modalSpan = document.createElement("span");
+  modalSpan.setAttribute("aria-hidden", "true");
+  modalSpan.innerHTML = "&times;";
+
+  const modalButton = document.createElement("button");
+  modalButton.className = "close-button";
+  modalButton.setAttribute("data-close", "");
+  modalButton.setAttribute("aria-label", "Close modal");
+  modalButton.setAttribute("type", "button");
+  modalButton.appendChild(modalSpan);
+  modalContainer.append(modalButton);
+
+  const modalTitle = document.createElement("h5");
+  modalTitle.textContent = "This is a modal";
+  modalContainer.append(modalTitle);
+
+  modalSpan.addEventListener("click", function () {
+    modalContainer.remove();
+  });
+
+  document.querySelector("body").append(modalContainer);
+}
+
 //jquery section
 $(function () {
   function showNotify(text, color, element) {
@@ -304,8 +361,8 @@ $(function () {
 
   clickableBtn.on("click", function (e) {
     e.preventDefault();
-    //modalDiv();
-    showNotify("this is a warning", "success", "body");
+    modalDiv();
+    //showNotify("this is a warning", "success", "body");
     console.log("clicked");
   });
   $(document).foundation();
@@ -436,3 +493,10 @@ generateContent.addEventListener("click", function (event) {
   event.preventDefault();
   getLocation();
 });
+
+//---------------------------------------------------------
+//initalize foundation css
+Foundation.addToJquery($);
+$(document).foundation();
+
+//--------------------------------------------------------------

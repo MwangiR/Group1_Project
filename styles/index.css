@@ -99,6 +99,15 @@ section {
   color: var(--spaceCadet);
 }
 
+footer {
+  text-align: center;
+  color: var(--mindaro);
+  background-color: var(--spaceCadet);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .authTab {
     flex-direction: column;
