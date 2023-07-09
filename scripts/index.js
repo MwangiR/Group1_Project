@@ -447,7 +447,8 @@ function getTickets() {
 
 // display the events and their details
 function showEvents(json) {
-  for (var i = 0; i < json.page.size; i++) {
+  //.page ->> totalElements
+  for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
 
