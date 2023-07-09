@@ -330,7 +330,7 @@ generateContent.addEventListener("click", function (event) {
   //console.log(event);
   event.preventDefault();
   getLocation();
-  initialArtists(); //moved from showPosition() might not work, might need to wait
+  //initialArtists(); //moved from showPosition() might not work, might need to wait
 });
 
 // get geolocation
@@ -350,7 +350,7 @@ function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
-  //initialArtists();
+  initialArtists();
 
 };
 
