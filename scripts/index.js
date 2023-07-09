@@ -217,6 +217,14 @@ function applyToDom(playlistObj) {
     ticketEL.classList.add('button');
     ticketEL.classList.add('this-button');
     ticketEL.textContent = "Search for Tickets";
+    ticketEL.addEventListener("click", function (event) {
+      // generate tickets      
+      console.log(event);
+      event.preventDefault();
+      getLocation();
+      getTickets();
+
+    })
 
     artistLiEL.appendChild(ticketEL);
     ulContainerEl.appendChild(artistLiEL);
@@ -383,15 +391,15 @@ function initialArtists() {
       //console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
       applyToDom(crossCheckedArray);
-      // generate tickets
-      const generateTickets = document.querySelectorAll(".this-button");
-      generateTickets.addEventListener("click", function (event) {
-        console.log(event);
+      // // generate tickets
+      // const generateTickets = document.querySelectorAll(".this-button");
+      // generateTickets.addEventListener("click", function (event) {
+      //   console.log(event);
 
-        event.preventDefault();
-        getLocation();
-        getTickets();
-      });
+      //   event.preventDefault();
+      //   getLocation();
+      //   getTickets();
+      // });
     })
     .catch((err) => {
       console.log(err);
