@@ -298,6 +298,7 @@ function accordionContent(title, items) {
   accordionContentEl.setAttribute("data-tab-content", "");
   accordionItemEL.appendChild(accordionContentEl);
 
+  //show
   for (const item of items) {
     const accordionTextEl = document.createElement("p");
     accordionTextEl.textContent = item;
