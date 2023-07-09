@@ -19,6 +19,8 @@ body {
   color: #212529;
   background-color: #f1f1f1;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -103,7 +105,7 @@ footer {
   text-align: center;
   color: var(--mindaro);
   background-color: var(--spaceCadet);
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
@@ -113,6 +115,9 @@ footer {
     flex-direction: column;
   }
   #secondSection {
+    flex-direction: column;
+  }
+  #artistSection {
     flex-direction: column;
   }
 }
