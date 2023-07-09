@@ -383,7 +383,7 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      //console.log(initialData);
+      console.log(initialData);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
@@ -490,7 +490,7 @@ function initMap(json) {
     center: { lat: mapLat, lng: mapLon },
     zoom: 10,
   });
-  for (var i = 0; i < json.page.size; i++) {
+  for (var i = 0; i < json.page.totalElements; i++) {
     addMarker(map, json._embedded.events[i]);
   }
 }
