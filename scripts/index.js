@@ -378,7 +378,7 @@ function initialArtists() {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=50&size=200"; //added size constraint, maybe add more constraints
+    "&radius=10&size=200"; //added size constraint, maybe add more constraints
 
   fetch(getAllUrl)
     .then((response) => response.json())
@@ -488,9 +488,10 @@ function initMap(json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
     center: { lat: mapLat, lng: mapLon },
-    zoom: 10,
+    zoom: 11,
   });
-  for (var i = 0; i < json.page.totalElements; i++) {
+  //json.page.totalElements or 199
+  for (var i = 0; i < 199; i++) {
     addMarker(map, json._embedded.events[i]);
   }
 }
