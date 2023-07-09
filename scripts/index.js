@@ -220,7 +220,8 @@ function applyToDom(playlistObj) {
     ticketEL.addEventListener("click", function (event) {
       // generate tickets      
       console.log(event);
-      let specificArtist = event.target.parent().textContent;
+      let thisArtist = event.target.parentNode.textContent;
+      specificArtist = thisArtist;
       event.preventDefault();
       getLocation();
       getTickets();
@@ -410,7 +411,7 @@ function initialArtists() {
 }
 
 
-
+specificArtist = "";
 
 // discoveryApi fetch for tickets
 function getTickets() {
