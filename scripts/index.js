@@ -392,7 +392,7 @@ function initialArtists() {
       }
       //console.log(initialDataArrayResults);
       uniqueArrayResults = [...new Set(initialDataArrayResults)];
-      //console.log(uniqueArrayResults);
+      console.log(uniqueArrayResults);
       findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
       applyToDom(crossCheckedArray);
       // // generate tickets
