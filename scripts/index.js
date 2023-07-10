@@ -210,8 +210,17 @@ function authenticationCheck(tokenVariable) {
     redIcon.setAttribute("class", "fi-x");
     redBadge.appendChild(redIcon);
     document.querySelector("#badgeIcon").appendChild(redBadge);
+
+    if (greenBadge) {
+      greenBadge.remove();
+      greenBadge = null;
+    }
   } else {
-    redBadge.remove();
+    if (redBadge) {
+      redBadge.remove();
+      redBadge = null;
+    }
+
     greenBadge = document.createElement("span");
     greenBadge.setAttribute("class", "badge alert");
     const greenIcon = document.createElement("i");
