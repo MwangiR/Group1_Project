@@ -502,7 +502,7 @@ function showEvents(json) {
 function initMap(positionLat, positionLon, json) {
   var mapDiv = document.getElementById('map');
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: positionLat, lng: positionLon },
+    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
     zoom: 10
   });
   console.log(json);
