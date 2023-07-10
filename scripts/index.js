@@ -289,11 +289,6 @@ $(function () {
 // --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
 
-// google maps api
-// const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
-// const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
-
-
 // empty array for initial fetch request data
 let uniqueSpotifyArtists = undefined;
 let initialDataArrayResults = [];
@@ -303,7 +298,6 @@ let crossCheckedArray = [];
 
 // function to compare the 2 unique arrays
 function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
-
   // Loop for array 1
   for (let i = 0; i < uniqueArrayResults.length; i++) {
     // Loop for array 2
@@ -314,14 +308,7 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
       }
     }
   }
-  //console.log(uniqueSpotifyArtists);
-  //console.log(crossCheckedArray);
-  //generateArtistList(crossCheckedArray);
-  //getTickets();
-
 }
-
-
 
 
 // generate cross checked list results
@@ -332,6 +319,7 @@ generateContent.addEventListener("click", function (event) {
   getLocation();
   //initialArtists(); //moved from showPosition() might not work, might need to wait
 });
+
 
 // get geolocation
 function getLocation() {
@@ -354,8 +342,8 @@ function showPosition(position) {
   mapLon = position.coords.longitude;
   console.log(position);
   initialArtists();
-
 };
+
 
 // show errors
 function showError(error) {
@@ -393,28 +381,17 @@ function initialArtists() {
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
-        } // else { console.log(event) };
-      }
-      //console.log(initialDataArrayResults);
-      uniqueArrayResults = [...new Set(initialDataArrayResults)];
-      console.log(uniqueArrayResults);
-      findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
+        }
 
-      //remove duplicates from cross-check array
-      crossCheckedArray = [...new Set(crossCheckedArray)];
+        uniqueArrayResults = [...new Set(initialDataArrayResults)];
+        console.log(uniqueArrayResults);
+        findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
 
-      applyToDom(crossCheckedArray);
-      // // generate tickets
-      // const generateTickets = document.querySelectorAll(".this-button");
-      // generateTickets.addEventListener("click", function (event) {
-      //   console.log(event);
+        //remove duplicates from cross-check array
+        crossCheckedArray = [...new Set(crossCheckedArray)];
 
-      //   event.preventDefault();
-      //   getLocation();
-      //   getTickets();
-      // });
-
-    })
+        applyToDom(crossCheckedArray);
+      })
     .catch((err) => {
       console.log(err);
     });
@@ -423,13 +400,10 @@ function initialArtists() {
 }
 
 
-specificArtist = "";
-
 // discoveryApi fetch for tickets
+specificArtist = "";
 function getTickets() {
   console.log(crossCheckedArray);
-  //let crossCheckedArrayString = crossCheckedArray.join(" ");
-  //let UseMe = crossCheckedArrayString.toString();
   console.log(specificArtist);
   var url =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" +
@@ -444,27 +418,17 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
-      //positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
-      //positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
-
-
 
       showEvents(json);
-      //test initMap(position, json)
       getLocation();
       console.log(mapLat);
       console.log(mapLon);
-
       initMap(mapLat, mapLon, json);
-
     })
     .catch((err) => {
       console.log(err);
     });
 }
-
-
-
 
 
 // display the events and their details
@@ -473,35 +437,23 @@ function showEvents(json) {
   for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
-
     const eventsNameEL = document.createElement("p");
 
-
-    //testing this
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
       } else { console.log(newEvent) };
     }
 
-    //eventsNameEL.textContent = json._embedded.events[i]._embedded.attractions[0].name;--------------------------------------------
-
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
     eventsUrlEL.setAttribute("class", "hollow button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
-
     eventContainer.appendChild(eventsNameEL);
     eventContainer.appendChild(eventsUrlEL);
     eventsEl.appendChild(eventContainer);
   }
 }
-
-
-// let positionLat = "";
-// let positionLon = "";
-
-
 
 
 // initialize map
@@ -517,10 +469,11 @@ function initMap(positionLat, positionLon, json) {
   }
 }
 
+
 function addMarker(map, event) {
   console.log(event);
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude), //parseInt()?
+    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
     map: map
   });
   marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
