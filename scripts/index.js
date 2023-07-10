@@ -391,7 +391,7 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      getLocation();
+      //getLocation(); may need this-----testing for map fix=----------------
       console.log(mapLat);
       console.log(mapLon);
       initMap(mapLat, mapLon, json);
