@@ -441,11 +441,14 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
+      positionLat = json._embedded.events[0]._embedded.venues.location.latitude;
+      positionLon = json._embedded.events[0]._embedded.venues.location.longitude;
+
 
       showEvents(json);
       //test initMap(position, json)
       getLocation();
-      initMap(position, json);
+      initMap(positionLat, positionLon, json);
     })
     .catch((err) => {
       console.log(err);
@@ -487,17 +490,17 @@ function showEvents(json) {
 }
 
 
-let mapLat = "";
-let mapLon = "";
+// let positionLat = "";
+// let positionLon = "";
 
 
 
 
 // initialize map
-function initMap(position, json) {
+function initMap(positionLat, positionLon, json) {
   var mapDiv = document.getElementById('map');
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: mapLat, lng: mapLon },
+    center: { lat: positionLat, lng: positionLon },
     zoom: 10
   });
   for (var i = 0; i < json.page.size; i++) {
