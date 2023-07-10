@@ -60,7 +60,7 @@ function handleCallback() {
       // Response from the token endpoint
       const accessToken = data.access_token;
       // Replace HTML space characters with regular spaces
-      tokenVariable = accessToken.replace(/&nbsp;/g, "-");
+      tokenVariable = accessToken.replace(/&nbsp;/g, " ");
       authenticationCheck(tokenVariable);
 
       // Log the access token for debugging
@@ -200,16 +200,19 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 //-------------------------------------------------------------------
 //apply to dom function
 
+var redBadge;
+var greenBadge;
 function authenticationCheck(tokenVariable) {
   if (tokenVariable === null || tokenVariable === "") {
-    const redBadge = document.createElement("span");
+    redBadge = document.createElement("span");
     redBadge.setAttribute("class", "badge alert");
     const redIcon = document.createElement("i");
     redIcon.setAttribute("class", "fi-x");
     redBadge.appendChild(redIcon);
     document.querySelector("#badgeIcon").appendChild(redBadge);
   } else {
-    const greenBadge = document.createElement("span");
+    redBadge.remove();
+    greenBadge = document.createElement("span");
     greenBadge.setAttribute("class", "badge alert");
     const greenIcon = document.createElement("i");
     greenIcon.setAttribute("class", "fi-x");
