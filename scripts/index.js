@@ -367,7 +367,6 @@ function showError(error) {
 
 // initial fetch to get all tickets for music gigs within a radius of the user location
 function initialArtists() {
-
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
@@ -382,22 +381,25 @@ function initialArtists() {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
         }
+      }
 
-        uniqueArrayResults = [...new Set(initialDataArrayResults)];
-        console.log(uniqueArrayResults);
-        findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
+      uniqueArrayResults = [...new Set(initialDataArrayResults)];
+      console.log(uniqueArrayResults);
+      findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
 
-        //remove duplicates from cross-check array
-        crossCheckedArray = [...new Set(crossCheckedArray)];
+      //remove duplicates from cross-check array
+      crossCheckedArray = [...new Set(crossCheckedArray)];
 
-        applyToDom(crossCheckedArray);
-      })
+      applyToDom(crossCheckedArray);
+    })
     .catch((err) => {
       console.log(err);
     });
+
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
 }
+
 
 
 // discoveryApi fetch for tickets
