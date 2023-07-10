@@ -441,8 +441,8 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
-      positionLat = json._embedded.events[0]._embedded.venues.location.latitude;
-      positionLon = json._embedded.events[0]._embedded.venues.location.longitude;
+      positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
+      positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
       console.log(positionLat);
       console.log(positionLon);
 
