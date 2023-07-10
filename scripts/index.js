@@ -3,8 +3,8 @@ const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
 // Function to handle user authentication and authorization
-let accessToken = "";
-authenticationCheck(accessToken);
+let tokenTest = "";
+authenticationCheck(tokenTest);
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
