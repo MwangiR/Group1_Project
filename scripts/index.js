@@ -214,7 +214,7 @@ function applyToDom(playlistObj) {
       let thisArtist = event.target.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       event.preventDefault();
-      getLocation();
+      //getLocation(); logged this out, might need it or try logging out other one
       getTickets();
       showNotify("List generated", "success", "#authSection");
     });
@@ -391,7 +391,7 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      getLocation();
+      //getLocation(); may need this-----testing for map fix=----------------
       console.log(mapLat);
       console.log(mapLon);
       initMap(mapLat, mapLon, json);
