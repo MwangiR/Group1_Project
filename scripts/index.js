@@ -206,7 +206,7 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 //apply to dom function
 
 function applyToDom(playlistObj) {
-  const playlistEL = document.querySelector(".playlistTab");
+  const playlistEL = document.querySelector("#updateContent"); //edit
   playlistEL.innerHTML = "";
   const ulContainerEl = document.createElement("ul");
 
@@ -383,7 +383,7 @@ function initialArtists() {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=10&size=200"; //added size constraint, maybe add more constraints
+    "&radius=10&size=200"; //added size constraint, maybe add more constraints 
 
   fetch(getAllUrl)
     .then((response) => response.json())
