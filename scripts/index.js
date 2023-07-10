@@ -61,7 +61,7 @@ function handleCallback() {
       const accessToken = data.access_token;
       // Replace HTML space characters with regular spaces
       tokenVariable = accessToken.replace(/&nbsp;/g, " ");
-      authenticationCheck(data.access_token);
+      authenticationCheck(accessToken);
 
       // Log the access token for debugging
       console.log("Access Token:", accessToken);
@@ -237,6 +237,7 @@ function applyToDom(playlistObj) {
 
   playlistObj.forEach((artist) => {
     const artistLiEL = document.createElement("li");
+    artistLiEL.className = "artistGenerated";
     artistLiEL.textContent = artist;
     //add search for ticket button here
     const ticketEL = document.createElement("button");
