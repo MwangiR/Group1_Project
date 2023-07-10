@@ -204,7 +204,7 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 //apply to dom function
 
 function applyToDom(playlistObj) {
-  const playlistEL = document.querySelector("#updateContent"); //edit
+  const playlistEL = document.querySelector(".playlistTab"); //edit
   playlistEL.innerHTML = "";
   const ulContainerEl = document.createElement("ul");
 
