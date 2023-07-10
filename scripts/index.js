@@ -155,14 +155,6 @@ function getUserLibraryArtists(accessToken) {
           libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name)),
         ),
       ];
-
-      //-----------------------------
-      //display to dom
-      //applyToDom(libraryArtists);
-      //----------------------------
-
-      // Log the library artists
-      //console.log("Library Artists:", libraryArtists);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -274,10 +266,6 @@ $(function () {
 // --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
 
-// google maps api
-// const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
-// const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
-
 // empty array for initial fetch request data
 let uniqueSpotifyArtists = undefined;
 let initialDataArrayResults = [];
@@ -296,19 +284,14 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
       }
     }
   }
-  //console.log(uniqueSpotifyArtists);
-  //console.log(crossCheckedArray);
-  //generateArtistList(crossCheckedArray);
-  //getTickets();
 }
 
 // generate cross checked list results
 const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
-  //console.log(event);
   event.preventDefault();
   getLocation();
-  //initialArtists(); //moved from showPosition() might not work, might need to wait
+
 });
 
 // get geolocation
@@ -357,7 +340,7 @@ function initialArtists() {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=10&size=200"; //added size constraint, maybe add more constraints
+    "&radius=10&size=200";
 
   fetch(getAllUrl)
     .then((response) => response.json())
@@ -407,8 +390,6 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
-      //positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
-      //positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
 
       showEvents(json);
       getLocation();
@@ -423,13 +404,11 @@ function getTickets() {
 
 // display the events and their details
 function showEvents(json) {
-  //.page ->> totalElements
   for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
 
-    //testing this
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
@@ -448,8 +427,6 @@ function showEvents(json) {
   }
 }
 
-// let positionLat = "";
-// let positionLon = "";
 
 // initialize map
 function initMap(positionLat, positionLon, json) {
