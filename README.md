@@ -2,7 +2,8 @@
 
 Bootcamp Group Project 1 2023
 
-![Wireframe](https://github.com/AlexanderDuncan1/Group1_Project/assets/131665093/2e543b1c-88a5-4d87-9de1-8f88c1f58461)
+![Wireframe](https://github.com/AlexanderDuncan1/Group1_Project/assets/131665093/f715283c-9347-4a26-bb5b-468d348b6861)
+
 
 
 ## User Story
