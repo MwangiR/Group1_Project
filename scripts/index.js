@@ -207,7 +207,7 @@ function applyToDom(playlistObj) {
     const ticketEL = document.createElement("button");
     ticketEL.classList.add("button");
     ticketEL.classList.add("this-button");
-    ticketEL.textContent = "Search for Tickets";
+    ticketEL.textContent = "Search Playlist Tickets";
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
@@ -291,7 +291,6 @@ const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
   event.preventDefault();
   getLocation();
-
 });
 
 // get geolocation
@@ -426,7 +425,6 @@ function showEvents(json) {
     eventsEl.appendChild(eventContainer);
   }
 }
-
 
 // initialize map
 function initMap(positionLat, positionLon, json) {
