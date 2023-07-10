@@ -512,7 +512,7 @@ function initMap(positionLat, positionLon, json) {
     zoom: 10
   });
   console.log(json);
-  for (var i = 0; i < json.page.size; i++) {
+  for (var i = 0; i < json.page.totalElements; i++) {
     addMarker(map, json._embedded.events[i]);
   }
 }
@@ -520,7 +520,7 @@ function initMap(positionLat, positionLon, json) {
 function addMarker(map, event) {
   console.log(event);
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude), //parseInt()?
     map: map
   });
   marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
