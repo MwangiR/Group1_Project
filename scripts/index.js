@@ -300,11 +300,7 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
   //console.log(crossCheckedArray);
   //generateArtistList(crossCheckedArray);
   //getTickets();
-
 }
-
-
-
 
 // generate cross checked list results
 const generateContent = document.querySelector("#generateList");
@@ -314,7 +310,6 @@ generateContent.addEventListener("click", function (event) {
   getLocation();
   //initialArtists(); //moved from showPosition() might not work, might need to wait
 });
-
 
 // get geolocation
 function getLocation() {
@@ -336,8 +331,7 @@ function showPosition(position) {
   mapLon = position.coords.longitude;
   console.log(position);
   initialArtists();
-
-};
+}
 
 // show errors
 function showError(error) {
@@ -374,33 +368,24 @@ function initialArtists() {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
         }
+      }
 
-        uniqueArrayResults = [...new Set(initialDataArrayResults)];
-        console.log(uniqueArrayResults);
-        findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
+      uniqueArrayResults = [...new Set(initialDataArrayResults)];
+      console.log(uniqueArrayResults);
+      findCommonElement(uniqueArrayResults, uniqueSpotifyArtists);
 
-        //remove duplicates from cross-check array
-        crossCheckedArray = [...new Set(crossCheckedArray)];
+      //remove duplicates from cross-check array
+      crossCheckedArray = [...new Set(crossCheckedArray)];
 
       applyToDom(crossCheckedArray);
-      // // generate tickets
-      // const generateTickets = document.querySelectorAll(".this-button");
-      // generateTickets.addEventListener("click", function (event) {
-      //   console.log(event);
-
-      //   event.preventDefault();
-      //   getLocation();
-      //   getTickets();
-      // });
-
     })
     .catch((err) => {
       console.log(err);
     });
+
   console.log(uniqueSpotifyArtists);
   console.log(crossCheckedArray);
 }
-
 
 specificArtist = "";
 
@@ -425,8 +410,6 @@ function getTickets() {
       //positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
       //positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
 
-
-
       showEvents(json);
       getLocation();
       console.log(mapLat);
@@ -438,10 +421,6 @@ function getTickets() {
     });
 }
 
-
-
-
-
 // display the events and their details
 function showEvents(json) {
   //.page ->> totalElements
@@ -449,7 +428,6 @@ function showEvents(json) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
-
 
     //testing this
     for (const newEvent of json._embedded.events) {
@@ -470,12 +448,8 @@ function showEvents(json) {
   }
 }
 
-
 // let positionLat = "";
 // let positionLon = "";
-
-
-
 
 // initialize map
 function initMap(positionLat, positionLon, json) {
@@ -489,7 +463,6 @@ function initMap(positionLat, positionLon, json) {
     addMarker(map, json._embedded.events[i]);
   }
 }
-
 
 function addMarker(map, event) {
   console.log(event);
