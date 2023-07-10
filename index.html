@@ -21,59 +21,47 @@
                     <div class="title-bar-left">
                         <span class="title-bar-title">Project 1</span>
                     </div>
-                    <div class="title-bar-right">
-                        <ul class="dropdown menu align-right">
-                            <li>
-                                <a>Item 1</a>
-                                <ul class="menu">
-                                    <li><a href="">Item A</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </header>
 
-
-        <!--Alex, changed your button to this-->
-
-        <!--<button onclick="authenticate()">Authenticate</button>-->
-
         <div id="divSection">
+
+            <div class="authTab">
+                <h3>Authenticate with Spotify </h3>
+                <div>
+                    <a href="#" class="button expanded" id="authBtn" onclick="authenticate()">Authenticate</a>
+                </div>
+                <div>
+                    <button id="generateList" class="button expanded">Generate List</button>
+                </div>
+
+            </div>
             <section id="authSection">
                 <h2>Spotify Playlist</h2>
                 <article>
-                    <div class="authTab">
-                        <h3>Authenticate with Spotify </h3>
-                        <div>
-                            <a href="#" class="button expanded" id="authBtn" onclick="authenticate()">Authenticate</a>
-                        </div>
-                    </div>
-                    <div class="playlistTab">
-
-                    </div>
+                    <div class="playlistTab"></div>
                 </article>
             </section>
             <div>
                 <!-- <a href="#" class="hollow button expanded showModal" data-open="Modal">Sample Modal</a> -->
             </div>
-            <button id="generateList" class="button">Generate List</button>
+
             <button id="updateContent" class="button">Search for Tickets</button>
-
             <section id="artistSection">
-                <article>
-                    <h2>Events</h2>
-                    <div id="events"></div>
-
-
-                </article>
                 <aside>
                     <h2>Map</h2>
                     <p id="location"></p>
                     <div id="map"></div>
 
                 </aside>
+                <article>
+                    <h2>Events</h2>
+                    <div id="events"></div>
+
+
+                </article>
             </section>
         </div>
     </main>
