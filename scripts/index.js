@@ -270,9 +270,8 @@ function applyToDom(playlistObj) {
     });
 
     searchTicketEl.appendChild(ticketEL);
+    playlistEL.appendChild(searchResultEl);
   });
-
-  playlistEL.appendChild(searchResultEl);
 }
 
 function showNotify(text, color, element) {
