@@ -3,7 +3,8 @@ const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
 // Function to handle user authentication and authorization
-
+let tokenVariable = "";
+authenticationCheck(tokenVariable);
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
@@ -58,7 +59,9 @@ function handleCallback() {
     .then((data) => {
       // Response from the token endpoint
       const accessToken = data.access_token;
-      authenticationCheck(accessToken);
+      // Replace HTML space characters with regular spaces
+      tokenVariable = accessToken.replace(/&nbsp;/g, "-");
+      authenticationCheck(tokenVariable);
 
       // Log the access token for debugging
       console.log("Access Token:", accessToken);
