@@ -443,6 +443,8 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
       positionLat = json._embedded.events[0]._embedded.venues.location.latitude;
       positionLon = json._embedded.events[0]._embedded.venues.location.longitude;
+      console.log(positionLat);
+      console.log(positionLon);
 
 
       showEvents(json);
@@ -503,6 +505,7 @@ function initMap(positionLat, positionLon, json) {
     center: { lat: positionLat, lng: positionLon },
     zoom: 10
   });
+  console.log(json);
   for (var i = 0; i < json.page.size; i++) {
     addMarker(map, json._embedded.events[i]);
   }
