@@ -200,16 +200,16 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 function authenticationCheck(tokenVariable) {
   if (tokenVariable === null || tokenVariable === "") {
     const redBadge = document.createElement("span");
-    redBadge.classList.add("badge alert");
+    redBadge.setAttribute("class", "badge alert");
     const redIcon = document.createElement("i");
-    redIcon.classList.add("fi-x");
+    redIcon.setAttribute("class", "fi-x");
     redBadge.appendChild(redIcon);
     document.querySelector("#badgeIcon").appendChild(redBadge);
   } else {
     const greenBadge = document.createElement("span");
-    greenBadge.classList.add("badge alert");
+    greenBadge.setAttribute("class", "badge alert");
     const greenIcon = document.createElement("i");
-    greenIcon.classList.add("fi-x");
+    greenIcon.setAttribute("class", "fi-x");
     greenBadge.appendChild(greenIcon);
     document.querySelector("#badgeIcon").appendChild(greenBadge);
   }
