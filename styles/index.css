@@ -93,6 +93,10 @@ section {
   color: var(--spaceCadet);
 }
 
+.artistGenerated {
+  list-style-type: none;
+}
+
 .artistGroup {
   display: flex;
   flex-direction: row;
