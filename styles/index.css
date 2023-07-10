@@ -6,6 +6,7 @@
   --mindaro: #dbff76;
   --spaceCadet: #202c59;
   --caputMortum: #581f18;
+  --spotifyGreen: #1db954;
 }
 
 body {
@@ -47,10 +48,12 @@ section {
 
 .authTab {
   display: flex;
+  flex-direction: column;
 }
 
 .authTab h3 {
   flex: 1 0 30%;
+  text-align: center;
 }
 
 .authTab div {
@@ -63,13 +66,17 @@ section {
   padding: 2%;
 }
 
+#authSection h2 {
+  text-align: center;
+  color: var(--spotifyGreen);
+}
+
 #artistSection {
   display: flex;
   flex: 1 0 auto;
 }
 
 #artistSection article {
-  border: 5px solid darkblue;
   margin: 5px;
   flex: 1 0 50%;
 }
@@ -81,7 +88,7 @@ section {
 }
 
 #authBtn {
-  background-color: var(--mindaro);
+  background-color: var(--spotifyGreen);
   color: var(--spaceCadet);
 }
 
@@ -94,9 +101,18 @@ section {
   flex: 1 0 200px;
 }
 
-#authBtn {
-  background-color: var(--mindaro);
-  color: var(--spaceCadet);
+footer {
+  text-align: center;
+  color: var(--mindaro);
+  background-color: var(--spaceCadet);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#map {
+  width: 390px;
+  height: 390px;
 }
 
 @media (max-width: 600px) {
@@ -106,9 +122,4 @@ section {
   #secondSection {
     flex-direction: column;
   }
-}
-
-#map {
-  width: 390px;
-  height: 390px;
 }

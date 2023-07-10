@@ -2,14 +2,12 @@ const clientId = "07574a44bbef47ad9c5b4949cf020c29";
 const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
-
-
 // Function to handle user authentication and authorization
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
 
-  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here                            
+  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here
 
   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri,
@@ -210,25 +208,24 @@ function applyToDom(playlistObj) {
   playlistEL.innerHTML = "";
   const ulContainerEl = document.createElement("ul");
 
-
   playlistObj.forEach((artist) => {
     const artistLiEL = document.createElement("li");
     artistLiEL.textContent = artist;
     //add search for ticket button here
     const ticketEL = document.createElement("button");
-    ticketEL.classList.add('button');
-    ticketEL.classList.add('this-button');
+    ticketEL.classList.add("button");
+    ticketEL.classList.add("this-button");
     ticketEL.textContent = "Search for Tickets";
     ticketEL.addEventListener("click", function (event) {
-      // generate tickets      
+      // generate tickets
       console.log(event);
       let thisArtist = event.target.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       event.preventDefault();
       getLocation();
       getTickets();
-
-    })
+      showNotify("List generated", "success", "#authSection");
+    });
 
     artistLiEL.appendChild(ticketEL);
     ulContainerEl.appendChild(artistLiEL);
@@ -236,22 +233,19 @@ function applyToDom(playlistObj) {
 
   playlistEL.appendChild(ulContainerEl);
 }
+
+function showNotify(text, color, element) {
+  const notifyContainer = document.createElement("div");
+  notifyContainer.className = `${color} callout`;
+  notifyContainer.innerHTML = `<h5>${text}</h5>`;
+  $(`${element}`).prepend(notifyContainer);
+
+  setTimeout(function () {
+    notifyContainer.remove();
+  }, 3000);
+}
 //jquery section
 $(function () {
-  function showNotify(text, color, element) {
-    const notifyContainer = $("<div>")
-      .attr({
-        class: `${color} callout`,
-        style: "width:300px; position:absolute; right:0; top:10%; left:5%;",
-      })
-      .append($("<h5>").text(`${text}`));
-
-    $(`${element}`).append(notifyContainer);
-
-    setTimeout(function () {
-      notifyContainer.remove();
-    }, 3000);
-  }
   function modalDiv() {
     const modalDiv = $("<div>")
       .addClass("reveal")
@@ -274,27 +268,21 @@ $(function () {
     $("body").append(modalDiv);
     $(document).foundation();
   }
-
-  const clickableBtn = $(".showModal");
-
-  clickableBtn.on("click", function (e) {
-    e.preventDefault();
-    //modalDiv();
-    showNotify("this is a warning", "success", "body");
-    console.log("clicked");
-  });
   $(document).foundation();
 });
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
 
+// google maps api
+// const mapsKey = "AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
+// const mapsRequestUrl = "https://www.google.com/maps/embed/v1/search?key=" + mapsKey + "&center=" + `${userLatitde}` + "," + `${userLongitude}` + "&zoom=15";
+
 // empty array for initial fetch request data
 let uniqueSpotifyArtists = undefined;
 let initialDataArrayResults = [];
 let uniqueArrayResults = [];
 let crossCheckedArray = [];
-
 
 // function to compare the 2 unique arrays
 function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
@@ -308,8 +296,11 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
       }
     }
   }
+  //console.log(uniqueSpotifyArtists);
+  //console.log(crossCheckedArray);
+  //generateArtistList(crossCheckedArray);
+  //getTickets();
 }
-
 
 // generate cross checked list results
 const generateContent = document.querySelector("#generateList");
@@ -319,7 +310,6 @@ generateContent.addEventListener("click", function (event) {
   getLocation();
   //initialArtists(); //moved from showPosition() might not work, might need to wait
 });
-
 
 // get geolocation
 function getLocation() {
@@ -331,7 +321,6 @@ function getLocation() {
   }
 }
 
-
 // get latitude and longitude
 let latlon = "";
 let mapLat = 0;
@@ -342,8 +331,7 @@ function showPosition(position) {
   mapLon = position.coords.longitude;
   console.log(position);
   initialArtists();
-};
-
+}
 
 // show errors
 function showError(error) {
@@ -364,13 +352,12 @@ function showError(error) {
   }
 }
 
-
 // initial fetch to get all tickets for music gigs within a radius of the user location
 function initialArtists() {
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
-    "&radius=10&size=200"; //added size constraint, maybe add more constraints 
+    "&radius=10&size=200"; //added size constraint, maybe add more constraints
 
   fetch(getAllUrl)
     .then((response) => response.json())
@@ -400,7 +387,7 @@ function initialArtists() {
   console.log(crossCheckedArray);
 }
 
-
+specificArtist = "";
 
 // discoveryApi fetch for tickets
 specificArtist = "";
@@ -420,6 +407,8 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
+      //positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
+      //positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
 
       showEvents(json);
       getLocation();
@@ -432,7 +421,6 @@ function getTickets() {
     });
 }
 
-
 // display the events and their details
 function showEvents(json) {
   //.page ->> totalElements
@@ -441,10 +429,13 @@ function showEvents(json) {
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
 
+    //testing this
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
-      } else { console.log(newEvent) };
+      } else {
+        console.log(newEvent);
+      }
     }
 
     const eventsUrlEL = document.createElement("a");
@@ -457,13 +448,15 @@ function showEvents(json) {
   }
 }
 
+// let positionLat = "";
+// let positionLon = "";
 
 // initialize map
 function initMap(positionLat, positionLon, json) {
-  var mapDiv = document.getElementById('map');
+  var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
     center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
-    zoom: 10
+    zoom: 10,
   });
   console.log(json);
   for (var i = 0; i < json.page.totalElements; i++) {
@@ -471,15 +464,21 @@ function initMap(positionLat, positionLon, json) {
   }
 }
 
-
 function addMarker(map, event) {
   console.log(event);
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
-    map: map
+    position: new google.maps.LatLng(
+      event._embedded.venues[0].location.latitude,
+      event._embedded.venues[0].location.longitude,
+    ),
+    map: map,
   });
-  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+  marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
   console.log(marker);
 }
 
-
+//---------------------------------------------------
+//leave this bit always at the bottom
+Foundation.addToJquery($);
+$(document).foundation();
+//---------------------------------------------------
