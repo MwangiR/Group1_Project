@@ -239,7 +239,7 @@ function applyToDom(playlistObj) {
     searchResultEl.setAttribute("id", "searchResult");
 
     const artistTitleEl = document.createElement("div");
-    artistTitleEl.setAttribute("id", "artistTitle");
+    artistTitleEl.setAttribute("id", "playlistTitle");
     searchResultEl.appendChild(artistTitleEl);
 
     const searchResultTitle = document.createElement("h3");
