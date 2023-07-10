@@ -60,7 +60,7 @@ function handleCallback() {
       // Response from the token endpoint
       const accessToken = data.access_token;
       // Replace HTML space characters with regular spaces
-      tokenVariable = accessToken.replace(/&nbsp;/g, " ");
+      console.log(typeof accessToken);
       authenticationCheck(accessToken);
 
       // Log the access token for debugging
@@ -233,17 +233,31 @@ function authenticationCheck(tokenVariable) {
 function applyToDom(playlistObj) {
   const playlistEL = document.querySelector(".playlistTab"); //edit
   playlistEL.innerHTML = "";
-  const ulContainerEl = document.createElement("ul");
 
   playlistObj.forEach((artist) => {
-    const artistLiEL = document.createElement("li");
-    artistLiEL.className = "artistGenerated";
-    artistLiEL.textContent = artist;
+    const searchResultEl = document.createElement("div");
+    searchResultEl.setAttribute("id", "searchResult");
+
+    const artistTitleEl = document.createElement("div");
+    artistTitleEl.setAttribute("id", "artistTitle");
+    searchResultEl.appendChild(artistTitleEl);
+
+    const searchResultTitle = document.createElement("h3");
+    searchResultTitle.textContent = artist;
+    artistTitleEl.appendChild(searchResultTitle);
+
+    const searchTicketEl = document.createElement("div");
+    searchTicketEl.setAttribute("id", "searchTicket");
+    searchResultEl.appendChild(searchTicketEl);
+
+    // const artistLiEL = document.createElement("li");
+    // artistLiEL.className = "artistGenerated";
+    // artistLiEL.textContent = artist;
     //add search for ticket button here
     const ticketEL = document.createElement("button");
-    ticketEL.classList.add("button");
+    ticketEL.setAttribute("class", "success button expanded");
     ticketEL.classList.add("this-button");
-    ticketEL.textContent = "Search Playlist Tickets";
+    ticketEL.textContent = "Search Ticket";
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
@@ -255,11 +269,10 @@ function applyToDom(playlistObj) {
       showNotify("List generated", "success", "#authSection");
     });
 
-    artistLiEL.appendChild(ticketEL);
-    ulContainerEl.appendChild(artistLiEL);
+    searchTicketEl.appendChild(ticketEL);
   });
 
-  playlistEL.appendChild(ulContainerEl);
+  playlistEL.appendChild(searchResultEl);
 }
 
 function showNotify(text, color, element) {

@@ -97,6 +97,25 @@ section {
   list-style-type: none;
 }
 
+.artistGen {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#searchResult {
+  display: flex;
+}
+
+#playlistTitle {
+  flex: 1 0 20%;
+  text-align: center;
+}
+
+#searchTicket {
+  flex: 1 0 70%;
+}
+
 .artistGroup {
   display: flex;
   flex-direction: row;
