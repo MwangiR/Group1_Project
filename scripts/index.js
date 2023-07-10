@@ -346,10 +346,13 @@ function getLocation() {
 
 // get latitude and longitude
 let latlon = "";
+let mapLat = 0;
+let mapLon = 0;
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
+  console.log(position);
   initialArtists();
 
 };
@@ -441,16 +444,19 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       e.innerHTML = json.page.totalElements + " events found.";
-      positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
-      positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
-      console.log(positionLat);
-      console.log(positionLon);
+      //positionLat = json._embedded.events[0]._embedded.venues[0].location.latitude;
+      //positionLon = json._embedded.events[0]._embedded.venues[0].location.longitude;
+
 
 
       showEvents(json);
       //test initMap(position, json)
       getLocation();
-      initMap(positionLat, positionLon, json);
+      console.log(mapLat);
+      console.log(mapLon);
+
+      initMap(mapLat, mapLon, json);
+
     })
     .catch((err) => {
       console.log(err);
@@ -512,6 +518,7 @@ function initMap(positionLat, positionLon, json) {
 }
 
 function addMarker(map, event) {
+  console.log(event);
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
     map: map
