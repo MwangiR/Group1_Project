@@ -222,9 +222,9 @@ function authenticationCheck(tokenVariable) {
     }
 
     greenBadge = document.createElement("span");
-    greenBadge.setAttribute("class", "badge alert");
+    greenBadge.setAttribute("class", "badge success");
     const greenIcon = document.createElement("i");
-    greenIcon.setAttribute("class", "fi-x");
+    greenIcon.setAttribute("class", "fi-check");
     greenBadge.appendChild(greenIcon);
     document.querySelector("#badgeIcon").appendChild(greenBadge);
   }
