@@ -3,6 +3,7 @@ const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 
 // Function to handle user authentication and authorization
+authenticationCheck(accessToken);
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
@@ -57,6 +58,7 @@ function handleCallback() {
     .then((data) => {
       // Response from the token endpoint
       const accessToken = data.access_token;
+      authenticationCheck(accessToken);
 
       // Log the access token for debugging
       console.log("Access Token:", accessToken);
@@ -194,6 +196,24 @@ window.addEventListener("DOMContentLoaded", handleCallback);
 
 //-------------------------------------------------------------------
 //apply to dom function
+
+function authenticationCheck(tokenVariable) {
+  if (tokenVariable === null || tokenVariable === "") {
+    const redBadge = document.createElement("span");
+    redBadge.classList.add("badge alert");
+    const redIcon = document.createElement("i");
+    redIcon.classList.add("fi-x");
+    redBadge.appendChild(redIcon);
+    document.querySelector("#badgeIcon").appendChild(redBadge);
+  } else {
+    const greenBadge = document.createElement("span");
+    greenBadge.classList.add("badge alert");
+    const greenIcon = document.createElement("i");
+    greenIcon.classList.add("fi-x");
+    greenBadge.appendChild(greenIcon);
+    document.querySelector("#badgeIcon").appendChild(greenBadge);
+  }
+}
 
 function applyToDom(playlistObj) {
   const playlistEL = document.querySelector(".playlistTab"); //edit
