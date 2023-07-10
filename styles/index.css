@@ -111,10 +111,10 @@ footer {
   width: 100%;
 }
 
-/* #map {
+#map {
   width: 390px;
   height: 390px;
-} */
+}
 
 @media (max-width: 600px) {
   .authTab {
