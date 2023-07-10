@@ -61,7 +61,7 @@ function handleCallback() {
       const accessToken = data.access_token;
       // Replace HTML space characters with regular spaces
       tokenVariable = accessToken.replace(/&nbsp;/g, " ");
-      authenticationCheck(tokenVariable);
+      authenticationCheck(data.access_token);
 
       // Log the access token for debugging
       console.log("Access Token:", accessToken);
