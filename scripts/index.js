@@ -393,7 +393,12 @@ function initialArtists() {
     .then((response) => response.json())
     .then((initialData) => {
       console.log(initialData);
-
+      
+      if (initialData._embedded && initialData._embedded.events.length === 0) {
+        const eventsEl = document.querySelector("#events");
+        eventsEl.textContent = "No events in your area, sorry.";
+        return; // Exit the function early if no events are found
+      }
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
