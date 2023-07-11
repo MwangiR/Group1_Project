@@ -134,7 +134,7 @@ footer {
   color: var(--mindaro);
   background-color: var(--spaceCadet);
   position: absolute;
-  bottom: 0;
+  bottom: 0 !important;
   width: 100%;
 }
 
