@@ -31,6 +31,13 @@
         </header>
 
         <div id="divSection">
+            <div class="reveal showModal" id="infoModal" data-reveal>
+                <button class="close-button" data-close aria-label="Close modal" type="button"
+                    onclick="removeElement()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
 
             <div class="authTab">
                 <h3>Authenticate with Spotify </h3>
@@ -71,15 +78,7 @@
             <button id="updateContent" class="button">Search for Tickets</button>
 
 
-            <div class="reveal showModal" id="infoModal" data-reveal>
-                <button class="close-button" data-close aria-label="Close modal" type="button"
-                    onclick="removeElement()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <!-- <div id="displayInfo">
 
-                </div> -->
-            </div>
 
 
             <section id="artistSection">
