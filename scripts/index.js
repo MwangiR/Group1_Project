@@ -419,8 +419,8 @@ function initialArtists() {
       console.log(err);
     });
 
-  console.log(uniqueSpotifyArtists);
-  console.log(crossCheckedArray);
+  //console.log(uniqueSpotifyArtists);
+  //console.log(crossCheckedArray);
 }
 
 specificArtist = "";
