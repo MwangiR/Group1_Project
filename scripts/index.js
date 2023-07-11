@@ -382,20 +382,7 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      console.log("this is initial data", initialData);
-
-      const eventsFoundEl = document.createElement("div");
-
-      var e = document.getElementById("events");
-
-      if (initialData._embedded.events.length === 0 || !initialData._embedded.events.length) {
-        eventsFoundEl.setAttribute("class", "alert callout");
-        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
-      } else {
-        eventsFoundEl.setAttribute("class", "success callout");
-        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
-      }
-      e.prepend(eventsFoundEl);
+      // console.log("this is initial data", initialData);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
@@ -436,18 +423,18 @@ function getTickets() {
     .then((response) => response.json())
     .then((json) => {
       // console.log(json);
-      // var e = document.getElementById("events");
-      // e.innerHTML = json.page.totalElements + " events found.";
-      // const eventsFoundEl = document.createElement("div");
+      var e = document.getElementById("events");
+      e.innerHTML = json.page.totalElements + " events found.";
+      const eventsFoundEl = document.createElement("div");
 
-      // if (json.page.totalElements === 0) {
-      //   eventsFoundEl.setAttribute("class", "alert callout");
-      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      // } else {
-      //   eventsFoundEl.setAttribute("class", "success callout");
-      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      // }
-      // e.prepend(eventsFoundEl);
+      if (json.page.totalElements === 0 || !json.page.totalElements) {
+        eventsFoundEl.setAttribute("class", "alert callout");
+        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      } else {
+        eventsFoundEl.setAttribute("class", "success callout");
+        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      }
+      e.prepend(eventsFoundEl);
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
