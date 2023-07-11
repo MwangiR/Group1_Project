@@ -393,12 +393,13 @@ function initialArtists() {
     .then((response) => response.json())
     .then((initialData) => {
       console.log(initialData);
-      
-      if (initialData._embedded && initialData._embedded.events.length === 0) {
+
+      if (initialData.page.totalElements === 0) {
         const eventsEl = document.querySelector("#events");
         eventsEl.textContent = "No events in your area, sorry.";
-        return; // Exit the function early if no events are found
+        return;
       }
+
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
@@ -491,9 +492,6 @@ function initMap(positionLat, positionLon, json) {
     addMarker(map, json._embedded.events[i]);
   }
 }
-
-// Call the loadMapScript function to load the Google Maps API
-loadMapScript();
 
 function addMarker(map, event) {
   console.log(event);
