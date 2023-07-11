@@ -482,7 +482,7 @@ function initMap(mapLat, mapLon, json) {
         google.maps.event.addListener(map, 'bounds_changed', function (event) {
           if (this.getZoom() > 15 && this.initialZoom == true) {
             // Change max/min zoom here
-            this.setZoom(10);
+            this.setZoom(12);
             this.initialZoom = false;
           }
           google.maps.event.removeListener(zoomChangeBoundsListener);
