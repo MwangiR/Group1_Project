@@ -46,8 +46,9 @@ section {
   margin-right: 10%;
 }
 
+.reveal,
 .showModal {
-  top: 10%;
+  top: 0;
 }
 .authTab {
   display: flex;
