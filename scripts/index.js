@@ -424,7 +424,11 @@ function getTickets() {
     .then((json) => {
       console.log(json);
       var e = document.getElementById("events");
-      e.innerHTML = json.page.totalElements + " events found.";
+      // e.innerHTML = json.page.totalElements + " events found.";
+      const eventsFoundEl = documnt.createElement("div");
+      eventsFoundEl.setAttribute("class", "success callout");
+      eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      e.prepend(eventsFoundEl);
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
@@ -466,7 +470,6 @@ function initMap(mapLat, mapLon, json) {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
     center: { lat: mapLat, lng: mapLon },
-
   });
 
   const bounds = new google.maps.LatLngBounds();
@@ -477,30 +480,28 @@ function initMap(mapLat, mapLon, json) {
     const venueLon = event._embedded.venues[0].location.longitude;
     const venueLatLng = new google.maps.LatLng(venueLat, venueLon);
 
-    google.maps.event.addListener(map, 'zoom_changed', function () {
-      zoomChangeBoundsListener =
-        google.maps.event.addListener(map, 'bounds_changed', function (event) {
+    google.maps.event.addListener(map, "zoom_changed", function () {
+      zoomChangeBoundsListener = google.maps.event.addListener(
+        map,
+        "bounds_changed",
+        function (event) {
           if (this.getZoom() > 15 && this.initialZoom == true) {
             // Change max/min zoom here
             this.setZoom(12);
             this.initialZoom = false;
           }
           google.maps.event.removeListener(zoomChangeBoundsListener);
-        });
+        },
+      );
     });
     map.initialZoom = true;
-
 
     bounds.extend(venueLatLng);
     addMarker(map, event);
   }
 
   map.fitBounds(bounds);
-
 }
-
-
-
 
 function addMarker(map, event) {
   console.log(event);
