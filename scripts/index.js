@@ -462,11 +462,10 @@ function showEvents(json) {
   }
 }
 
-function initMap(mapLat, mapLon, json) {
+function initMap(json) {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
-    center: { lat: mapLat, lng: mapLon },
-    zoom: 10,
+    zoom: 5,
   });
 
   const bounds = new google.maps.LatLngBounds();
@@ -482,6 +481,7 @@ function initMap(mapLat, mapLon, json) {
 
   map.fitBounds(bounds);
 }
+
 
 
 function addMarker(map, event) {
