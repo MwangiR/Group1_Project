@@ -251,7 +251,7 @@ function applyToDom(playlistObj) {
     searchResultEl.appendChild(searchTicketEl);
 
     const moreInfoBtn = document.createElement("button");
-    moreInfoBtn.setAttribute("class", "button expanded dark"); // added expanded class and dark
+    moreInfoBtn.setAttribute("class", "button expanded"); // added expanded class
     moreInfoBtn.setAttribute("data-open", "infoModal");
     moreInfoBtn.textContent = "More Info";
     // make button stretch to fill available space like 'Search Ticket'
@@ -280,7 +280,7 @@ function applyToDom(playlistObj) {
       let thisArtist = event.target.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       event.preventDefault();
-      getLocation(); // logged this back in, might not be needed
+      //getLocation(); // logged this back in, might not be needed
       getTickets();
       //showNotify("List generated", "success", "#authSection");
 
@@ -329,6 +329,7 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
 const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
   event.preventDefault();
+  showNotify("Generating List...", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
   getLocation();
 });
 
@@ -375,7 +376,6 @@ function showError(error) {
 
 // initial fetch to get all tickets for music gigs within a radius of the user location
 function initialArtists() {
-  showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
