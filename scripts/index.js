@@ -270,6 +270,8 @@ function applyToDom(playlistObj) {
     moreInfoBtn.textContent = "More Info";
     // make button strecth to fill available space like 'Search Ticket'
 
+    showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
+
 
     moreInfoBtn.addEventListener("click", () => {
       console.log(artist);
@@ -292,9 +294,10 @@ function applyToDom(playlistObj) {
       let thisArtist = event.target.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       event.preventDefault();
-      //getLocation(); logged this out, might need it or try logging out other one
+      getLocation(); // logged this back in, might not be needed
       getTickets();
-      showNotify("List generated", "success", "#authSection");
+      //showNotify("List generated", "success", "#authSection");
+
     });
 
     searchTicketEl.appendChild(ticketEL);
