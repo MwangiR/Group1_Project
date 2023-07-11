@@ -275,6 +275,7 @@ function applyToDom(playlistObj) {
       console.log(event);
       let thisArtist = event.target.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
+      console.log(thisArtist);
       event.preventDefault();
       //getLocation(); // logged this back in, might not be needed
       getTickets();
@@ -410,7 +411,6 @@ function initialArtists() {
   //console.log(crossCheckedArray);
 }
 
-specificArtist = "";
 
 // discoveryApi fetch for tickets
 specificArtist = "";
