@@ -7,14 +7,10 @@ function fetchArtistInfoFromLastFM(artistName) {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-
       const artistName = data.artist.name;
       const artistBio = data.artist.bio.summary;
       const cleanedArtistBio = artistBio.replace(/<a.*?>(.*?)<\/a>/g, "$1");
-      //   console.log(cleanedArtistBio);
-      //   document.querySelector(".artistName").textContent = artistName;
-      //   document.querySelector(".artistBio").textContent = cleanedArtistBio;
+
       displayInfoEL.innerHTML = "";
       getTopTracks(artistName);
       modalInfo(artistName, cleanedArtistBio);
@@ -41,10 +37,8 @@ function getTopTracks(artist) {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      //console.log(data);
-
       const topTracks = data.toptracks.track;
-      //console.log(topTracks);
+
       const topTracksList = document.createElement("ul");
       displayInfoEL.appendChild(topTracksList);
 
@@ -53,10 +47,6 @@ function getTopTracks(artist) {
       topTracksList.appendChild(topTracksTitle);
 
       topTracks.slice(0, 10).forEach((track) => {
-        // console.log(track.name);
-        // console.log(parseInt(track.playcount));
-        // console.log(track.url);
-
         // Create a list item for each track
         const trackItem = document.createElement("li");
 
@@ -95,8 +85,6 @@ function getSimilarArtist(artist) {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.similarartists.artist);
-
       const similarArtists = data.similarartists.artist;
 
       const topSimilarArtist = document.createElement("ul");
@@ -107,9 +95,6 @@ function getSimilarArtist(artist) {
       topSimilarArtist.appendChild(topSimilarTitle);
 
       similarArtists.slice(0, 10).forEach((similarArtist) => {
-        console.log(similarArtist.name);
-        console.log(similarArtist.url);
-
         const similarArtistItem = document.createElement("li");
 
         const similarArtistNameLink = document.createElement("a");
