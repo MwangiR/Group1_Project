@@ -40,6 +40,10 @@ function getTopTracks(artist) {
       const topTracks = data.toptracks.track;
       //console.log(topTracks);
 
+      const displayInfoEL = document.querySelector("#displayInfo");
+      displayInfoEL.innerHTML = "";
+      document.querySelector(".showModal").appendChild(topTracksList);
+
       const topTracksList = document.createElement("ul");
       const topTracksTitle = document.createElement("h2");
       topTracksTitle.textContent = "Top Tracks";
@@ -71,7 +75,7 @@ function getTopTracks(artist) {
       });
 
       // Append the top tracks list to the modal
-      document.querySelector(".showModal").appendChild(topTracksList);
+      document.querySelector("#displayInfo").appendChild(topTracksList);
     });
 }
 
@@ -91,6 +95,10 @@ function getSimilarArtist(artist) {
       console.log(data.similarartists.artist);
 
       const similarArtists = data.similarartists.artist;
+
+      const displayInfoEL = document.querySelector("#displayInfo");
+      displayInfoEL.innerHTML = "";
+      document.querySelector(".showModal").appendChild(topSimilarArtist);
 
       const topSimilarArtist = document.createElement("ul");
       const topSimilarTitle = document.createElement("h2");
@@ -112,10 +120,13 @@ function getSimilarArtist(artist) {
         topSimilarArtist.appendChild(similarArtistItem);
       });
       // append to DOM element with id="similar-artists" in index.html file
-      document.querySelector(".showModal").appendChild(topSimilarArtist);
+      document.querySelector("#displayInfo").appendChild(topSimilarArtist);
     });
 }
 
+function removeElement() {
+  document.querySelector("#displayInfo").remove();
+}
 function modalInfo(artist, bio) {
   const titleEL = document.createElement("h1");
   titleEL.textContent = artist;
