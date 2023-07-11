@@ -49,6 +49,7 @@ section {
 #infoModal {
   top: 10% !important;
 }
+
 .authTab {
   display: flex;
   flex-direction: column;
@@ -142,14 +143,15 @@ footer {
   height: 390px;
 }
 
-/* h2 {
+h2 {
   text-align: center;
-} */
+}
 
 @media (max-width: 600px) {
   .authTab {
     flex-direction: column;
   }
+
   #secondSection {
     flex-direction: column;
   }
