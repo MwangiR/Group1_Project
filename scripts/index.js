@@ -190,8 +190,8 @@ function generateArtistList(artists) {
   });
 
   // Append the artist list to a specific element on your page
-  const container = document.querySelector(".artist-list-container");
-  container.appendChild(artistList);
+  //const container = document.querySelector(".artist-list-container");
+  //container.appendChild(artistList);
 }
 
 // Call the handleCallback function when the page is loaded
