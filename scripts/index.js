@@ -386,6 +386,8 @@ function initialArtists() {
 
       const eventsFoundEl = document.createElement("div");
 
+      var e = document.getElementById("events");
+
       if (initialData._embedded.events === 0) {
         eventsFoundEl.setAttribute("class", "alert callout");
         eventsFoundEl.textContent = initialData._embedded.events + " events found.";
@@ -433,8 +435,8 @@ function getTickets() {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
-      var e = document.getElementById("events");
+      // console.log(json);
+      // var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       // const eventsFoundEl = document.createElement("div");
 
