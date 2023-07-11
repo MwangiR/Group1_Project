@@ -466,7 +466,7 @@ function showEvents(json) {
 function initMap(latlon, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: latlon, //{ lat: parseInt(mapLat), lng: parseInt(mapLon) },
+    center: parseInt(latlon), //{ lat: parseInt(mapLat), lng: parseInt(mapLon) },
     zoom: 10,
   });
   console.log(json);
