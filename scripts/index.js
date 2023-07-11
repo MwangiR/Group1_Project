@@ -310,32 +310,6 @@ function showNotify(text, color, element) {
     notifyContainer.remove();
   }, 3000);
 }
-// //jquery section
-// $(function () {
-//   function modalDiv() {
-//     const modalDiv = $("<div>")
-//       .addClass("reveal")
-//       .attr({
-//         id: "Modal",
-//         "data-reveal": "",
-//       })
-//       .append(
-//         $("<h2>").text("This is a modal"),
-//         $("<button>")
-//           .addClass("close-button")
-//           .attr({
-//             "data-close": "",
-//             "aria-label": "Close modal",
-//             type: "button",
-//           })
-//           .append($("<span>").attr("aria-hidden", "true").html("&times")),
-//       );
-
-//     $("body").append(modalDiv);
-//     $(document).foundation();
-//   }
-//   $(document).foundation();
-// });
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
