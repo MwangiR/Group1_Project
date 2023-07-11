@@ -462,18 +462,27 @@ function showEvents(json) {
   }
 }
 
-// initialize map
 function initMap(mapLat, mapLon, json) {
-  var mapDiv = document.getElementById("map");
-  var map = new google.maps.Map(mapDiv, {
-    center: { lat: parseInt(mapLat), lng: parseInt(mapLon) },
+  const mapDiv = document.getElementById("map");
+  const map = new google.maps.Map(mapDiv, {
+    center: { lat: mapLat, lng: mapLon },
     zoom: 10,
   });
-  console.log(json);
-  for (var i = 0; i < json.page.totalElements; i++) {
-    addMarker(map, json._embedded.events[i]);
+
+  const bounds = new google.maps.LatLngBounds();
+
+  for (let i = 0; i < json.page.totalElements; i++) {
+    const event = json._embedded.events[i];
+    const venueLat = event._embedded.venues[0].location.latitude;
+    const venueLon = event._embedded.venues[0].location.longitude;
+    const venueLatLng = new google.maps.LatLng(venueLat, venueLon);
+    bounds.extend(venueLatLng);
+    addMarker(map, event);
   }
+
+  map.fitBounds(bounds);
 }
+
 
 function addMarker(map, event) {
   console.log(event);
