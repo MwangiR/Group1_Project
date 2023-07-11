@@ -42,7 +42,7 @@ function getTopTracks(artist) {
 
       const displayInfoEL = document.querySelector("#displayInfo");
       displayInfoEL.innerHTML = "";
-      document.querySelector(".showModal").appendChild(topTracksList);
+      displayInfoEL.appendChild(topTracksList);
 
       const topTracksList = document.createElement("ul");
       const topTracksTitle = document.createElement("h2");
@@ -98,7 +98,7 @@ function getSimilarArtist(artist) {
 
       const displayInfoEL = document.querySelector("#displayInfo");
       displayInfoEL.innerHTML = "";
-      document.querySelector(".showModal").appendChild(topSimilarArtist);
+      displayInfoEL.appendChild(topSimilarArtist);
 
       const topSimilarArtist = document.createElement("ul");
       const topSimilarTitle = document.createElement("h2");
