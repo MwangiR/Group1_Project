@@ -426,8 +426,14 @@ function getTickets() {
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
-      eventsFoundEl.setAttribute("class", "success callout");
-      eventsFoundEl.textContent = json.page.totalElements + " events found.";
+
+      if (json.page.totalElements === 0) {
+        eventsFoundEl.setAttribute("class", "alert callout");
+        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      } else {
+        eventsFoundEl.setAttribute("class", "success callout");
+        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      }
       e.prepend(eventsFoundEl);
 
       showEvents(json);
