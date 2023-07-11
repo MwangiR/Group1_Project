@@ -46,6 +46,9 @@ section {
   margin-right: 10%;
 }
 
+.showModal {
+  top: 10%;
+}
 .authTab {
   display: flex;
   flex-direction: column;
