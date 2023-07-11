@@ -256,11 +256,7 @@ function applyToDom(playlistObj) {
     moreInfoBtn.textContent = "More Info";
     // make button stretch to fill available space like 'Search Ticket'
 
-
-
-
     moreInfoBtn.addEventListener("click", () => {
-      console.log(artist);
       fetchArtistInfoFromLastFM(artist);
     });
 
@@ -283,7 +279,6 @@ function applyToDom(playlistObj) {
       //getLocation(); // logged this back in, might not be needed
       getTickets();
       //showNotify("List generated", "success", "#authSection");
-
     });
 
     searchTicketEl.appendChild(ticketEL);
@@ -406,7 +401,6 @@ function initialArtists() {
       crossCheckedArray = [...new Set(crossCheckedArray)];
 
       applyToDom(crossCheckedArray);
-
     })
     .catch((err) => {
       console.log(err);
@@ -447,7 +441,6 @@ function getTickets() {
       console.log(err);
     });
 }
-
 
 // initialize map
 function initMap(positionLat, positionLon, json) {
