@@ -60,11 +60,11 @@ function handleCallback() {
       // Response from the token endpoint
       const accessToken = data.access_token;
       // Replace HTML space characters with regular spaces
-      console.log(typeof accessToken);
+      //console.log(typeof accessToken);
       authenticationCheck(accessToken);
 
       // Log the access token for debugging
-      console.log("Access Token:", accessToken);
+      //console.log("Access Token:", accessToken);
 
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
@@ -359,7 +359,7 @@ function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
-  console.log(position);
+  //console.log(position);
   initialArtists();
 }
 
@@ -392,7 +392,7 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      console.log(initialData);
+      //console.log(initialData);
 
       if (initialData.page.totalElements === 0) {
         const eventsEl = document.querySelector("#events");
