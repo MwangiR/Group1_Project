@@ -273,9 +273,10 @@ function applyToDom(playlistObj) {
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
-      let thisArtist = event.target.parentNode.firstChild.textContent;
+      let thisArtist = event.target.parentNode.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       console.log(thisArtist);
+      console.log(this.parentNode);
       event.preventDefault();
       //getLocation(); // logged this back in, might not be needed
       getTickets();
