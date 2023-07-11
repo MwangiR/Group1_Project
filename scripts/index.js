@@ -206,6 +206,11 @@ function authenticationCheck(tokenVariable) {
   if (tokenVariable === null || tokenVariable === "") {
     redBadge = document.createElement("span");
     redBadge.setAttribute("class", "badge alert");
+    redBadge.setAttribute("data-tooltip", "");
+    redBadge.setAttribute("tabindex", "1");
+    redBadge.setAttribute("title", "Not authenticated");
+    redBadge.setAttribute("data-position", "bottom");
+    redBadge.setAttribute("data-alignment", "right");
     const redIcon = document.createElement("i");
     redIcon.setAttribute("class", "fi-x");
     redBadge.appendChild(redIcon);
@@ -223,6 +228,11 @@ function authenticationCheck(tokenVariable) {
 
     greenBadge = document.createElement("span");
     greenBadge.setAttribute("class", "badge success");
+    greenBadge.setAttribute("data-tooltip", "");
+    greenBadge.setAttribute("tabindex", "1");
+    greenBadge.setAttribute("title", "Authenticated");
+    greenBadge.setAttribute("data-position", "bottom");
+    greenBadge.setAttribute("data-alignment", "right");
     const greenIcon = document.createElement("i");
     greenIcon.setAttribute("class", "fi-check");
     greenBadge.appendChild(greenIcon);
