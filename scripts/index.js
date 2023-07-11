@@ -264,6 +264,18 @@ function applyToDom(playlistObj) {
     searchTicketEl.setAttribute("id", "searchTicket");
     searchResultEl.appendChild(searchTicketEl);
 
+    const moreInfoBtn = document.createElement("button");
+    moreInfoBtn.setAttribute("class", "button");
+    moreInfoBtn.setAttribute("data-open", "infoModal");
+    moreInfoBtn.textContent = "More Info";
+
+    moreInfoBtn.addEventListener("click", () => {
+      console.log(artist);
+      fetchArtistInfoFromLastFM(artist);
+    });
+
+    searchTicketEl.appendChild(moreInfoBtn);
+
     // const artistLiEL = document.createElement("li");
     // artistLiEL.className = "artistGenerated";
     // artistLiEL.textContent = artist;
@@ -298,32 +310,32 @@ function showNotify(text, color, element) {
     notifyContainer.remove();
   }, 3000);
 }
-//jquery section
-$(function () {
-  function modalDiv() {
-    const modalDiv = $("<div>")
-      .addClass("reveal")
-      .attr({
-        id: "Modal",
-        "data-reveal": "",
-      })
-      .append(
-        $("<h2>").text("This is a modal"),
-        $("<button>")
-          .addClass("close-button")
-          .attr({
-            "data-close": "",
-            "aria-label": "Close modal",
-            type: "button",
-          })
-          .append($("<span>").attr("aria-hidden", "true").html("&times")),
-      );
+// //jquery section
+// $(function () {
+//   function modalDiv() {
+//     const modalDiv = $("<div>")
+//       .addClass("reveal")
+//       .attr({
+//         id: "Modal",
+//         "data-reveal": "",
+//       })
+//       .append(
+//         $("<h2>").text("This is a modal"),
+//         $("<button>")
+//           .addClass("close-button")
+//           .attr({
+//             "data-close": "",
+//             "aria-label": "Close modal",
+//             type: "button",
+//           })
+//           .append($("<span>").attr("aria-hidden", "true").html("&times")),
+//       );
 
-    $("body").append(modalDiv);
-    $(document).foundation();
-  }
-  $(document).foundation();
-});
+//     $("body").append(modalDiv);
+//     $(document).foundation();
+//   }
+//   $(document).foundation();
+// });
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 // Discovery API Section
@@ -493,8 +505,6 @@ function showEvents(json) {
     eventsEl.appendChild(eventContainer);
   }
 }
-
-
 
 function addMarker(map, event) {
   console.log(event);
