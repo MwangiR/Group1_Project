@@ -122,6 +122,7 @@ section {
 
 #searchTicket {
   flex: 1 0 70%;
+  display: flex;
 }
 
 .artistGroup {
@@ -137,7 +138,7 @@ footer {
   text-align: center;
   color: var(--mindaro);
   background-color: var(--spaceCadet);
-  position: absolute;
+  position: fixed;
   bottom: 0 !important;
   width: 100%;
 }
