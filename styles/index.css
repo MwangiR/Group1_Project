@@ -94,6 +94,8 @@ section {
   border: 5px solid darkgreen;
   margin: 5px;
   flex: 1 0 40%;
+  display: flex;
+  flex-direction: column;
 }
 
 #authBtn {
@@ -143,9 +145,9 @@ footer {
   width: 100%;
 }
 
+/* test */
 #map {
-  width: 390px;
-  height: 390px;
+  flex: 1 2 400px;
 }
 
 h2 {
