@@ -22,8 +22,8 @@ function fetchArtistInfoFromLastFM(artistName) {
     .catch((err) => console.log(err));
 }
 
-const displayInfoEL = document.querySelector("#displayInfo");
-displayInfoEL.innerHTML = "";
+const displayInfoEL = document.createElement("div");
+displayInfoEL.id = "displayInfo";
 
 document.querySelector(".showModal").appendChild(displayInfoEL);
 
