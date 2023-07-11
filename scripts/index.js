@@ -234,8 +234,6 @@ function applyToDom(playlistObj) {
   const playlistEL = document.querySelector(".playlistTab"); //edit
   playlistEL.innerHTML = "";
 
-  showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
-
   playlistObj.forEach((artist) => {
     const searchResultEl = document.createElement("div");
     searchResultEl.setAttribute("id", "searchResult");
@@ -253,7 +251,7 @@ function applyToDom(playlistObj) {
     searchResultEl.appendChild(searchTicketEl);
 
     const moreInfoBtn = document.createElement("button");
-    moreInfoBtn.setAttribute("class", "button", "expanded"); // added expanded class
+    moreInfoBtn.setAttribute("class", "button expanded"); // added expanded class
     moreInfoBtn.setAttribute("data-open", "infoModal");
     moreInfoBtn.textContent = "More Info";
     // make button stretch to fill available space like 'Search Ticket'
@@ -407,6 +405,7 @@ function initialArtists() {
       crossCheckedArray = [...new Set(crossCheckedArray)];
 
       applyToDom(crossCheckedArray);
+      showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
     })
     .catch((err) => {
       console.log(err);
