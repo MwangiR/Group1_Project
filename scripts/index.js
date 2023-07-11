@@ -424,7 +424,7 @@ function getTickets() {
     .then((json) => {
       // console.log(json);
       var e = document.getElementById("events");
-      e.innerHTML = json.page.totalElements + " events found.";
+      // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
