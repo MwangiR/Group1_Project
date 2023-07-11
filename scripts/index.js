@@ -381,11 +381,11 @@ function initialArtists() {
     .then((initialData) => {
       //console.log(initialData);
 
-      if (initialData.page.totalElements === 0) {
-        const eventsEl = document.querySelector("#events");
-        eventsEl.textContent = "No events in your area, sorry.";
-        return;
-      }
+      // if (initialData.page.totalElements === 0) {
+      //   const eventsEl = document.querySelector("#events");
+      //   eventsEl.textContent = "No events in your area, sorry.";
+      //   return;
+      // }
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
