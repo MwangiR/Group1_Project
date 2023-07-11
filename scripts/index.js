@@ -196,6 +196,7 @@ function generateArtistList(artists) {
 
 // Call the handleCallback function when the page is loaded
 window.addEventListener("DOMContentLoaded", handleCallback);
+window.addEventListener("DOMContentLoaded", initMap);
 
 //-------------------------------------------------------------------
 //apply to dom function
