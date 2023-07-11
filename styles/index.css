@@ -142,9 +142,9 @@ footer {
   height: 390px;
 }
 
-h2 {
+/* h2 {
   text-align: center;
-}
+} */
 
 @media (max-width: 600px) {
   .authTab {
