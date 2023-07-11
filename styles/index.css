@@ -132,7 +132,6 @@ section {
   flex-direction: row;
 }
 
-/* test */
 .artistName {
   flex: 1 0 200px;
 }
@@ -146,6 +145,7 @@ footer {
   width: 100%;
 }
 
+/* test */
 #map {
   flex: 1 2 400px;
 }
