@@ -160,4 +160,10 @@ h2 {
   #secondSection {
     flex-direction: column;
   }
+  #searchResult {
+    flex-direction: column;
+  }
+  #searchTicket {
+    flex-direction: column;
+  }
 }
