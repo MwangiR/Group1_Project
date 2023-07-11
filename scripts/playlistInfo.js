@@ -77,7 +77,7 @@ function getTopTracks(artist) {
       });
 
       // Append the top tracks list to the modal
-      document.querySelector("#displayInfo").appendChild(topTracksList);
+      displayInfoEL.appendChild(topTracksList);
     });
 }
 
@@ -120,7 +120,7 @@ function getSimilarArtist(artist) {
         topSimilarArtist.appendChild(similarArtistItem);
       });
       // append to DOM element with id="similar-artists" in index.html file
-      document.querySelector("#displayInfo").appendChild(topSimilarArtist);
+      displayInfoEL.appendChild(topSimilarArtist);
     });
 }
 
