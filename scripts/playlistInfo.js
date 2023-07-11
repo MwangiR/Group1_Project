@@ -22,6 +22,11 @@ function fetchArtistInfoFromLastFM(artistName) {
     .catch((err) => console.log(err));
 }
 
+const displayInfoEL = document.querySelector("#displayInfo");
+displayInfoEL.innerHTML = "";
+
+document.querySelector(".showModal").appendChild(displayInfoEL);
+
 function getTopTracks(artist) {
   const params = new URLSearchParams({
     method: "artist.getTopTracks",
@@ -40,11 +45,10 @@ function getTopTracks(artist) {
       const topTracks = data.toptracks.track;
       //console.log(topTracks);
 
-      const displayInfoEL = document.querySelector("#displayInfo");
-      displayInfoEL.innerHTML = "";
       displayInfoEL.appendChild(topTracksList);
 
       const topTracksList = document.createElement("ul");
+
       const topTracksTitle = document.createElement("h2");
       topTracksTitle.textContent = "Top Tracks";
       topTracksList.appendChild(topTracksTitle);
@@ -96,8 +100,6 @@ function getSimilarArtist(artist) {
 
       const similarArtists = data.similarartists.artist;
 
-      const displayInfoEL = document.querySelector("#displayInfo");
-      displayInfoEL.innerHTML = "";
       displayInfoEL.appendChild(topSimilarArtist);
 
       const topSimilarArtist = document.createElement("ul");
@@ -134,8 +136,8 @@ function modalInfo(artist, bio) {
   const artBio = document.createElement("p");
   artBio.textContent = bio;
 
-  document.querySelector(".showModal").appendChild(titleEL);
-  document.querySelector(".showModal").appendChild(artBio);
+  displayInfoEL.appendChild(titleEL);
+  displayInfoEL.appendChild(artBio);
 }
 
 // Usage example
