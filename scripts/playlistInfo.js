@@ -44,10 +44,8 @@ function getTopTracks(artist) {
 
       const topTracks = data.toptracks.track;
       //console.log(topTracks);
-
-      displayInfoEL.appendChild(topTracksList);
-
       const topTracksList = document.createElement("ul");
+      displayInfoEL.appendChild(topTracksList);
 
       const topTracksTitle = document.createElement("h2");
       topTracksTitle.textContent = "Top Tracks";
@@ -100,9 +98,9 @@ function getSimilarArtist(artist) {
 
       const similarArtists = data.similarartists.artist;
 
+      const topSimilarArtist = document.createElement("ul");
       displayInfoEL.appendChild(topSimilarArtist);
 
-      const topSimilarArtist = document.createElement("ul");
       const topSimilarTitle = document.createElement("h2");
       topSimilarTitle.textContent = "Similar Artists";
       topSimilarArtist.appendChild(topSimilarTitle);
