@@ -12,9 +12,9 @@ function fetchArtistInfoFromLastFM(artistName) {
       const artistName = data.artist.name;
       const artistBio = data.artist.bio.summary;
       const cleanedArtistBio = artistBio.replace(/<a.*?>(.*?)<\/a>/g, "$1");
-      console.log(cleanedArtistBio);
-      document.querySelector(".artistName").textContent = artistName;
-      document.querySelector(".artistBio").textContent = cleanedArtistBio;
+      //   console.log(cleanedArtistBio);
+      //   document.querySelector(".artistName").textContent = artistName;
+      //   document.querySelector(".artistBio").textContent = cleanedArtistBio;
       getTopTracks(artistName);
       modalInfo(artistName, cleanedArtistBio);
       getSimilarArtist(artistName);
