@@ -47,7 +47,7 @@ section {
 }
 
 #infoModal {
-  top: 0;
+  top: 10% !important;
 }
 .authTab {
   display: flex;
