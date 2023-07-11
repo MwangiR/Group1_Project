@@ -194,22 +194,8 @@ function generateArtistList(artists) {
   //container.appendChild(artistList);
 }
 
-// initialize map
-function initMap(positionLat, positionLon, json) {
-  var mapDiv = document.getElementById("map");
-  var map = new google.maps.Map(mapDiv, {
-    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
-    zoom: 10,
-  });
-  console.log(json);
-  for (var i = 0; i < json.page.totalElements; i++) {
-    addMarker(map, json._embedded.events[i]);
-  }
-}
-
 // Call the handleCallback function when the page is loaded
 window.addEventListener("DOMContentLoaded", handleCallback);
-window.addEventListener("DOMContentLoaded", initMap);
 
 //-------------------------------------------------------------------
 //apply to dom function
@@ -460,6 +446,20 @@ function getTickets() {
     .catch((err) => {
       console.log(err);
     });
+}
+
+
+// initialize map
+function initMap(positionLat, positionLon, json) {
+  var mapDiv = document.getElementById("map");
+  var map = new google.maps.Map(mapDiv, {
+    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
+    zoom: 10,
+  });
+  console.log(json);
+  for (var i = 0; i < json.page.totalElements; i++) {
+    addMarker(map, json._embedded.events[i]);
+  }
 }
 
 // display the events and their details
