@@ -388,12 +388,12 @@ function initialArtists() {
 
       var e = document.getElementById("events");
 
-      if (initialData._embedded.events === 0) {
+      if (initialData._embedded.events.length === 0 || !initialData._embedded.events.length) {
         eventsFoundEl.setAttribute("class", "alert callout");
-        eventsFoundEl.textContent = initialData._embedded.events + " events found.";
+        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
       } else {
         eventsFoundEl.setAttribute("class", "success callout");
-        eventsFoundEl.textContent = initialData._embedded.events + " events found.";
+        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
       }
       e.prepend(eventsFoundEl);
 
