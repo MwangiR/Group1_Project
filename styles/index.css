@@ -140,7 +140,7 @@ footer {
   text-align: center;
   color: var(--mindaro);
   background-color: var(--spaceCadet);
-  position: fixed;
+  position: relative;
   bottom: 0 !important;
   width: 100%;
 }
