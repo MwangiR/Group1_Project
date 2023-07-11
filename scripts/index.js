@@ -251,7 +251,7 @@ function applyToDom(playlistObj) {
     searchResultEl.appendChild(searchTicketEl);
 
     const moreInfoBtn = document.createElement("button");
-    moreInfoBtn.setAttribute("class", "button expanded"); // added expanded class
+    moreInfoBtn.setAttribute("class", "button expanded dark"); // added expanded class and dark
     moreInfoBtn.setAttribute("data-open", "infoModal");
     moreInfoBtn.textContent = "More Info";
     // make button stretch to fill available space like 'Search Ticket'
@@ -375,6 +375,7 @@ function showError(error) {
 
 // initial fetch to get all tickets for music gigs within a radius of the user location
 function initialArtists() {
+  showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
   var getAllUrl =
     "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=eseLXtPfRbVGKGyJSqbCSi9iaudaWTws&latlong=" +
     latlon +
@@ -405,7 +406,7 @@ function initialArtists() {
       crossCheckedArray = [...new Set(crossCheckedArray)];
 
       applyToDom(crossCheckedArray);
-      showNotify("List generated", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
+
     })
     .catch((err) => {
       console.log(err);
