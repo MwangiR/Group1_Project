@@ -91,7 +91,6 @@ section {
 }
 
 #artistSection aside {
-  border: 5px solid darkgreen;
   margin: 5px;
   flex: 1 0 40%;
   display: flex;
@@ -138,11 +137,12 @@ section {
 
 footer {
   text-align: center;
-  color: var(--mindaro);
-  background-color: var(--spaceCadet);
+  color: #f1f1f1;
+  background-color: #0a0a0a;
   position: relative;
   bottom: 0 !important;
   width: 100%;
+  font-size: 20px;
 }
 
 /* test */
