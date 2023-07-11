@@ -382,7 +382,18 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      //console.log(initialData);
+      console.log("this is initial data", initialData);
+
+      const eventsFoundEl = document.createElement("div");
+
+      if (initialData._embedded.events === 0) {
+        eventsFoundEl.setAttribute("class", "alert callout");
+        eventsFoundEl.textContent = initialData._embedded.events + " events found.";
+      } else {
+        eventsFoundEl.setAttribute("class", "success callout");
+        eventsFoundEl.textContent = initialData._embedded.events + " events found.";
+      }
+      e.prepend(eventsFoundEl);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
@@ -425,16 +436,16 @@ function getTickets() {
       console.log(json);
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
-      const eventsFoundEl = document.createElement("div");
+      // const eventsFoundEl = document.createElement("div");
 
-      if (json.page.totalElements === 0) {
-        eventsFoundEl.setAttribute("class", "alert callout");
-        eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      } else {
-        eventsFoundEl.setAttribute("class", "success callout");
-        eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      }
-      e.prepend(eventsFoundEl);
+      // if (json.page.totalElements === 0) {
+      //   eventsFoundEl.setAttribute("class", "alert callout");
+      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      // } else {
+      //   eventsFoundEl.setAttribute("class", "success callout");
+      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
+      // }
+      // e.prepend(eventsFoundEl);
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
