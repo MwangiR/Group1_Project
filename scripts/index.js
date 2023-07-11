@@ -466,8 +466,7 @@ function initMap(mapLat, mapLon, json) {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
     center: { lat: mapLat, lng: mapLon },
-    zoom: 10,
-    minZoom: 10, // Adjust this value to control the initial zoom level
+
   });
 
   const bounds = new google.maps.LatLngBounds();
@@ -476,12 +475,20 @@ function initMap(mapLat, mapLon, json) {
     const event = json._embedded.events[i];
     const venueLat = event._embedded.venues[0].location.latitude;
     const venueLon = event._embedded.venues[0].location.longitude;
-    //const venueLatLng = new google.maps.LatLng(venueLat, venueLon);
-    const venueLatLng = new google.maps.LatLng(mapDiv, {
-      center: { lat: venueLat, lng: venueLon },
-      zoom: 10,
-      minZoom: 10, // Adjust this value to control the initial zoom level
+    const venueLatLng = new google.maps.LatLng(venueLat, venueLon);
+
+    google.maps.event.addListener(map, 'zoom_changed', function () {
+      zoomChangeBoundsListener =
+        google.maps.event.addListener(map, 'bounds_changed', function (event) {
+          if (this.getZoom() > 15 && this.initialZoom == true) {
+            // Change max/min zoom here
+            this.setZoom(10);
+            this.initialZoom = false;
+          }
+          google.maps.event.removeListener(zoomChangeBoundsListener);
+        });
     });
+    map.initialZoom = true;
 
 
     bounds.extend(venueLatLng);
