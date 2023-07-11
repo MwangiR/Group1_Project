@@ -442,18 +442,7 @@ function getTickets() {
     });
 }
 
-// initialize map
-function initMap(positionLat, positionLon, json) {
-  var mapDiv = document.getElementById("map");
-  var map = new google.maps.Map(mapDiv, {
-    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
-    zoom: 10,
-  });
-  console.log(json);
-  for (var i = 0; i < json.page.totalElements; i++) {
-    addMarker(map, json._embedded.events[i]);
-  }
-}
+
 
 // display the events and their details
 function showEvents(json) {
@@ -479,6 +468,21 @@ function showEvents(json) {
     eventsEl.appendChild(eventContainer);
   }
 }
+
+
+// initialize map
+function initMap(positionLat, positionLon, json) {
+  var mapDiv = document.getElementById("map");
+  var map = new google.maps.Map(mapDiv, {
+    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
+    zoom: 10,
+  });
+  console.log(json);
+  for (var i = 0; i < json.page.totalElements; i++) {
+    addMarker(map, json._embedded.events[i]);
+  }
+}
+
 
 function addMarker(map, event) {
   console.log(event);
