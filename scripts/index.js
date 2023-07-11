@@ -343,8 +343,8 @@ function getLocation() {
 
 // get latitude and longitude
 let latlon = "";
-let mapLat = 0;
-let mapLon = 0;
+let mapLat = "";
+let mapLon = "";
 function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
@@ -463,10 +463,10 @@ function showEvents(json) {
 }
 
 // initialize map
-function initMap(positionLat, positionLon, json) {
+function initMap(mapLat, mapLon, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: { lat: parseInt(positionLat), lng: parseInt(positionLon) },
+    center: { lat: parseInt(mapLat), lng: parseInt(mapLon) },
     zoom: 10,
   });
   console.log(json);
