@@ -125,7 +125,7 @@ function getSimilarArtist(artist) {
 }
 
 function removeElement() {
-  document.querySelector("#displayInfo").remove();
+  displayInfoEL.remove();
 }
 function modalInfo(artist, bio) {
   const titleEL = document.createElement("h1");
