@@ -430,7 +430,7 @@ function getTickets() {
       //getLocation(); //may need this-----testing for map fix=----------------
       //console.log(mapLat);
       //console.log(mapLon);
-      initMap(latlon, json);
+      initMap(mapLat, mapLon, json);
     })
     .catch((err) => {
       console.log(err);
@@ -463,10 +463,10 @@ function showEvents(json) {
 }
 
 // initialize map
-function initMap(latlon, json) {
+function initMap(mapLat, mapLon, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: parseInt(latlon), //{ lat: parseInt(mapLat), lng: parseInt(mapLon) },
+    center: { lat: parseInt(mapLat), lng: parseInt(mapLon) },
     zoom: 10,
   });
   console.log(json);
