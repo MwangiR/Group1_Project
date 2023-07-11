@@ -230,6 +230,7 @@ function authenticationCheck(tokenVariable) {
   }
 }
 
+//don't touch this function.Remain as is
 function applyToDom(playlistObj) {
   const playlistEL = document.querySelector(".playlistTab"); //edit
   playlistEL.innerHTML = "";
@@ -383,12 +384,6 @@ function initialArtists() {
     .then((initialData) => {
       //console.log(initialData);
 
-      // if (initialData.page.totalElements === 0) {
-      //   const eventsEl = document.querySelector("#events");
-      //   eventsEl.textContent = "No events in your area, sorry.";
-      //   return;
-      // }
-
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
           initialDataArrayResults.push(event._embedded.attractions[0].name);
@@ -411,7 +406,6 @@ function initialArtists() {
   //console.log(uniqueSpotifyArtists);
   //console.log(crossCheckedArray);
 }
-
 
 // discoveryApi fetch for tickets
 specificArtist = "";
@@ -443,8 +437,6 @@ function getTickets() {
     });
 }
 
-
-
 // display the events and their details
 function showEvents(json) {
   for (var i = 0; i < json.page.totalElements; i++) {
@@ -470,7 +462,6 @@ function showEvents(json) {
   }
 }
 
-
 // initialize map
 function initMap(positionLat, positionLon, json) {
   var mapDiv = document.getElementById("map");
@@ -483,7 +474,6 @@ function initMap(positionLat, positionLon, json) {
     addMarker(map, json._embedded.events[i]);
   }
 }
-
 
 function addMarker(map, event) {
   console.log(event);
