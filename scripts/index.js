@@ -429,12 +429,20 @@ function getTickets() {
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
         eventsFoundEl.setAttribute("class", "alert callout");
-        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+        eventsFoundEl.textContent = json.page.totalElements + " event(s) found";
       } else {
         eventsFoundEl.setAttribute("class", "success callout");
-        eventsFoundEl.textContent = json.page.totalElements + " events found.";
+        eventsFoundEl.textContent = json.page.totalElements + " event(s) found";
       }
-      e.prepend(eventsFoundEl);
+
+      const previousElement = e.firstElementChild;
+      //if there was a previuos child
+      if (previousElement) {
+        e.insertBefore(eventsFoundEl, previousElement);
+        previousElement.remove();
+      } else {
+        e.prepend(eventsFoundEl);
+      }
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
