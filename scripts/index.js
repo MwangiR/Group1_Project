@@ -274,8 +274,7 @@ function applyToDom(playlistObj) {
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
-      // let thisArtist = event.target.parentNode.parentNode.firstChild.textContent;
-      let thisArtist = getArtistNameFromElement(event.target);
+      let thisArtist = event.target.parentNode.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       console.log(thisArtist);
       console.log(this.parentNode);
@@ -467,7 +466,7 @@ function showEvents(json) {
 function initMap(latlon, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
-    center: latlon,    //{ lat: parseInt(mapLat), lng: parseInt(mapLon) },
+    center: latlon, //{ lat: parseInt(mapLat), lng: parseInt(mapLon) },
     zoom: 10,
   });
   console.log(json);
