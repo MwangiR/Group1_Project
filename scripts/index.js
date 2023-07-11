@@ -112,7 +112,7 @@ function getUserPlaylists(accessToken) {
         .then(() => {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
-          console.log("All Playlist Artists:", uniqueArtists);
+          //console.log("All Playlist Artists:", uniqueArtists);
           //applyToDom(uniqueArtists);
           uniqueSpotifyArtists = uniqueArtists;
 
@@ -486,6 +486,17 @@ function initMap(positionLat, positionLon, json) {
     addMarker(map, json._embedded.events[i]);
   }
 }
+
+function loadMapScript() {
+  const script = document.createElement("script");
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
+  script.defer = true;
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+// Call the loadMapScript function to load the Google Maps API
+loadMapScript();
 
 function addMarker(map, event) {
   console.log(event);
