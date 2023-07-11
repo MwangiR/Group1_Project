@@ -124,6 +124,20 @@ function modalInfo(artist, bio) {
   displayInfoEL.appendChild(artBio);
 }
 
+function getArtistNameFromElement(element) {
+  const searchResultEL = element.closest("#saerchResult");
+  if (searchResultEl) {
+    const artistTitleEl = searchResultEL.querySelector("#playlisyTitle");
+    if (artistTitleEl) {
+      const artistNameEl = artistTitleEl.querySelector("h3");
+      if (artistNameEl) {
+        return artistNameEl.textContent;
+      }
+    }
+  }
+  return null;
+}
+
 // Usage example
 //const artistName = "linkin park";
 //fetchArtistInfoFromLastFM(artistName);
