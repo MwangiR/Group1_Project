@@ -274,8 +274,7 @@ function applyToDom(playlistObj) {
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
-      // let thisArtist = event.target.parentNode.parentNode.firstChild.textContent;
-      let thisArtist = getArtistNameFromElement(event.target);
+      let thisArtist = event.target.parentNode.parentNode.firstChild.textContent;
       specificArtist = thisArtist;
       console.log(thisArtist);
       console.log(this.parentNode);
@@ -431,7 +430,7 @@ function getTickets() {
       //getLocation(); //may need this-----testing for map fix=----------------
       //console.log(mapLat);
       //console.log(mapLon);
-      initMap(latlon, json);
+      initMap(mapLat, mapLon, json);
     })
     .catch((err) => {
       console.log(err);
@@ -464,7 +463,7 @@ function showEvents(json) {
 }
 
 // initialize map
-function initMap(latlon, json) {
+function initMap(mapLat, mapLon, json) {
   var mapDiv = document.getElementById("map");
   var map = new google.maps.Map(mapDiv, {
     center: { lat: parseInt(mapLat), lng: parseInt(mapLon) },
