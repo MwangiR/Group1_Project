@@ -15,6 +15,7 @@ function fetchArtistInfoFromLastFM(artistName) {
       //   console.log(cleanedArtistBio);
       //   document.querySelector(".artistName").textContent = artistName;
       //   document.querySelector(".artistBio").textContent = cleanedArtistBio;
+      displayInfoEL.innerHTML = "";
       getTopTracks(artistName);
       modalInfo(artistName, cleanedArtistBio);
       getSimilarArtist(artistName);
@@ -125,7 +126,7 @@ function getSimilarArtist(artist) {
 }
 
 function removeElement() {
-  displayInfoEL.remove();
+  displayInfoEL.innerHTML = "";
 }
 function modalInfo(artist, bio) {
   const titleEL = document.createElement("h1");
