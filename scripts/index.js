@@ -268,6 +268,8 @@ function applyToDom(playlistObj) {
     moreInfoBtn.setAttribute("class", "button");
     moreInfoBtn.setAttribute("data-open", "infoModal");
     moreInfoBtn.textContent = "More Info";
+    // make button strecth to fill available space like 'Search Ticket'
+
 
     moreInfoBtn.addEventListener("click", () => {
       console.log(artist);
@@ -445,7 +447,7 @@ function getTickets() {
       e.innerHTML = json.page.totalElements + " events found.";
 
       showEvents(json);
-      //getLocation(); may need this-----testing for map fix=----------------
+      getLocation(); //may need this-----testing for map fix=----------------
       console.log(mapLat);
       console.log(mapLon);
       initMap(mapLat, mapLon, json);
