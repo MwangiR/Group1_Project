@@ -435,12 +435,6 @@ function getTickets() {
         eventsFoundEl.textContent = json.page.totalElements + " event(s) found";
       }
 
-      const previousElement = e.firstElementChild;
-      //if there was a previuos child
-      if (previousElement) {
-        e.replaceChild(eventsFoundEl, previousElement);
-        //previousElement.remove();
-      }
       e.prepend(eventsFoundEl);
 
       showEvents(json);
