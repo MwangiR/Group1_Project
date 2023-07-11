@@ -492,14 +492,6 @@ function initMap(positionLat, positionLon, json) {
   }
 }
 
-function loadMapScript() {
-  const script = document.createElement("script");
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBYf20aoNlqP4t3mGaRW__BmWmIoVyuDEg";
-  script.defer = true;
-  script.async = true;
-  document.head.appendChild(script);
-}
-
 // Call the loadMapScript function to load the Google Maps API
 loadMapScript();
 
