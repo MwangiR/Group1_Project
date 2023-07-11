@@ -438,11 +438,10 @@ function getTickets() {
       const previousElement = e.firstElementChild;
       //if there was a previuos child
       if (previousElement) {
-        e.insertBefore(eventsFoundEl, previousElement);
-        previousElement.remove();
-      } else {
-        e.prepend(eventsFoundEl);
+        e.replaceChild(eventsFoundEl, previousElement);
+        //previousElement.remove();
       }
+      e.prepend(eventsFoundEl);
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
