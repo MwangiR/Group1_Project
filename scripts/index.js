@@ -468,7 +468,7 @@ function showEvents(json) {
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
-
+    //added elements
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
@@ -488,7 +488,7 @@ function showEvents(json) {
     eventContainer.appendChild(eventsVenueEL);
     eventContainer.appendChild(eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
-    eventsEl.appendChild(eventContainer);
+    eventsEl.appendChild(eventContainer); 
   }
 }
 
