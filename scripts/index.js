@@ -527,7 +527,7 @@ function displaySavedTickets() {
 
     const ticketUrl = document.createElement("a");
     ticketUrl.setAttribute("href", ticket.url);
-    ticketUrl.textContent = "Ticket Link " + String.fromCharCode(128279);
+    ticketUrl.innerHTML = "Ticket Url &#128279;";
 
     savedItemEL.appendChild(savedTicketsTitle);
     savedItemEL.appendChild(ticketUrl);
