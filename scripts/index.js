@@ -506,7 +506,7 @@ function displaySavedTickets() {
   const savedTickets = JSON.parse(savedTicketsString) || [];
 
   // Get the container element to display the saved tickets
-  const savedTicketsContainer = document.querySelector("#savedTickets");
+  const savedTicketsContainer = document.querySelector(".savedTickets");
 
   for (const ticket of savedTickets) {
     const savedItemEL = document.createElement("div");
