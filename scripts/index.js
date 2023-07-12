@@ -1,6 +1,7 @@
 const clientId = "07574a44bbef47ad9c5b4949cf020c29";
 const redirectUri = "https://alexanderduncan1.github.io/Group1_Project/";
 const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
+loadMap();
 
 // Function to handle user authentication and authorization
 let tokenVariable = "";
@@ -119,7 +120,7 @@ function getUserPlaylists(accessToken) {
           uniqueSpotifyArtists = uniqueArtists;
 
           generateArtistList(uniqueArtists);
-          loadMap();
+          //loadMap();
         })
         .catch((error) => {
           console.error("Error:", error);
