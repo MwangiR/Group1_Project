@@ -22,9 +22,9 @@ function authenticate() {
 function loadMap() {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
-    // Map options
-    center: { lat: YOUR_LATITUDE, lng: YOUR_LONGITUDE },
-    zoom: YOUR_ZOOM_LEVEL,
+    
+    center: { lat: -25.2744, lng: 133.7751 },
+    zoom: 5,
   });
 
 }
