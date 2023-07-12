@@ -433,6 +433,7 @@ function getTickets() {
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
+      eventsFoundEl.innerHTML = ""; // try remove duplicates
 
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
@@ -462,6 +463,7 @@ function showEvents(json) {
     const eventsEl = document.querySelector("#events");
     eventsEl.innerHTML = ""; //remove duplicates
     const eventContainer = document.createElement("div");
+    eventContainer.innerHTML = ""; ///try remove duplicates
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
