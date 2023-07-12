@@ -157,8 +157,7 @@ function getUserLibraryArtists(accessToken) {
     .then((response) => response.json())
     .then((data) => {
       const libraryTracks = data.items;
-
-    libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
+      return libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
     })
     .catch((error) => {
       console.error("Error:", error);
