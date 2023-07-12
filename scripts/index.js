@@ -128,7 +128,7 @@ function getUserPlaylists(accessToken) {
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
-          displayMap();
+          loadMap();
         })
         .catch((error) => {
           console.error("Error:", error);
