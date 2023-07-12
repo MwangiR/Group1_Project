@@ -433,6 +433,7 @@ function getTickets() {
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
+      eventsFoundEl.textContent = ""; //added to try gix duplication
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
         eventsFoundEl.setAttribute("class", "alert callout");
@@ -463,13 +464,15 @@ function showEvents(json) {
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
+    const eventsTimeEL = document.createElement("p");
     //added elements
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
         eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
-        eventsDateEL.textContent = newEvent.dates.start.dateTime;
+        eventsDateEL.textContent = newEvent.dates.start.localDate;
+        eventsTimeEL.textContent = newEvent.dates.start.localTime;
       } else {
         console.log(newEvent);
       }
@@ -479,7 +482,7 @@ function showEvents(json) {
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
     eventsUrlEL.setAttribute("class", "hollow button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
-    eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL);
+    eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL, eventsTimeEL);
     //eventContainer.appendChild(eventsVenueEL);
     //eventContainer.appendChild(eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
