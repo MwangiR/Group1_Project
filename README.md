@@ -39,9 +39,11 @@ WHEN I click on the 'Buy Tickets' button
 THEN I am redirected to a ticketing page where I can purchase tickets for the show
 ```
 
-Link to deployed site: 
+Link to deployed site: https://alexanderduncan1.github.io/Group1_Project/
 
 Screenshot of our application:
+
+![alexanderduncan1 github io_Group1_Project__code=AQB3hdrcvR1ak2rSx2RBzlxs9RrrpqtcbkGyJKvkyOnSZAae0mjtYqmMyq4opcViFNaqzYNjSEpDWErwrbowxAxzjQc2vuNL4xhDCp744gMPCcCIZDGkzWN-FR9ERaZ86FgB4mVSrq0onQqr1-D_jTs3NKsV-zVdegyN6Z](https://github.com/AlexanderDuncan1/Group1_Project/assets/131665093/88e2e731-09ed-4b58-b2f5-611dab71f49c)
 
 
 ## Installation
