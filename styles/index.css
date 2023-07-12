@@ -59,6 +59,15 @@ section {
   top: 10% !important;
 }
 
+.off-canvas.position-left {
+  width: 250px; /* Set the desired width */
+  padding-left: 1%;
+  padding-top: 2%;
+}
+.off-canvas-content {
+  padding-left: 300px; /* Match the width of the off-canvas menu */
+}
+
 .authTab {
   display: flex;
   flex-direction: column;

@@ -25,7 +25,6 @@ function loadMap() {
     center: { lat: -25.2744, lng: 133.7751 },
     zoom: 4,
   });
-
 }
 
 // Function to handle callback after user authorization
@@ -89,7 +88,6 @@ function getUserPlaylists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-
       const playlists = data.items;
       const allArtists = [];
 
@@ -146,7 +144,6 @@ function getPlaylistTracks(accessToken, playlistId) {
 
 //fetch user's library artists
 function getUserLibraryArtists(accessToken) {
-
   fetch("https://api.spotify.com/v1/me/tracks", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -160,7 +157,6 @@ function getUserLibraryArtists(accessToken) {
     .catch((error) => {
       console.error("Error:", error);
     });
-
 }
 
 // saves gibberish to satisfy spotifies securitues Oauth2 stuff and hides the token
@@ -175,7 +171,6 @@ function generateRandomString(length) {
 
 // generates the artist list so it can be refrenced and crosschecked later
 function generateArtistList(artists) {
-
   // Example: Creating an unordered list of artists
   const artistList = document.createElement("ul");
   artists.forEach((artist) => {
@@ -458,7 +453,7 @@ function showEvents(json) {
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
-    eventsUrlEL.setAttribute("class", "hollow button expanded");
+    eventsUrlEL.setAttribute("class", "button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
     eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL, eventsTimeEL);
     eventContainer.appendChild(eventsUrlEL);
