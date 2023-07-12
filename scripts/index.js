@@ -19,6 +19,16 @@ function authenticate() {
   window.location.href = authorizeUrl;
 }
 
+function loadMap() {
+  const mapDiv = document.getElementById("map");
+  const map = new google.maps.Map(mapDiv, {
+    
+    center: { lat: -25.2744, lng: 133.7751 },
+    zoom: 4,
+  });
+
+}
+
 // Function to handle callback after user authorization
 function handleCallback() {
   // Extract the query parameters from the callback URL
@@ -59,12 +69,9 @@ function handleCallback() {
     .then((data) => {
       // Response from the token endpoint
       const accessToken = data.access_token;
-      // Replace HTML space characters with regular spaces
-      //console.log(typeof accessToken);
+
       authenticationCheck(accessToken);
 
-      // Log the access token for debugging
-      //console.log("Access Token:", accessToken);
 
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
@@ -84,11 +91,11 @@ function getUserPlaylists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the user's playlists
+
       const playlists = data.items;
       const allArtists = [];
 
-      // Iterate over each playlist
+      // runs over each playlist
       const fetchPromises = playlists.map((playlist) => {
         const playlistId = playlist.id;
         return getPlaylistTracks(accessToken, playlistId)
@@ -97,9 +104,7 @@ function getUserPlaylists(accessToken) {
             const artists = tracks.flatMap((track) =>
               track.track.artists.map((artist) => artist.name),
             );
-            //console.log("Artists in Playlist:", artists);
 
-            // Add artists to the allArtists array
             allArtists.push(...artists);
           })
           .catch((error) => {
@@ -112,12 +117,11 @@ function getUserPlaylists(accessToken) {
         .then(() => {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
-          //console.log("All Playlist Artists:", uniqueArtists);
-          //applyToDom(uniqueArtists);
+
           uniqueSpotifyArtists = uniqueArtists;
 
-          // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
+          loadMap();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -128,7 +132,7 @@ function getUserPlaylists(accessToken) {
     });
 }
 
-// Function to fetch a playlist's tracks
+// fetch playlist's tracks
 function getPlaylistTracks(accessToken, playlistId) {
   return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     headers: {
@@ -137,13 +141,14 @@ function getPlaylistTracks(accessToken, playlistId) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the playlist's tracks
+      //contains the playlist's tracks
       return data.items;
     });
 }
 
-// Function to fetch user's library artists
+//fetch user's library artists
 function getUserLibraryArtists(accessToken) {
+
   fetch("https://api.spotify.com/v1/me/tracks", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -151,22 +156,19 @@ function getUserLibraryArtists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the user's library tracks
       const libraryTracks = data.items;
-
-      // Extract unique artists from the library tracks
-      const libraryArtists = [
-        ...new Set(
-          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name)),
-        ),
-      ];
+      return libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+
 }
 
-// Generate a random string of a given length
+
+
+
+// saves gibberish to satisfy spotifies securitues Oauth2 stuff and hides the token
 function generateRandomString(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -176,11 +178,9 @@ function generateRandomString(length) {
   return result;
 }
 
-// Function to generate the artist list or perform any other operation with the uniqueArtists array
+// generates the artist list so it can be refrenced and crosschecked later
 function generateArtistList(artists) {
-  // Here, you can create the list using the artists array and perform any desired operation
-  // For example, you can append the artists to an HTML element on your page or create a formatted string
-
+  
   // Example: Creating an unordered list of artists
   const artistList = document.createElement("ul");
   artists.forEach((artist) => {
@@ -189,12 +189,9 @@ function generateArtistList(artists) {
     artistList.appendChild(artistItem);
   });
 
-  // Append the artist list to a specific element on your page
-  //const container = document.querySelector(".artist-list-container");
-  //container.appendChild(artistList);
 }
 
-// Call the handleCallback function when the page is loaded
+// Calls the handleCallback function when the page is loaded
 window.addEventListener("DOMContentLoaded", handleCallback);
 
 //-------------------------------------------------------------------
@@ -206,6 +203,11 @@ function authenticationCheck(tokenVariable) {
   if (tokenVariable === null || tokenVariable === "") {
     redBadge = document.createElement("span");
     redBadge.setAttribute("class", "badge alert");
+    redBadge.setAttribute("data-tooltip", "");
+    redBadge.setAttribute("tabindex", "1");
+    redBadge.setAttribute("title", "Not authenticated");
+    redBadge.setAttribute("data-position", "bottom");
+    redBadge.setAttribute("data-alignment", "right");
     const redIcon = document.createElement("i");
     redIcon.setAttribute("class", "fi-x");
     redBadge.appendChild(redIcon);
@@ -223,6 +225,11 @@ function authenticationCheck(tokenVariable) {
 
     greenBadge = document.createElement("span");
     greenBadge.setAttribute("class", "badge success");
+    greenBadge.setAttribute("data-tooltip", "");
+    greenBadge.setAttribute("tabindex", "1");
+    greenBadge.setAttribute("title", "Authenticated");
+    greenBadge.setAttribute("data-position", "bottom");
+    greenBadge.setAttribute("data-alignment", "right");
     const greenIcon = document.createElement("i");
     greenIcon.setAttribute("class", "fi-check");
     greenBadge.appendChild(greenIcon);
@@ -382,20 +389,7 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      console.log("this is initial data", initialData);
-
-      const eventsFoundEl = document.createElement("div");
-
-      var e = document.getElementById("events");
-
-      if (initialData._embedded.events.length === 0 || !initialData._embedded.events.length) {
-        eventsFoundEl.setAttribute("class", "alert callout");
-        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
-      } else {
-        eventsFoundEl.setAttribute("class", "success callout");
-        eventsFoundEl.textContent = initialData._embedded.events.length + " events found.";
-      }
-      e.prepend(eventsFoundEl);
+      // console.log("this is initial data", initialData);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
@@ -436,18 +430,19 @@ function getTickets() {
     .then((response) => response.json())
     .then((json) => {
       // console.log(json);
-      // var e = document.getElementById("events");
+      var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
-      // const eventsFoundEl = document.createElement("div");
+      const eventsFoundEl = document.createElement("div");
 
-      // if (json.page.totalElements === 0) {
-      //   eventsFoundEl.setAttribute("class", "alert callout");
-      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      // } else {
-      //   eventsFoundEl.setAttribute("class", "success callout");
-      //   eventsFoundEl.textContent = json.page.totalElements + " events found.";
-      // }
-      // e.prepend(eventsFoundEl);
+      if (json.page.totalElements === 0 || !json.page.totalElements) {
+        eventsFoundEl.setAttribute("class", "alert callout");
+        eventsFoundEl.textContent = json.page.totalElements + " event(s) found";
+      } else {
+        eventsFoundEl.setAttribute("class", "success callout");
+        eventsFoundEl.textContent = json.page.totalElements + " event(s) found";
+      }
+
+      e.prepend(eventsFoundEl);
 
       showEvents(json);
       //getLocation(); //may need this-----testing for map fix=----------------
