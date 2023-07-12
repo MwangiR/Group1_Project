@@ -501,27 +501,36 @@ function savedLocal(name, url) {
 }
 
 function displaySavedTickets() {
-  // Retrieve saved tickets from local storage
-  const savedTicketsString = localStorage.getItem("savedTickets");
-  const savedTickets = JSON.parse(savedTicketsString) || [];
+  if (displaySavedTickets.savedTickets) {
+    // Use the previously retrieved saved tickets
+    const savedTickets = displaySavedTickets.savedTickets;
 
-  // Get the container element to display the saved tickets
-  const savedTicketsContainer = document.querySelector(".savedTickets");
+    // Get the container element to display the saved tickets
+    const savedTicketsContainer = document.querySelector(".savedTickets");
+    for (const ticket of savedTickets) {
+      const savedItemEL = document.createElement("div");
+      savedItemEL.setAttribute("class", "savedItem");
+      // Create and append the saved ticket elements
+      const savedTicketsTitle = document.createElement("h4");
+      savedTicketsTitle.textContent = ticket.name;
 
-  for (const ticket of savedTickets) {
-    const savedItemEL = document.createElement("div");
-    savedItemEL.setAttribute("class", "savedItem");
-    // Create and append the saved ticket elements
-    const savedTicketsTitle = document.createElement("h4");
-    savedTicketsTitle.textContent = ticket.name;
+      const ticketUrl = document.createElement("a");
+      ticketUrl.setAttribute("href", ticket.url);
+      ticketUrl.textContent = "Ticket Url";
 
-    const ticketUrl = document.createElement("a");
-    ticketUrl.setAttribute("href", ticket.url);
-    ticketUrl.textContent = "Ticket Url";
+      savedItemEL.appendChild(savedTicketsTitle);
+      savedItemEL.appendChild(ticketUrl);
+      savedTicketsContainer.appendChild(savedItemEL);
+    }
+  } else {
+    // Retrieve saved tickets from local storage
+    const savedTicketsString = localStorage.getItem("savedTickets");
+    const savedTickets = JSON.parse(savedTicketsString) || [];
+    // Store the retrieved saved tickets for future use
+    displaySavedTickets.savedTickets = savedTickets;
 
-    savedItemEL.appendChild(savedTicketsTitle);
-    savedItemEL.appendChild(ticketUrl);
-    savedTicketsContainer.appendChild(savedItemEL);
+    // Call the function recursively to display the saved tickets
+    displaySavedTickets();
   }
 }
 
