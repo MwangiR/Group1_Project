@@ -442,6 +442,11 @@ function showEvents(json) {
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
+        //trial
+        const eventsaveURL = newEvent.url;
+        const eventSaveName = newEvent.name;
+        savedLocal(eventSaveName, eventsaveURL);
+        //
         eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
       } else {
         console.log(newEvent);
@@ -462,6 +467,35 @@ function showEvents(json) {
     eventsEl.appendChild(eventContainer);
   }
 }
+
+//--------------------------------------------------------------
+function savedLocal(name, url) {
+  // Retrieve existing saved tickets from local storage
+  const savedTicketsString = localStorage.getItem("savedTickets");
+  let savedTickets = [];
+
+  // If there are existing saved tickets, parse the JSON string into an array
+  if (savedTicketsString) {
+    savedTickets = JSON.parse(savedTicketsString);
+  }
+
+  // Create a new ticket object
+  const newTicket = {
+    name: name,
+    url: url,
+  };
+
+  // Add the new ticket to the array
+  savedTickets.push(newTicket);
+
+  // Convert the array to a string
+  const savedTicketsStringNew = JSON.stringify(savedTickets);
+
+  // Save the updated array in local storage
+  localStorage.setItem("savedTickets", savedTicketsStringNew);
+}
+
+//-------------------------------------------------------------------------------
 
 function initMap(mapLat, mapLon, json) {
   const mapDiv = document.getElementById("map");
