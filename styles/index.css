@@ -68,6 +68,13 @@ section {
   padding-left: 300px; /* Match the width of the off-canvas menu */
 }
 
+.savedItem {
+  border: 2px solid black;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 20px;
+}
+
 .authTab {
   display: flex;
   flex-direction: column;
@@ -96,6 +103,7 @@ section {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+  margin-bottom: 60px;
 }
 
 #artistSection article {
@@ -148,14 +156,17 @@ section {
   flex: 1 0 200px;
 }
 
-footer {
-  text-align: center;
-  color: #f1f1f1;
-  background-color: #0a0a0a;
+#footer {
+  height: 50px;
   position: fixed;
-  bottom: 0 !important;
+  bottom: 0px;
+  /* left: 0px; */
+  line-height: 50px;
+  color: white;
+  text-align: center;
+  left: 0px;
   width: 100%;
-  font-size: 20px;
+  background-color: black;
 }
 
 /* test */
