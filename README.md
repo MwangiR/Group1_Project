@@ -6,7 +6,7 @@ This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creati
 a unique web application utilising the skills we have aquired thus far in the course.
 
 We decided to build a Gig Finder web application utilising Apis from Spotify,
-Ticketek, Google Maps and the one Renny used lol.
+Ticketek, Google Maps and LastFM.
 
 Our User Story and Acceptance Criteria are as follows:
 
