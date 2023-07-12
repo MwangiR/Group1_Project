@@ -391,7 +391,7 @@ function initialArtists() {
   fetch(getAllUrl)
     .then((response) => response.json())
     .then((initialData) => {
-      // console.log("this is initial data", initialData);
+      console.log("this is initial data", initialData);
 
       for (const event of initialData._embedded.events) {
         if (event._embedded.hasOwnProperty("attractions")) {
