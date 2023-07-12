@@ -454,7 +454,9 @@ function showEvents(json) {
     }
     console.log(json);
     eventsDateEL.textContent = json._embedded.events[i].dates.start.localDate;
-    eventsTimeEL.textContent = json._embedded.events[i].dates.start.localTime;
+    let localTime = json._embedded.events[i].dates.start.localTime;
+    localTime = toString(localTime);
+    eventsTimeEL.textContent = localTime.slice(0, 4);
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
