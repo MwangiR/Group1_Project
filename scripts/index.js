@@ -5,6 +5,7 @@ const clientSecret = "3a121714103f4ebbbe8a1d88a0e5fa8c";
 // Function to handle user authentication and authorization
 let tokenVariable = "";
 authenticationCheck(tokenVariable);
+displaySavedTickets();
 function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
