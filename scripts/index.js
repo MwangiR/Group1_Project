@@ -479,20 +479,51 @@ function savedLocal(name, url) {
     savedTickets = JSON.parse(savedTicketsString);
   }
 
-  // Create a new ticket object
-  const newTicket = {
-    name: name,
-    url: url,
-  };
+  const isEventSaved = savedTickets.some((ticket) => ticket.name === name && ticket.url === url);
 
-  // Add the new ticket to the array
-  savedTickets.push(newTicket);
+  if (!isEventSaved) {
+    // Create a new ticket object
+    const newTicket = {
+      name: name,
+      url: url,
+    };
 
-  // Convert the array to a string
-  const savedTicketsStringNew = JSON.stringify(savedTickets);
+    // Add the new ticket to the array
+    savedTickets.push(newTicket);
+    displaySavedTickets();
 
-  // Save the updated array in local storage
-  localStorage.setItem("savedTickets", savedTicketsStringNew);
+    // Convert the array to a string
+    const savedTicketsStringNew = JSON.stringify(savedTickets);
+
+    // Save the updated array in local storage
+    localStorage.setItem("savedTickets", savedTicketsStringNew);
+  }
+}
+
+function displaySavedTickets() {
+  // Retrieve saved tickets from local storage
+  const savedTicketsString = localStorage.getItem("savedTickets");
+  const savedTickets = JSON.parse(savedTicketsString) || [];
+
+  // Get the container element to display the saved tickets
+  const savedTicketsContainer = document.querySelector("#savedTickets");
+
+  // Create and append the saved ticket elements
+  const savedTicketsTitle = document.createElement("h4");
+  savedTicketsTitle.textContent = "Saved Tickets";
+  savedTicketsContainer.appendChild(savedTicketsTitle);
+
+  for (const ticket of savedTickets) {
+    const savedItem = document.createElement("div");
+    savedItem.classList.add("savedItem");
+
+    const ticketUrl = document.createElement("a");
+    ticketUrl.setAttribute("href", ticket.url);
+    ticketUrl.textContent = "Ticket Url";
+
+    savedItem.appendChild(ticketUrl);
+    savedTicketsContainer.appendChild(savedItem);
+  }
 }
 
 //-------------------------------------------------------------------------------
