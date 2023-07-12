@@ -471,12 +471,13 @@ function showEvents(json) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
         eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
-        eventsDateEL.textContent = newEvent.dates.start.localDate;
-        eventsTimeEL.textContent = newEvent.dates.start.localTime;
       } else {
         console.log(newEvent);
       }
     }
+    console.log(json);
+    eventsDateEL.textContent = json._embedded.events[i].dates.start.localDate;
+    eventsTimeEL.textContent = json._embedded.events[i].dates.start.localTime;
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
