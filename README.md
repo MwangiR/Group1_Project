@@ -1,7 +1,5 @@
 # Group1_Project
 
-Bootcamp Group Project 1 2023
-
 ## Description
 
 This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creating a unique 
