@@ -287,6 +287,8 @@ function applyToDom(playlistObj) {
       console.log(this.parentNode);
       event.preventDefault();
       //getLocation(); // logged this back in, might not be needed
+      const clearEvents = document.querySelector("#events");
+      clearEvents.innerHTML = ""; //big boy test
       getTickets();
       //showNotify("List generated", "success", "#authSection");
     });
@@ -433,7 +435,7 @@ function getTickets() {
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
-      eventsFoundEl.innerHTML = ""; // try remove duplicates
+      //eventsFoundEl.innerHTML = ""; // try remove duplicates
 
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
@@ -461,9 +463,9 @@ function getTickets() {
 function showEvents(json) {
   for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
-    eventsEl.innerHTML = ""; //remove duplicates
+    //eventsEl.innerHTML = ""; //remove duplicates
     const eventContainer = document.createElement("div");
-    eventContainer.innerHTML = ""; ///try remove duplicates
+    //eventContainer.innerHTML = ""; ///try remove duplicates
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
