@@ -148,7 +148,6 @@ function getPlaylistTracks(accessToken, playlistId) {
 
 //fetch user's library artists
 function getUserLibraryArtists(accessToken) {
-  let uniqueArtists;
 
   fetch("https://api.spotify.com/v1/me/tracks", {
     headers: {
@@ -159,7 +158,7 @@ function getUserLibraryArtists(accessToken) {
     .then((data) => {
       const libraryTracks = data.items;
 
-      uniqueArtists = libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
+    libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
     })
     .catch((error) => {
       console.error("Error:", error);
