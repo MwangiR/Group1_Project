@@ -9,22 +9,26 @@ Bootcamp Group Project 1 2023
 ## User Story
 
 ```
-When I go to a webpage, I can enter artists or a copied playlist as an input
-and have displayed tickets for upcoming shows for the artists/playlist
-as well as viewing a map of where the shows are within a radius of my location.
+When I go to a webpage, I can view tickets for upcoming shows for the artists in my personsal spotify playlists.
+I can also view a map of where the shows and read information about the artists.
 ```
 
 ## Acceptance Criteria
 
 ```
 GIVEN I access the website
-WHEN I enter artists or a playlist to a form
-THEN I am able to submit the form and have the artists/playlists upcoming shows
-displayed showing whether tickets are available or not.
+WHEN I click the Spotify Authentication button
+THEN I am redirected to Spotify's login page and aftwards redirected back to the page
 
-WHEN I click on a button to enter my geo-location
-THEN the list of upcoming shows is filtered to those shows in my area
+WHEN I click on the 'Show me the Bands' button
+THEN a list of artists from my Spotify Playlists that have upcoming shows is displayed
 
-WHEN I click on an upcoming show
-THEN I am taken to a ticketing page where I can purchase tickets for the show
+WHEN I click on the 'More Info' button
+THEN I am presented with information about the artist
+
+WHEN I click on the 'View Upcoming Shows' button
+THEN I am presented with a list of upcoming shows for the artist
+
+WHEN I click on the 'Buy Tickets' button
+THEN I am redirected to a ticketing page where I can purchase tickets for the show
 ```
