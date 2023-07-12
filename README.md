@@ -15,7 +15,7 @@ Our User Story and Acceptance Criteria are as follows:
 
 ```
 When I go to a webpage, I can view tickets for upcoming shows for the artists in
-my personsal spotify playlists. I can also view a map of where the shows and read
+my personal spotify playlists. I can also view a map of where the shows and read
 information about the artists.
 ```
 
