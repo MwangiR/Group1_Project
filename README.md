@@ -2,8 +2,15 @@
 
 Bootcamp Group Project 1 2023
 
-![Wireframe](https://github.com/AlexanderDuncan1/Group1_Project/assets/131665093/f715283c-9347-4a26-bb5b-468d348b6861)
+## Description
 
+This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creating a unique 
+web application utilising the skill swe have aquires thus far.
+
+We decided to build a Gig Finder web application utilising Apis from Spotify,
+Ticketek, Google Maps and the one Renny used lol.
+
+Our User Story and Acceptance Criteria are as follows:
 
 
 ## User Story
@@ -32,3 +39,21 @@ THEN I am presented with a list of upcoming shows for the artist
 WHEN I click on the 'Buy Tickets' button
 THEN I am redirected to a ticketing page where I can purchase tickets for the show
 ```
+
+Link to deployed site: 
+
+Screenshot of our application:
+
+
+## Installation
+
+N/A
+
+## Requirments
+
+The user must have a valid Spotify Account with some saved playlists to their account
+The user must be willing to allow Geolocation on their browser
+
+## Usage
+
+Follow the layout of the page, starting at the top and click through the buttons in order to see who is playing near you!!
