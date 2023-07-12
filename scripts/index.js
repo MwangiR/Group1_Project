@@ -22,7 +22,6 @@ function authenticate() {
 function loadMap() {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
-
     center: { lat: -25.2744, lng: 133.7751 },
     zoom: 4,
   });
@@ -71,7 +70,6 @@ function handleCallback() {
       const accessToken = data.access_token;
 
       authenticationCheck(accessToken);
-
 
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
@@ -165,9 +163,6 @@ function getUserLibraryArtists(accessToken) {
 
 }
 
-
-
-
 // saves gibberish to satisfy spotifies securitues Oauth2 stuff and hides the token
 function generateRandomString(length) {
   let result = "";
@@ -188,7 +183,6 @@ function generateArtistList(artists) {
     artistItem.textContent = artist;
     artistList.appendChild(artistItem);
   });
-
 }
 
 // Calls the handleCallback function when the page is loaded
@@ -239,7 +233,7 @@ function authenticationCheck(tokenVariable) {
 
 //don't touch this function.Remain as is
 function applyToDom(playlistObj) {
-  const playlistEL = document.querySelector(".playlistTab"); //edit
+  const playlistEL = document.querySelector(".playlistTab");
   playlistEL.innerHTML = "";
 
   playlistObj.forEach((artist) => {
@@ -259,21 +253,15 @@ function applyToDom(playlistObj) {
     searchResultEl.appendChild(searchTicketEl);
 
     const moreInfoBtn = document.createElement("button");
-    moreInfoBtn.setAttribute("class", "button expanded"); // added expanded class
+    moreInfoBtn.setAttribute("class", "button expanded");
     moreInfoBtn.setAttribute("data-open", "infoModal");
     moreInfoBtn.textContent = "More Info";
-    // make button stretch to fill available space like 'Search Ticket'
-
     moreInfoBtn.addEventListener("click", () => {
       fetchArtistInfoFromLastFM(artist);
     });
 
     searchTicketEl.appendChild(moreInfoBtn);
 
-    // const artistLiEL = document.createElement("li");
-    // artistLiEL.className = "artistGenerated";
-    // artistLiEL.textContent = artist;
-    //add search for ticket button here
     const ticketEL = document.createElement("button");
     ticketEL.setAttribute("class", "success button expanded");
     ticketEL.classList.add("this-button");
@@ -286,11 +274,9 @@ function applyToDom(playlistObj) {
       console.log(thisArtist);
       console.log(this.parentNode);
       event.preventDefault();
-      //getLocation(); // logged this back in, might not be needed
       const clearEvents = document.querySelector("#events");
-      clearEvents.innerHTML = ""; //big boy test
+      clearEvents.innerHTML = "";
       getTickets();
-      //showNotify("List generated", "success", "#authSection");
     });
 
     searchTicketEl.appendChild(ticketEL);
@@ -336,7 +322,7 @@ function findCommonElement(uniqueArrayResults, uniqueSpotifyArtists) {
 const generateContent = document.querySelector("#generateList");
 generateContent.addEventListener("click", function (event) {
   event.preventDefault();
-  showNotify("Generating List...", "success", "#authSection"); // moved this here so displays when 'generate list is clicked
+  showNotify("Generating List...", "success", "#authSection");
   getLocation();
 });
 
@@ -358,7 +344,6 @@ function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   mapLat = position.coords.latitude;
   mapLon = position.coords.longitude;
-  //console.log(position);
   initialArtists();
 }
 
@@ -411,9 +396,6 @@ function initialArtists() {
     .catch((err) => {
       console.log(err);
     });
-
-  //console.log(uniqueSpotifyArtists);
-  //console.log(crossCheckedArray);
 }
 
 // discoveryApi fetch for tickets
@@ -431,12 +413,8 @@ function getTickets() {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      // console.log(json);
       var e = document.getElementById("events");
-      // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
-      //eventsFoundEl.innerHTML = ""; // try remove duplicates
-
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
         eventsFoundEl.setAttribute("class", "alert callout");
@@ -449,9 +427,6 @@ function getTickets() {
       e.prepend(eventsFoundEl);
 
       showEvents(json);
-      //getLocation(); //may need this-----testing for map fix=----------------
-      //console.log(mapLat);
-      //console.log(mapLon);
       initMap(mapLat, mapLon, json);
     })
     .catch((err) => {
@@ -463,14 +438,11 @@ function getTickets() {
 function showEvents(json) {
   for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
-    //eventsEl.innerHTML = ""; //remove duplicates
     const eventContainer = document.createElement("div");
-    //eventContainer.innerHTML = ""; ///try remove duplicates
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
     const eventsTimeEL = document.createElement("p");
-    //added elements
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
@@ -489,8 +461,6 @@ function showEvents(json) {
     eventsUrlEL.setAttribute("class", "hollow button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
     eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL, eventsTimeEL);
-    //eventContainer.appendChild(eventsVenueEL);
-    //eventContainer.appendChild(eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
     eventsEl.appendChild(eventContainer);
   }
@@ -516,7 +486,6 @@ function initMap(mapLat, mapLon, json) {
         "bounds_changed",
         function (event) {
           if (this.getZoom() > 15 && this.initialZoom == true) {
-            // Change max/min zoom here
             this.setZoom(12);
             this.initialZoom = false;
           }
