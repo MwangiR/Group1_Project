@@ -438,12 +438,12 @@ function showEvents(json) {
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
     const eventsDateEL = document.createElement("p");
-    const eventsTimeEL = document.createElement("p");
+    // const eventsTimeEL = document.createElement("p");
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
-        //trial
+        //getting the id, name  and url to save to local storage
         const eventsaveURL = newEvent.url;
         const eventSaveName = newEvent.name;
         const eventID = newEvent.id;
@@ -457,15 +457,16 @@ function showEvents(json) {
     }
     console.log(json);
     eventsDateEL.textContent = json._embedded.events[i].dates.start.localDate;
-    let localTime = json._embedded.events[i].dates.start.localTime;
-    localTime = toString(localTime);
-    eventsTimeEL.textContent = localTime.slice(0, 4);
+    // let localTime = json._embedded.events[i].dates.start.localTime;
+    // localTime = toString(localTime);
+    // eventsTimeEL.textContent = localTime.slice(0, 4);
 
     const eventsUrlEL = document.createElement("a");
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
     eventsUrlEL.setAttribute("class", "button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
-    eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL, eventsTimeEL);
+    // eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL, eventsTimeEL);
+    eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
     eventsEl.appendChild(eventContainer);
   }
@@ -527,7 +528,7 @@ function displaySavedTickets() {
 
     const ticketUrl = document.createElement("a");
     ticketUrl.setAttribute("href", ticket.url);
-    ticketUrl.innerHTML = "Ticket Url &#128279;";
+    ticketUrl.innerHTML = "Ticket Link &#128279;";
 
     savedItemEL.appendChild(savedTicketsTitle);
     savedItemEL.appendChild(ticketUrl);
