@@ -508,21 +508,21 @@ function displaySavedTickets() {
   // Get the container element to display the saved tickets
   const savedTicketsContainer = document.querySelector("#savedTickets");
 
-  // Create and append the saved ticket elements
-  const savedTicketsTitle = document.createElement("h4");
-  savedTicketsTitle.textContent = "Saved Tickets";
-  savedTicketsContainer.appendChild(savedTicketsTitle);
+  const savedItemEL = document.createElement("div");
+  savedItemEL.setAttribute("class", "savedItem");
 
   for (const ticket of savedTickets) {
-    const savedItem = document.createElement("div");
-    savedItem.classList.add("savedItem");
+    // Create and append the saved ticket elements
+    const savedTicketsTitle = document.createElement("h4");
+    savedTicketsTitle.textContent = ticket.name;
 
     const ticketUrl = document.createElement("a");
     ticketUrl.setAttribute("href", ticket.url);
     ticketUrl.textContent = "Ticket Url";
 
-    savedItem.appendChild(ticketUrl);
-    savedTicketsContainer.appendChild(savedItem);
+    savedItemEL.appendChild(savedTicketsTitle);
+    savedItemEL.appendChild(ticketUrl);
+    savedTicketsContainer.appendChild(savedItemEL);
   }
 }
 
