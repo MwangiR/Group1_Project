@@ -70,6 +70,10 @@ section {
   padding-left: 300px; /* Match the width of the off-canvas menu */
 }
 
+.off-canvas button {
+  color: #f1f1f1;
+}
+
 .savedTickets {
   padding: 5%;
   display: flex;
