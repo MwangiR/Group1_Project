@@ -148,6 +148,8 @@ function getPlaylistTracks(accessToken, playlistId) {
 
 //fetch user's library artists
 function getUserLibraryArtists(accessToken) {
+  let uniqueArtists;
+
   fetch("https://api.spotify.com/v1/me/tracks", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -155,21 +157,17 @@ function getUserLibraryArtists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // contains the user's library tracks
       const libraryTracks = data.items;
 
-      // pulls out unique artists from the library tracks
-      const uniqueArtists = [
-        ...new Set(
-          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name))
-        ),
-      ];
-
+      uniqueArtists = libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name));
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+
 }
+
+
 
 
 // saves gibberish to satisfy spotifies securitues Oauth2 stuff and hides the token
