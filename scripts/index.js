@@ -433,7 +433,7 @@ function getTickets() {
       var e = document.getElementById("events");
       // e.innerHTML = json.page.totalElements + " events found.";
       const eventsFoundEl = document.createElement("div");
-      eventsFoundEl.textContent = ""; //added to try gix duplication
+
 
       if (json.page.totalElements === 0 || !json.page.totalElements) {
         eventsFoundEl.setAttribute("class", "alert callout");
@@ -460,6 +460,7 @@ function getTickets() {
 function showEvents(json) {
   for (var i = 0; i < json.page.totalElements; i++) {
     const eventsEl = document.querySelector("#events");
+    eventsEl.innerHTML = ""; //remove duplicates
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
     const eventsVenueEL = document.createElement("p");
