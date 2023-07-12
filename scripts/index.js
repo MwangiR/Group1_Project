@@ -466,10 +466,15 @@ function showEvents(json) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
+    const eventsVenueEL = document.createElement("p");
+    const eventsDateEL = document.createElement("p");
+
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
+        eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
+        eventsDateEL.textContent = newEvent.dates.start.dateTime;
       } else {
         console.log(newEvent);
       }
@@ -480,6 +485,8 @@ function showEvents(json) {
     eventsUrlEL.setAttribute("class", "hollow button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
     eventContainer.appendChild(eventsNameEL);
+    eventContainer.appendChild(eventsVenueEL);
+    eventContainer.appendChild(eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
     eventsEl.appendChild(eventContainer);
   }
