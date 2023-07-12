@@ -24,7 +24,7 @@ function loadMap() {
   const map = new google.maps.Map(mapDiv, {
     
     center: { lat: -25.2744, lng: 133.7751 },
-    zoom: 3.5,
+    zoom: 4,
   });
 
 }
