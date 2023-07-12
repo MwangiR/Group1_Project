@@ -63,6 +63,8 @@ section {
   width: 250px; /* Set the desired width */
   padding-left: 1%;
   padding-top: 2%;
+  background-color: var(--spaceCadet);
+  color: #f1f1f1;
 }
 .off-canvas-content {
   padding-left: 300px; /* Match the width of the off-canvas menu */
@@ -80,7 +82,17 @@ section {
   border: 2px solid black;
   margin: 5px 5px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 12px;
+}
+
+.savedItem h4 {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.savedItem a {
+  color: var(--spotifyGreen);
+  font-weight: bold;
 }
 
 .authTab {
