@@ -22,7 +22,7 @@ function authenticate() {
 function loadMap() {
   const mapDiv = document.getElementById("map");
   const map = new google.maps.Map(mapDiv, {
-    
+
     center: { lat: -25.2744, lng: 133.7751 },
     zoom: 4,
   });
@@ -180,7 +180,7 @@ function generateRandomString(length) {
 
 // generates the artist list so it can be refrenced and crosschecked later
 function generateArtistList(artists) {
-  
+
   // Example: Creating an unordered list of artists
   const artistList = document.createElement("ul");
   artists.forEach((artist) => {
@@ -277,7 +277,7 @@ function applyToDom(playlistObj) {
     const ticketEL = document.createElement("button");
     ticketEL.setAttribute("class", "success button expanded");
     ticketEL.classList.add("this-button");
-    ticketEL.textContent = "Search Ticket";
+    ticketEL.textContent = "View Upcoming Shows";
     ticketEL.addEventListener("click", function (event) {
       // generate tickets
       console.log(event);
@@ -461,15 +461,15 @@ function showEvents(json) {
     const eventsEl = document.querySelector("#events");
     const eventContainer = document.createElement("div");
     const eventsNameEL = document.createElement("p");
-    //const eventsVenueEL = document.createElement("p");
-    //const eventsDateEL = document.createElement("p");
+    const eventsVenueEL = document.createElement("p");
+    const eventsDateEL = document.createElement("p");
     //added elements
 
     for (const newEvent of json._embedded.events) {
       if (newEvent._embedded.hasOwnProperty("attractions")) {
         eventsNameEL.textContent = newEvent._embedded.attractions[0].name;
-        //eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
-        //eventsDateEL.textContent = newEvent.dates.start.dateTime;
+        eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
+        eventsDateEL.textContent = newEvent.dates.start.dateTime;
       } else {
         console.log(newEvent);
       }
@@ -479,11 +479,11 @@ function showEvents(json) {
     eventsUrlEL.setAttribute("href", `${json._embedded.events[i].url}`);
     eventsUrlEL.setAttribute("class", "hollow button expanded");
     eventsUrlEL.textContent = "Buy Tickets";
-    eventContainer.appendChild(eventsNameEL);
+    eventContainer.append(eventsNameEL, eventsVenueEL, eventsDateEL);
     //eventContainer.appendChild(eventsVenueEL);
     //eventContainer.appendChild(eventsDateEL);
     eventContainer.appendChild(eventsUrlEL);
-    eventsEl.appendChild(eventContainer); 
+    eventsEl.appendChild(eventContainer);
   }
 }
 
