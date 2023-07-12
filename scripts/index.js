@@ -446,6 +446,7 @@ function showEvents(json) {
         const eventsaveURL = newEvent.url;
         const eventSaveName = newEvent.name;
         savedLocal(eventSaveName, eventsaveURL);
+        displaySavedTickets();
         //
         eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
       } else {
@@ -490,7 +491,6 @@ function savedLocal(name, url) {
 
     // Add the new ticket to the array
     savedTickets.push(newTicket);
-    displaySavedTickets();
 
     // Convert the array to a string
     const savedTicketsStringNew = JSON.stringify(savedTickets);
@@ -508,10 +508,9 @@ function displaySavedTickets() {
   // Get the container element to display the saved tickets
   const savedTicketsContainer = document.querySelector("#savedTickets");
 
-  const savedItemEL = document.createElement("div");
-  savedItemEL.setAttribute("class", "savedItem");
-
   for (const ticket of savedTickets) {
+    const savedItemEL = document.createElement("div");
+    savedItemEL.setAttribute("class", "savedItem");
     // Create and append the saved ticket elements
     const savedTicketsTitle = document.createElement("h4");
     savedTicketsTitle.textContent = ticket.name;
