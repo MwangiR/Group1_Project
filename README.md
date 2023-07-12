@@ -2,8 +2,8 @@
 
 ## Description
 
-This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creating a unique 
-web application utilising the skills we have aquired thus far in the course.
+This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creating 
+a unique web application utilising the skills we have aquired thus far in the course.
 
 We decided to build a Gig Finder web application utilising Apis from Spotify,
 Ticketek, Google Maps and the one Renny used lol.
@@ -14,8 +14,9 @@ Our User Story and Acceptance Criteria are as follows:
 ## User Story
 
 ```
-When I go to a webpage, I can view tickets for upcoming shows for the artists in my personsal spotify playlists.
-I can also view a map of where the shows and read information about the artists.
+When I go to a webpage, I can view tickets for upcoming shows for the artists in
+my personsal spotify playlists. I can also view a map of where the shows and read
+information about the artists.
 ```
 
 ## Acceptance Criteria
@@ -54,4 +55,5 @@ and be willing to allow Geolocation on their browser
 
 ## Usage
 
-Follow the layout of the page, starting at the top and click through the buttons in order to see who is playing near you!!
+Follow the layout of the page, starting at the top and click through the buttons in order 
+to see who is playing near you!!
