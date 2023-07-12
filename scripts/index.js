@@ -69,12 +69,9 @@ function handleCallback() {
     .then((data) => {
       // Response from the token endpoint
       const accessToken = data.access_token;
-      // Replace HTML space characters with regular spaces
-      //console.log(typeof accessToken);
+
       authenticationCheck(accessToken);
 
-      // Log the access token for debugging
-      //console.log("Access Token:", accessToken);
 
       // Use the access token to fetch user's playlists and library
       getUserPlaylists(accessToken);
@@ -94,11 +91,11 @@ function getUserPlaylists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the user's playlists
+
       const playlists = data.items;
       const allArtists = [];
 
-      // Iterate over each playlist
+      // runs over each playlist
       const fetchPromises = playlists.map((playlist) => {
         const playlistId = playlist.id;
         return getPlaylistTracks(accessToken, playlistId)
@@ -107,9 +104,7 @@ function getUserPlaylists(accessToken) {
             const artists = tracks.flatMap((track) =>
               track.track.artists.map((artist) => artist.name),
             );
-            //console.log("Artists in Playlist:", artists);
 
-            // Add artists to the allArtists array
             allArtists.push(...artists);
           })
           .catch((error) => {
@@ -122,11 +117,9 @@ function getUserPlaylists(accessToken) {
         .then(() => {
           // Combine all the arrays and remove duplicates
           const uniqueArtists = [...new Set(allArtists)];
-          //console.log("All Playlist Artists:", uniqueArtists);
-          //applyToDom(uniqueArtists);
+
           uniqueSpotifyArtists = uniqueArtists;
 
-          // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
           loadMap();
         })
@@ -139,7 +132,7 @@ function getUserPlaylists(accessToken) {
     });
 }
 
-// Function to fetch a playlist's tracks
+// fetch playlist's tracks
 function getPlaylistTracks(accessToken, playlistId) {
   return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     headers: {
@@ -148,12 +141,12 @@ function getPlaylistTracks(accessToken, playlistId) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the playlist's tracks
+      //contains the playlist's tracks
       return data.items;
     });
 }
 
-// Function to fetch user's library artists
+//fetch user's library artists
 function getUserLibraryArtists(accessToken) {
   fetch("https://api.spotify.com/v1/me/tracks", {
     headers: {
@@ -162,22 +155,24 @@ function getUserLibraryArtists(accessToken) {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Response contains the user's library tracks
+      // contains the user's library tracks
       const libraryTracks = data.items;
 
-      // Extract unique artists from the library tracks
-      const libraryArtists = [
+      // pulls out unique artists from the library tracks
+      const uniqueArtists = [
         ...new Set(
-          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name)),
+          libraryTracks.flatMap((track) => track.track.artists.map((artist) => artist.name))
         ),
       ];
+
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 }
 
-// Generate a random string of a given length
+
+// saves gibberish to satisfy spotifies securitues Oauth2 stuff and hides the token
 function generateRandomString(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -187,11 +182,9 @@ function generateRandomString(length) {
   return result;
 }
 
-// Function to generate the artist list or perform any other operation with the uniqueArtists array
+// generates the artist list so it can be refrenced and crosschecked later
 function generateArtistList(artists) {
-  // Here, you can create the list using the artists array and perform any desired operation
-  // For example, you can append the artists to an HTML element on your page or create a formatted string
-
+  
   // Example: Creating an unordered list of artists
   const artistList = document.createElement("ul");
   artists.forEach((artist) => {
@@ -200,12 +193,9 @@ function generateArtistList(artists) {
     artistList.appendChild(artistItem);
   });
 
-  // Append the artist list to a specific element on your page
-  //const container = document.querySelector(".artist-list-container");
-  //container.appendChild(artistList);
 }
 
-// Call the handleCallback function when the page is loaded
+// Calls the handleCallback function when the page is loaded
 window.addEventListener("DOMContentLoaded", handleCallback);
 
 //-------------------------------------------------------------------
