@@ -49,8 +49,8 @@ N/A
 
 ## Requirments
 
-The user must have a valid Spotify Account with some saved playlists to their account
-The user must be willing to allow Geolocation on their browser
+The user must have a valid Spotify Account with some saved playlists to their account 
+and be willing to allow Geolocation on their browser
 
 ## Usage
 
