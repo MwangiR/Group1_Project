@@ -35,6 +35,29 @@
         </header>
 
         <div id="divSection">
+
+            <!-- <div class="off-canvas-wrapper">
+                <div class="off-canvas position-left savedTickets" id="offCanvas" data-off-canvas>
+
+                </div>
+            </div> -->
+
+
+            <div class="off-canvas position-left" id="offCanvasPush" data-off-canvas data-transition="push">
+                <button class="close-button" aria-label="Close menu" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div class="savedTickets">
+                    <!-- potentially loop through creating the following elements bellow probably href -->
+                    <div class="savedItem">
+                        <h4>Saved Tickets</h4>
+                        <a href="">Ticket Url</a>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="reveal showModal" id="infoModal" data-reveal>
                 <button class="close-button" data-close aria-label="Close modal" type="button"
                     onclick="removeElement()">
@@ -63,6 +86,8 @@
             </section>
 
             <!-- <button id="updateContent" class="button">Search for Tickets</button> -->
+            <button type="button" class="button" data-toggle="offCanvasPush" aria-expanded="false"
+                aria-controls="offCanvasPush">Saved Tickets</button>
 
             <section id="artistSection">
 
