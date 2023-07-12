@@ -5,7 +5,7 @@ Bootcamp Group Project 1 2023
 ## Description
 
 This is our Project 1 for the Monash Coding Bootcamp. We were tasked with creating a unique 
-web application utilising the skill swe have aquires thus far.
+web application utilising the skills we have aquired thus far in the course.
 
 We decided to build a Gig Finder web application utilising Apis from Spotify,
 Ticketek, Google Maps and the one Renny used lol.
