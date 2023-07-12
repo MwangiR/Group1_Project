@@ -445,7 +445,8 @@ function showEvents(json) {
         //trial
         const eventsaveURL = newEvent.url;
         const eventSaveName = newEvent.name;
-        savedLocal(eventSaveName, eventsaveURL);
+        const eventID = newEvent.id;
+        savedLocal(eventID, eventSaveName, eventsaveURL);
         displaySavedTickets();
         //
         eventsVenueEL.textContent = newEvent._embedded.venues[0].name;
@@ -470,7 +471,7 @@ function showEvents(json) {
 }
 
 //--------------------------------------------------------------
-function savedLocal(name, url) {
+function savedLocal(id, name, url) {
   // Retrieve existing saved tickets from local storage
   const savedTicketsString = localStorage.getItem("savedTickets");
   let savedTickets = [];
@@ -480,11 +481,12 @@ function savedLocal(name, url) {
     savedTickets = JSON.parse(savedTicketsString);
   }
 
-  const isEventSaved = savedTickets.some((ticket) => ticket.name === name && ticket.url === url);
+  const isEventSaved = savedTickets.some((ticket) => ticket.id === id);
 
   if (!isEventSaved) {
     // Create a new ticket object
     const newTicket = {
+      id: id,
       name: name,
       url: url,
     };
@@ -501,36 +503,34 @@ function savedLocal(name, url) {
 }
 
 function displaySavedTickets() {
-  if (displaySavedTickets.savedTickets) {
-    // Use the previously retrieved saved tickets
-    const savedTickets = displaySavedTickets.savedTickets;
+  // Retrieve saved tickets from local storage
+  const savedTicketsString = localStorage.getItem("savedTickets");
+  const savedTickets = JSON.parse(savedTicketsString) || [];
 
-    // Get the container element to display the saved tickets
-    const savedTicketsContainer = document.querySelector(".savedTickets");
-    for (const ticket of savedTickets) {
-      const savedItemEL = document.createElement("div");
-      savedItemEL.setAttribute("class", "savedItem");
-      // Create and append the saved ticket elements
-      const savedTicketsTitle = document.createElement("h4");
-      savedTicketsTitle.textContent = ticket.name;
+  // Get the container element to display the saved tickets
+  const savedTicketsContainer = document.querySelector(".savedTickets");
 
-      const ticketUrl = document.createElement("a");
-      ticketUrl.setAttribute("href", ticket.url);
-      ticketUrl.textContent = "Ticket Url";
-
-      savedItemEL.appendChild(savedTicketsTitle);
-      savedItemEL.appendChild(ticketUrl);
-      savedTicketsContainer.appendChild(savedItemEL);
+  for (const ticket of savedTickets) {
+    //validating
+    const existingEventID = document.getElementById(ticket.id);
+    if (existingEventID) {
+      continue;
     }
-  } else {
-    // Retrieve saved tickets from local storage
-    const savedTicketsString = localStorage.getItem("savedTickets");
-    const savedTickets = JSON.parse(savedTicketsString) || [];
-    // Store the retrieved saved tickets for future use
-    displaySavedTickets.savedTickets = savedTickets;
 
-    // Call the function recursively to display the saved tickets
-    displaySavedTickets();
+    const savedItemEL = document.createElement("div");
+    savedItemEL.setAttribute("class", "savedItem");
+    savedItemEL.setAttribute("id", ticket.id);
+    // Create and append the saved ticket elements
+    const savedTicketsTitle = document.createElement("h4");
+    savedTicketsTitle.textContent = ticket.name;
+
+    const ticketUrl = document.createElement("a");
+    ticketUrl.setAttribute("href", ticket.url);
+    ticketUrl.textContent = "Ticket Url";
+
+    savedItemEL.appendChild(savedTicketsTitle);
+    savedItemEL.appendChild(ticketUrl);
+    savedTicketsContainer.appendChild(savedItemEL);
   }
 }
 
