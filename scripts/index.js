@@ -19,6 +19,16 @@ function authenticate() {
   window.location.href = authorizeUrl;
 }
 
+function loadMap() {
+  const mapDiv = document.getElementById("map");
+  const map = new google.maps.Map(mapDiv, {
+    // Map options
+    center: { lat: YOUR_LATITUDE, lng: YOUR_LONGITUDE },
+    zoom: YOUR_ZOOM_LEVEL,
+  });
+
+}
+
 // Function to handle callback after user authorization
 function handleCallback() {
   // Extract the query parameters from the callback URL
@@ -118,6 +128,7 @@ function getUserPlaylists(accessToken) {
 
           // Call a function here to generate a list or perform any other operation with the uniqueArtists array
           generateArtistList(uniqueArtists);
+          displayMap();
         })
         .catch((error) => {
           console.error("Error:", error);
