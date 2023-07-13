@@ -1,3 +1,10 @@
+/**
+ * Fetches artist information from LastFM API.
+ *
+ * @param {string} artistName - The name of the artist.
+ * @return {undefined} This function does not return a value.
+ */
+
 function fetchArtistInfoFromLastFM(artistName) {
   const apiKey = "de1822b6fc0eff2b6de0fd51d1501598";
   const apiUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(
@@ -24,6 +31,12 @@ displayInfoEL.id = "displayInfo";
 
 document.querySelector(".showModal").appendChild(displayInfoEL);
 
+/**
+ * Retrieves the top tracks for a given artist.
+ *
+ * @param {string} artist - The name of the artist.
+ * @return {undefined} This function does not return a value.
+ */
 function getTopTracks(artist) {
   const params = new URLSearchParams({
     method: "artist.getTopTracks",
@@ -72,6 +85,12 @@ function getTopTracks(artist) {
     });
 }
 
+/**
+ * Retrieves a list of similar artists based on the given artist name.
+ *
+ * @param {string} artist - The name of the artist.
+ * @return {Promise} A Promise that resolves to the list of similar artists.
+ */
 function getSimilarArtist(artist) {
   const params = new URLSearchParams({
     method: "artist.getSimilar",
