@@ -6,7 +6,7 @@
  */
 
 function fetchArtistInfoFromLastFM(artistName) {
-  const apiKey = "de1822b6fc0eff2b6de0fd51d1501598";
+  const apiKey = "api_key";
   const apiUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(
     artistName,
   )}&api_key=${apiKey}&format=json`;
@@ -40,7 +40,7 @@ document.querySelector(".showModal").appendChild(displayInfoEL);
 function getTopTracks(artist) {
   const params = new URLSearchParams({
     method: "artist.getTopTracks",
-    api_key: "de1822b6fc0eff2b6de0fd51d1501598",
+    api_key: "api_key",
     artist: artist,
     format: "json",
   });
@@ -94,7 +94,7 @@ function getTopTracks(artist) {
 function getSimilarArtist(artist) {
   const params = new URLSearchParams({
     method: "artist.getSimilar",
-    api_key: "de1822b6fc0eff2b6de0fd51d1501598",
+    api_key: "api_key",
     artist: artist,
     format: "json",
   });
