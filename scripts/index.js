@@ -10,7 +10,7 @@ function authenticate() {
   const state = generateRandomString(16);
   localStorage.setItem("spotify_auth_state", state);
 
-  const scope = "playlist-read-private playlist-read-collaborative user-library-read"; // Add the required scopes here
+  const scope = "playlist-read-private playlist-read-collaborative user-library-read";
 
   const authorizeUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri,
@@ -80,7 +80,7 @@ function handleCallback() {
     });
 }
 
-// Function to fetch user's playlists and extract artists from each playlist
+//Fetch user's playlists and extract artists from each playlist
 function getUserPlaylists(accessToken) {
   fetch("https://api.spotify.com/v1/me/playlists", {
     headers: {
@@ -172,7 +172,7 @@ function generateRandomString(length) {
 
 // generates the artist list so it can be refrenced and crosschecked later
 function generateArtistList(artists) {
-  // Example: Creating an unordered list of artists
+  //Creating an unordered list of artists we still supposed to have this?
   const artistList = document.createElement("ul");
   artists.forEach((artist) => {
     const artistItem = document.createElement("li");
