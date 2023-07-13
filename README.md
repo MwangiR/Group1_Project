@@ -42,7 +42,7 @@ Link to deployed site: https://alexanderduncan1.github.io/Group1_Project/
 
 ## Screenshot of our application:
 
-!![Gig finder](./assets/screenshot.png)
+![Gig finder](./assets/screenshot.png)
 
 ## Installation
 
