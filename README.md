@@ -57,5 +57,10 @@ and be willing to allow Geolocation on their browser
 
 ## Usage
 
+Limited Useage - In this applicatoins current implementation there are only limited accounts that will work.
+for Spotify log in please use;
+user name - group1apptest@gmail.com
+password - TestingAccount
+
 Follow the layout of the page, starting at the top and click through the buttons in order 
 to see who is playing near you!!
