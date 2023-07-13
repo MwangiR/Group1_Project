@@ -44,6 +44,10 @@ Link to deployed site: https://alexanderduncan1.github.io/Group1_Project/
 
 ![Gig finder](./assets/screenshot.png)
 
+### Gif Link
+
+![Gig finder](https://mega.nz/file/qN12TDoQ#UOsvayVKS1e56XPkIeRZ5238YlyjMts-Sl7oEk0NOXo)
+
 ## Installation
 
 ### Usage Criteria:
